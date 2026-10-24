@@ -1,0 +1,24 @@
+.pip-curator { margin: 0; position: relative; width: min(100%, 240px); color: #f1e0c3; }
+.pip-portrait { display: block; width: 100%; height: auto; overflow: visible; }
+.pip-body { transform-origin: 130px 210px; animation: pip-breathe 7s ease-in-out infinite; }
+.pip-eyes { transform-origin: 128px 111px; animation: pip-blink 9s ease infinite; }
+.pip-bright-eyes, .pip-notebook, .pip-welcome-paw, .pip-little-spark, .pip-tiny-lantern { opacity: 0; }
+.pip-tail, .pip-tail-outline { transform-origin: 174px 193px; animation: pip-tail 13s ease-in-out infinite; }
+.pip-note { text-align: center; font-size: .9rem; line-height: 1.5; margin-top: -4px; }
+.pip-note span { display: block; font-size: .73rem; opacity: .7; margin-bottom: .2rem; }
+.pip-welcome .pip-welcome-paw { opacity: 1; transform-origin: 83px 170px; animation: pip-wave 2.6s ease both; }
+.pip-welcome .pip-body { animation: pip-stretch 2.8s ease both, pip-breathe 7s 2.8s ease-in-out infinite; }
+.pip-writing .pip-notebook { opacity: 1; }
+.pip-writing .pip-head { transform-origin: 128px 148px; transform: rotate(4deg); }
+.pip-placing .pip-bright-eyes, .pip-light .pip-bright-eyes { opacity: 1; }
+.pip-placing .pip-eyes, .pip-light .pip-eyes { opacity: 0; animation: none; }
+.pip-placing .pip-little-spark { animation: pip-spark 2.5s ease both; }
+.pip-light .pip-tiny-lantern { opacity: 1; }
+.pip-light .pip-head { transform-origin: 130px 150px; transform: rotate(5deg); }
+@keyframes pip-breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.018); } }
+@keyframes pip-blink { 0%,43%,47%,100% { transform: scaleY(1); } 45% { transform: scaleY(.13); } }
+@keyframes pip-tail { 0%,75%,100% { transform: rotate(0); } 82% { transform: rotate(-5deg); } 89% { transform: rotate(3deg); } }
+@keyframes pip-wave { 0%,100% { transform: rotate(0); } 35% { transform: rotate(14deg); } 65% { transform: rotate(-5deg); } }
+@keyframes pip-stretch { 0%,100% { transform: scaleY(1); } 45% { transform: scaleY(1.035) translateY(-2px); } }
+@keyframes pip-spark { 0%,100% { opacity: 0; } 25%,70% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pip-curator *, .pip-curator *::before, .pip-curator *::after { animation: none !important; transition: none !important; } .pip-placing .pip-little-spark { opacity: .8; } }

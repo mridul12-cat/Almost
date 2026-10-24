@@ -121,10 +121,10 @@ export default function App() {
     setMessage(didSave ? 'Your exhibit has found its place.' : SAVE_WARNING);
     setPanel(null);
     setSelectedId(record.id);
-    if (current.phase === 'pending-save' || reduced) finishReveal(record.id);
+    if (!didSave || current.phase === 'pending-save' || reduced) finishReveal(record.id);
     else {
       setRevealId(record.id);
-      revealTimer.current = setTimeout(() => finishReveal(record.id), 1400);
+      revealTimer.current = setTimeout(() => finishReveal(record.id), 1900);
     }
   }
   function closePanel() {
@@ -134,6 +134,10 @@ export default function App() {
     if (selectedId) requestAnimationFrame(() => document.getElementById(`artifact-${selectedId}`)?.focus());
   }
   function select(id: string) {
+    if (revealTimer.current) clearTimeout(revealTimer.current);
+    setRevealId(null);
+    setBusy(false);
+    submissionGuard.current = false;
     setSelectedId(id);
     setPlaybackId(null);
     if (playbackTimer.current) clearTimeout(playbackTimer.current);
@@ -142,7 +146,7 @@ export default function App() {
   }
   function replay(id: string) {
     if (playbackId) return;
-    setMessage('A little light, left on.');
+    setMessage('A little moment, remembered.');
     if (!reduced) {
       setPlaybackId(id);
       playbackTimer.current = setTimeout(() => setPlaybackId(null), 2500);
@@ -205,10 +209,10 @@ export default function App() {
 
   return <div className="museum-app">
     <a className="skip-link" href="#museum">Skip to museum</a>
-    <header className="site-header"><a className="wordmark" href="#museum" aria-label="Almost museum"><svg viewBox="0 0 28 34" aria-hidden="true"><path d="M3 31V15a11 11 0 0 1 22 0v16Z"/><path d="M9 31V16a5 5 0 0 1 10 0v15M14 9V2"/><circle cx="14" cy="21" r="2"/></svg><span>ALMOST<span className="wordmark-subtitle">EVERY UNFINISHED THING HAS A STORY</span></span></a><span className="header-note"><span aria-hidden="true">☾</span> Open for possibilities</span></header>
-    <MuseumScene count={records.length} hasDraft={!!draft} onCreate={beginCreation}><ExhibitGallery records={records} selectedId={selectedId} revealId={revealId} playbackId={playbackId} saved={saved} onSelect={select}/></MuseumScene>
+    <header className="site-header"><a className="wordmark" href="#museum" aria-label="Almost museum"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M25 5A13 13 0 1 0 29 25 14 14 0 0 1 25 5Z"/><path d="m22 13 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg><span>almost<span className="wordmark-subtitle">The museum of unfinished things</span></span></a><span className="header-note"><span aria-hidden="true">✦</span> No endings required.</span></header>
+    <MuseumScene count={records.length} hasDraft={!!draft} onCreate={beginCreation} placing={!!revealId} remembering={!!playbackId} lightCount={records.filter(e => e.lightOn).length} onSkipReveal={() => {if (revealId) {if (revealTimer.current) clearTimeout(revealTimer.current); finishReveal(revealId);}}}><ExhibitGallery records={records} selectedId={selectedId} revealId={revealId} playbackId={playbackId} saved={saved} onSelect={select}/></MuseumScene>
     <StatusNotice blocked={blocked} warning={loadWarning} draftWarning={draftWarning || (initial.reconciliation === 'conflict' ? 'An earlier draft differs from its saved exhibit. Both have been retained; the saved version will not be overwritten.' : '')} message={message} onRecheck={recheck}/>
-    <footer className="site-footer"><span>A quiet place for things that still matter.</span><span className="footer-storage">Kept in this browser · Clearing browser data may remove your collection</span><span className="footer-star" aria-hidden="true">✧</span></footer>
+    <footer className="site-footer"><span>Kept with care. By you, and a very small cat.</span><span className="footer-storage">Saved in this browser when available.<br/>Clearing browser data may remove your collection.</span><span className="footer-star" aria-hidden="true">☾</span></footer>
     {panel === 'creation' && draft && <CreationPanel draft={draft} busy={busy} onChange={updateDraft} onNext={nextStep} onPlace={place} onClose={closePanel} notice={blocked ? 'This collection cannot currently be saved. Your words will remain here for now, and may disappear after a reload.' : draftWarning}/>}
     {panel === 'plaque' && selected && <ExhibitPlaque exhibit={selected} playing={playbackId === selected.id} saved={!!saved[selected.id]} error={errors[selected.id] || (!saved[selected.id] ? SAVE_WARNING : '')} blocked={blocked} canEdit={draft?.id === selected.id} onClose={closePanel} onLight={(on, animate) => light(selected.id, on, animate)} onReplay={() => replay(selected.id)} onRetry={() => retry(selected)} onEdit={() => setPanel('creation')}/>}
   </div>;

@@ -18,7 +18,7 @@ export function PanelDialog({ title, kind, onClose, children }: { title: string;
     };
   }, []);
   return <dialog ref={ref} className={`panel-dialog ${kind}`} aria-labelledby={`${kind}-title`}>
-    <div className="panel-heading"><span className="eyebrow">{kind === 'creation' ? 'A place for your beginning' : 'From your collection'}</span><button className="icon-button close-button" onClick={onClose} aria-label="Close panel">×</button></div>
+    <div className="panel-heading"><span className="eyebrow">{kind === 'creation' ? 'Make a little place for it.' : 'A keepsake from your museum'}</span><button className="icon-button close-button" onClick={onClose} aria-label="Close panel">×</button></div>
     <h2 id={`${kind}-title`} tabIndex={-1}>{title}</h2>
     {children}
   </dialog>;

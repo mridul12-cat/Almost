@@ -225,7 +225,7 @@ test('keyboard-only creation, validation, focus return and reduced-motion intera
   await expect(page.getByRole('dialog').getByRole('heading', { name: 'A summer song' })).toBeFocused();
   await tabTo(page, page.getByRole('button', { name: 'Leave a little light on' })); await page.keyboard.press('Enter');
   await expect(page.getByRole('checkbox', { name: 'Light on' })).toBeChecked();
-  await expect(page.locator('.artifact.playing, .being-revealed')).toHaveCount(0);
+  await expect(page.locator('.artifact.is-playing, .artifact.is-revealing, .being-revealed')).toHaveCount(0);
   await page.keyboard.press('Escape');
   await expect(page.getByRole('button', { name: 'View exhibit: A summer song' })).toBeFocused();
 });
@@ -284,4 +284,110 @@ test('failed light writes keep session feedback honest and retry the same saved 
   await page.reload();
   await page.getByRole('button', { name: 'View exhibit: A quiet book' }).click();
   await expect(page.getByRole('checkbox', { name: 'Light on' })).toBeChecked();
+});
+
+test('Pip is an accessible local illustration through arrival and the creation ritual', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByRole('img', { name: /Pip/i }).first()).toBeVisible();
+  await page.getByRole('button', { name: 'Create your first exhibit' }).click();
+  await expect(page.getByRole('dialog').getByRole('img', { name: /Pip/i })).toBeVisible();
+  await page.getByLabel('Something you never quite finished').fill('A small paper observatory.');
+  await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
+  await expect(page.getByRole('dialog').getByRole('img', { name: /Pip/i })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('img', { name: /Pip/i }).first()).toBeVisible();
+});
+
+test('a failed save skips the placement ceremony and never celebrates durable success', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await installFaults(page, { localWrite: true });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Create your first exhibit' }).click();
+  await page.getByLabel('Something you never quite finished').fill('A little observatory.');
+  await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByLabel('Exhibit title', { exact: true }).fill('A temporary observatory');
+  await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByRole('radio', { name: 'Spaceship', exact: true }).check();
+  await page.getByRole('button', { name: 'Place in Museum' }).evaluate(button => { (button as HTMLButtonElement).click(); (button as HTMLButtonElement).click(); });
+  // Assertions run immediately, before a normal ceremony could have finished.
+  await expect(page.locator('.being-revealed, .artifact.is-revealing, .placement-ceremony')).toHaveCount(0);
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'A temporary observatory' })).toBeVisible();
+  await expect(page.getByText('Your exhibit has found its place.', { exact: true })).toHaveCount(0);
+  await expect(page.getByText('Temporary · not saved for your next visit', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Continue editing' })).toBeVisible();
+  expect(await savedRecords(page)).toHaveLength(0);
+  expect(await page.evaluate(() => JSON.parse(sessionStorage.getItem('almost:draft')!).title)).toBe('A temporary observatory');
+});
+
+test('twelve existing keepsakes retain stable IDs, exact bytes, ordering and independent lights', async ({ page, isMobile }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const forms = ['book', 'spaceship', 'plant', 'music-box', 'canvas'];
+  const fixture = Array.from({ length: 12 }, (_, index) => ({ ...existing, id: `00000000-0000-4000-8000-${String(index + 1).padStart(12, '0')}`, title: `Kept beginning ${String(index + 1).padStart(2, '0')}`, description: `  Original words ${index + 1}.\nA little story ✨`, artifactType: forms[index % forms.length], lightOn: index % 2 === 0, createdAt: new Date(Date.parse(existing.createdAt) + index * 1000).toISOString() }));
+  const bytes = fixture.map(record => ({ key: PREFIX + record.id, raw: JSON.stringify(record, null, 2) }));
+  await page.evaluate(entries => { for (const entry of entries) localStorage.setItem(entry.key, entry.raw); }, bytes);
+  await page.reload();
+  expect(await savedRecords(page)).toHaveLength(12);
+  if (isMobile) {
+    for (let step = 1; step < 12; step++) {
+      await page.getByRole('button', { name: 'Next exhibit', exact: true }).click();
+      await expect(page.getByRole('navigation', { name: 'Mobile collection browsing' })).toContainText(`${step + 1} of 12`);
+    }
+  } else await page.getByRole('button', { name: 'Next exhibits', exact: true }).click();
+  await page.getByRole('button', { name: 'View exhibit: Kept beginning 12', exact: true }).click();
+  await expect(page.getByRole('checkbox', { name: 'Light off' })).not.toBeChecked();
+  await page.getByRole('button', { name: 'Relive the moment' }).click();
+  await expect(page.getByRole('checkbox', { name: 'Light off' })).not.toBeChecked();
+  await page.keyboard.press('Escape');
+  await page.reload();
+  const after = await page.evaluate(entries => entries.map(entry => ({ key: entry.key, raw: localStorage.getItem(entry.key) })), bytes);
+  expect(after).toEqual(bytes);
+  expect((await savedRecords(page)).sort((a, b) => a.id.localeCompare(b.id))).toEqual(fixture);
+});
+
+test('the complete keepsake journey makes no external network request', async ({ page }) => {
+  const externalRequests: string[] = [];
+  page.on('request', request => {
+    const url = new URL(request.url());
+    if ((url.protocol === 'http:' || url.protocol === 'https:') && url.origin !== 'http://127.0.0.1:4173') externalRequests.push(url.href);
+  });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await create(page, 'Local little story', 'A story kept entirely in this browser.', 'Canvas');
+  await page.getByRole('button', { name: 'Leave a little light on' }).click();
+  await page.getByRole('button', { name: 'Relive the moment' }).click();
+  await page.reload();
+  await page.waitForLoadState('networkidle');
+  expect(externalRequests).toEqual([]);
+});
+
+test('320px short viewports keep creation and long plaque bottom actions reachable', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('button', { name: 'Create your first exhibit' }).click();
+  const longWords = 'A little unfinished beginning.\n'.repeat(29);
+  await page.getByLabel('Something you never quite finished').fill(longWords);
+  await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByLabel('Exhibit title', { exact: true }).fill('A very small room for a long story');
+  // A short layout approximates the available space above a mobile software keyboard.
+  await page.setViewportSize({ width: 320, height: 360 });
+  const next = page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true });
+  await next.scrollIntoViewIfNeeded();
+  await expect(next).toBeInViewport();
+  await next.click();
+  await page.getByRole('radio', { name: 'Canvas', exact: true }).check();
+  const place = page.getByRole('button', { name: 'Place in Museum' });
+  await place.scrollIntoViewIfNeeded();
+  await expect(place).toBeInViewport();
+  await place.click();
+  const toggle = page.getByRole('checkbox', { name: 'Light off' });
+  await toggle.scrollIntoViewIfNeeded();
+  await expect(toggle).toBeInViewport();
+  await toggle.check();
+  await expect(page.getByRole('checkbox', { name: 'Light on' })).toBeChecked();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('button', { name: 'View exhibit: A very small room for a long story' })).toBeFocused();
 });

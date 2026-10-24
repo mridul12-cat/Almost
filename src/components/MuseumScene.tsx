@@ -1,9 +1,20 @@
 import type { ReactNode } from 'react';
-export function MuseumScene({ children, count, hasDraft, onCreate }: { children: ReactNode; count: number; hasDraft: boolean; onCreate: () => void }) {
-  return <main className={`museum ${count ? 'inhabited' : 'empty'}`} id="museum">
-    <div className="room-architecture" aria-hidden="true"><div className="room-cornice"/><div className="wall-panels"/>{[0, 1, 2].map(i => <div className={`arched-window window-${i}`} key={i}><div className="window-sky"><i className="moon"/><i className="hill hill-one"/><i className="hill hill-two"/>{[0, 1, 2, 3, 4, 5].map(s => <i className={`star star-${s}`} key={s}/>)}</div><div className="window-mullion"/><div className="window-sill"/></div>)}<div className="wall-lamp lamp-left"><i/></div><div className="wall-lamp lamp-right"><i/></div><div className="floor"/><div className="floor-light"/><div className="room-skirt"/>{Array.from({length: 12}, (_, i) => <i className={`dust dust-${i}`} key={i}/>)}</div>
-    <div className="museum-inscription"><p className="eyebrow">THE MUSEUM OF UNFINISHED THINGS</p><h1>{count ? <>Every beginning<br/><em>has a place.</em></> : <>Every unfinished thing<br/><em>began somewhere.</em></>}</h1><div className="inscription-flourish" aria-hidden="true"><span/>✧<span/></div><p className="museum-subtitle">{count ? 'A collection of things you once imagined.' : 'Give something you once started a place to exist.'}</p></div>
-    {children}
-    <div className="museum-invitation"><button className="primary-button museum-create" onClick={onCreate}>{hasDraft ? 'Continue where you left off' : count ? '+ Add an Exhibit' : 'Create your first exhibit'}<span aria-hidden="true">{count ? '' : '↗'}</span></button><p className="invitation-note">{count ? 'No need to finish. No need to explain.' : 'No masterpiece required. Just a beginning.'}</p></div>
+import { MuseumAtmosphere } from './MuseumAtmosphere';
+import { PipCurator } from './PipCurator';
+
+export function MuseumScene({ children, count, hasDraft, onCreate, placing = false, remembering = false, lightCount = 0, onSkipReveal }: { children: ReactNode; count: number; hasDraft: boolean; onCreate: () => void; placing?: boolean; remembering?: boolean; lightCount?: number; onSkipReveal?: () => void }) {
+  return <main className={`museum ${count ? 'inhabited' : 'empty'} ${placing ? 'is-placing' : ''} ${lightCount ? 'has-lights' : ''}`} id="museum" tabIndex={-1}>
+    <div className="museum-intro"><div><span className="little-caption"><span aria-hidden="true">☾</span> A tiny museum. Open all night.</span><h1>A little place<br/>for your <span>almosts.</span></h1></div><p>Some things are worth keeping, <br/>even unfinished.<span className="intro-scribble" aria-hidden="true">That includes yours.</span></p></div>
+    <div className="diorama">
+      <MuseumAtmosphere/>
+      <div className="room-sign" aria-hidden="true"><span>The Midnight</span><strong>Keepsake Museum</strong><i>beginnings welcome here</i></div>
+      <div className="room-constellation" aria-hidden="true">{Array.from({ length: Math.min(count, 12) }, (_, i) => <i key={i} style={{ left: `${8 + (i * 29) % 85}%`, top: `${8 + (i * 17) % 50}%`, transform: `rotate(${i * 19}deg)` }}>✦</i>)}</div>
+      <div className="keeper-corner"><PipCurator mood={placing ? 'placing' : remembering ? 'light' : count ? 'idle' : 'welcome'} showNote/><span className="keeper-tag">Pip <span>keeper of almost</span></span></div>
+      <div className="writing-desk"><span className="desk-note">{count ? 'There’s room for one more.' : 'Every unfinished thing began somewhere.'}</span><button className="primary-button museum-create" onClick={onCreate} disabled={placing}><span>{hasDraft ? 'Continue where you left off' : count ? '+ Add an Exhibit' : 'Create your first exhibit'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 17 1-5L17 1l5 5-11 11-6 1Zm1-5 5 5M3 21h17"/></svg></button><p>Make a little place for it.</p></div>
+      {children}
+      {placing && <div className="placement-ceremony" role="status"><span aria-hidden="true">✧</span><p>A little place, just for this.</p><button className="text-button" onClick={onSkipReveal}>Open its keepsake card</button></div>}
+      <span className="room-caption" aria-hidden="true">a home for things that never quite became</span>
+    </div>
+    <p className="museum-footnote"><span aria-hidden="true">✧</span> Nothing here needs an ending.</p>
   </main>;
 }

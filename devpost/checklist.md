@@ -31,7 +31,7 @@ Authorization: the learner supplied the build order and explicitly requested imp
   Learner check: Close/reopen a draft, add several exhibits and browse them; verify light state on return.
   Commit: `Verify resilient drafts recovery and collection browsing`
 
-- [ ] **3. Polish the museum and prepare a verifiable release**
+- [x] **3. Polish the museum and prepare a verifiable release**
   Becomes usable: A polished responsive museum with verified keyboard/reduced-motion behavior, deployment settings, instructions and final review readiness.
   Why now: Refines a working experience, preserving time for visual QA and submission preparation.
   PRD ref: `prd.md > Look and Feel`, `Accessible and Responsive Use`, `What We're Building`
@@ -39,7 +39,7 @@ Authorization: the learner supplied the build order and explicitly requested imp
   Build: Refine scene/artifacts, implement agreed creative feedback, check narrow/desktop layouts, document Vercel Hobby and Render Static Site backup, add app map after final review.
   Verify (mechanical): Typecheck, lint, unit and browser suites, production build; desktop/mobile/reduced-motion screenshots and focus checks.
   Learner check: Explore the whole app, including awkward text and narrow viewports; identify anything broken, confusing or worth changing before shipping.
-  Commit: `Polish museum accessibility and deployment readiness`
+  Commit: `Reinvent Almost as the Midnight Keepsake Museum`
 
 ## Hands-on Checkpoints
 
@@ -50,6 +50,8 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 ## Final Review
 
+- [x] Implement authorized Midnight Keepsake Museum reinvention and mechanically verify it — 22 unit tests, 34 browser tests, typecheck, lint and production build passed; desktop/mobile/tablet screenshots inspected.
+- [ ] Learner explores the redesigned room, ritual, reveal and details; any further feedback is clarified and resolved.
 - [ ] Final review complete — feedback resolved and learner confirms ready to ship
 
 ## Code Tour and App Map
@@ -65,6 +67,10 @@ Reflection: Not yet offered.
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- Implemented the authorized redesign with local SVG room scenery, Pip, notebook/name-tag/object-tray creation, keepsake-box details and independent shelf lanterns. Failed persistence bypasses the success ceremony. Added five browser scenarios for Pip, failure ceremony, 12-record preservation, network independence and narrow layouts.
+- Tablet visual QA found the speech note colliding with the desk action; suppress that optional note at intermediate widths and give shelf rows more space. Measured paper-text and primary-control contrast; darkened essential text/control colors to at least 4.5:1 for the checked pairs.
+- Added static Vercel settings and retained Render Free Static Site as backup. Removed one unused development lint plugin; no runtime dependency or storage schema change. Nothing pushed, published or deployed.
 
 - Learner authorized a complete visual/interaction reinvention after the first playable checkpoint. Pip, asymmetric shelves, paper ritual and keepsake card replace the formal gallery. Storage schemas and semantics remain unchanged; see `redesign.md`.
 
