@@ -1,0 +1,9 @@
+import type { ReactNode } from 'react';
+export function MuseumScene({ children, count, hasDraft, onCreate }: { children: ReactNode; count: number; hasDraft: boolean; onCreate: () => void }) {
+  return <main className={`museum ${count ? 'inhabited' : 'empty'}`} id="museum">
+    <div className="room-architecture" aria-hidden="true"><div className="room-cornice"/><div className="wall-panels"/>{[0, 1, 2].map(i => <div className={`arched-window window-${i}`} key={i}><div className="window-sky"><i className="moon"/><i className="hill hill-one"/><i className="hill hill-two"/>{[0, 1, 2, 3, 4, 5].map(s => <i className={`star star-${s}`} key={s}/>)}</div><div className="window-mullion"/><div className="window-sill"/></div>)}<div className="wall-lamp lamp-left"><i/></div><div className="wall-lamp lamp-right"><i/></div><div className="floor"/><div className="floor-light"/><div className="room-skirt"/>{Array.from({length: 12}, (_, i) => <i className={`dust dust-${i}`} key={i}/>)}</div>
+    <div className="museum-inscription"><p className="eyebrow">THE MUSEUM OF UNFINISHED THINGS</p><h1>{count ? <>Every beginning<br/><em>has a place.</em></> : <>Every unfinished thing<br/><em>began somewhere.</em></>}</h1><div className="inscription-flourish" aria-hidden="true"><span/>✧<span/></div><p className="museum-subtitle">{count ? 'A collection of things you once imagined.' : 'Give something you once started a place to exist.'}</p></div>
+    {children}
+    <div className="museum-invitation"><button className="primary-button museum-create" onClick={onCreate}>{hasDraft ? 'Continue where you left off' : count ? '+ Add an Exhibit' : 'Create your first exhibit'}<span aria-hidden="true">{count ? '' : '↗'}</span></button><p className="invitation-note">{count ? 'No need to finish. No need to explain.' : 'No masterpiece required. Just a beginning.'}</p></div>
+  </main>;
+}

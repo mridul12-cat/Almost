@@ -1,0 +1,28 @@
+.artifact { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 1; isolation: isolate; pointer-events: none; }
+.artifact-illustration { display: block; width: 100%; height: 100%; overflow: visible; }
+.artifact-drawing { transform-origin: 110px 150px; }
+.artifact-lasting-halo, .artifact-lasting-light { opacity: 0; transition: opacity .7s ease; }
+.artifact.is-lit .artifact-lasting-halo, .artifact.is-lit .artifact-lasting-light { opacity: 1; }
+.artifact-moment-halo, .artifact-sparks { opacity: 0; pointer-events: none; }
+.artifact.is-playing .artifact-moment-halo { animation: artifact-warmth 2.5s ease both; }
+.artifact.is-playing .artifact-sparks { animation: artifact-sparks 2.5s ease both; transform-origin: 110px 120px; }
+.artifact.is-revealing .artifact-drawing { animation: artifact-arrival 1.6s cubic-bezier(.2,.7,.25,1) both; }
+.artifact.is-playing .book-pages { transform-origin: 110px 162px; animation: book-flutter 2.5s ease both; }
+.artifact.is-playing .spaceship-lamp { animation: spaceship-flicker 2.5s ease both; }
+.artifact.is-playing .spaceship-body { transform-origin: 110px 156px; animation: spaceship-drift 2.5s ease both; }
+.artifact.is-playing .plant-leaf { transform-origin: 110px 100px; animation: plant-unfold 2.5s ease both; }
+.artifact.is-playing .music-turn { transform-origin: 115px 119px; animation: music-turn 2.5s ease both; }
+.artifact.is-playing .canvas-paint { animation: canvas-shimmer 2.5s ease both; }
+@keyframes artifact-arrival { from { opacity: 0; transform: translateY(12px) scale(.94); filter: blur(4px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
+@keyframes artifact-warmth { 0%,100% { opacity: 0; } 24%,65% { opacity: 1; } }
+@keyframes artifact-sparks { 0%,100% { opacity: 0; transform: translateY(3px); } 32%,65% { opacity: .85; } 75% { transform: translateY(-5px); } }
+@keyframes book-flutter { 0%,100% { transform: scaleY(1); } 28% { transform: scaleY(1.08) skewY(-2deg); } 42% { transform: scaleY(.98) skewY(1deg); } 57% { transform: scaleY(1.06) skewY(-1deg); } 74% { transform: scaleY(1.01); } }
+@keyframes spaceship-flicker { 0%,100% { fill: #e6bd68; } 25%,48%,64% { fill: #fff4c0; filter: drop-shadow(0 0 5px #ffd880); } 35%,56% { fill: #a69872; filter: none; } }
+@keyframes spaceship-drift { 0%,100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-4px) rotate(-1deg); } 65% { transform: translateY(-2px) rotate(1deg); } }
+@keyframes plant-unfold { 0%,100% { transform: rotate(0); filter: brightness(1); } 30% { transform: rotate(-9deg) scale(1.04); filter: brightness(1.35); } 70% { transform: rotate(-3deg); filter: brightness(1.15); } }
+@keyframes music-turn { 0%,100% { transform: scaleX(1); } 25%,75% { transform: scaleX(.55); } 50% { transform: scaleX(-1); } }
+@keyframes canvas-shimmer { 0%,100% { filter: brightness(1); opacity: 1; } 40% { filter: brightness(1.5) saturate(1.2); opacity: .85; } 70% { filter: brightness(1.15); } }
+@media (prefers-reduced-motion: reduce) {
+  .artifact *, .artifact.is-playing *, .artifact.is-revealing * { animation: none !important; transition: none !important; }
+  .artifact.is-playing .artifact-moment-halo, .artifact.is-playing .artifact-sparks { opacity: 0; }
+}
