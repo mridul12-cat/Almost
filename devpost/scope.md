@@ -23,7 +23,7 @@ Returning is an invitation to remember, never an obligation or engagement goal.
 
 ## Inspiration & Identity
 
-An intimate place between a dream and a memory: hand-painted storybook and watercolor influences, warm architecture, cozy indie-game environmental storytelling, twilight blue against amber light, and restrained golden accents. These are visual directions, not a requirement to implement every architectural detail. No specific reference works or URLs were supplied.
+An intimate place between a dream and a memory. Updated by the learner's authorized Midnight Keepsake Museum revision: a single asymmetric storybook diorama, midnight blue and soft forest green, butter-yellow lanterns, dusty peach/lavender, tactile cream labels and wooden shelves. Pip, an original sleepy curator cat, quietly accompanies creation and remembering. No direct imitation of an existing artist or work. See `redesign.md` for the revision boundary.
 
 “The museum preserves beginnings, not endings.” Aim for quiet wonder and recognition, leaving visitors free to decide how they feel. Avoid a memorial atmosphere, forced positivity, therapeutic language, or invented emotional interpretations.
 

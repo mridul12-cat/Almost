@@ -45,6 +45,10 @@ Mobile exhibits form a horizontally swipeable gallery; explicit browsing control
 
 ## Look and Feel
 
+**Authorized creative revision:** `redesign.md` and the learner's Midnight Keepsake Museum brief supersede the formal/symmetric architectural styling below. One irregular miniature room replaces the gallery wall: a moonlit window, doorway, varied wood shelves, desk, lamp, rug, celestial details and Pip's resting corner. Typography is warm storybook display type plus readable system body text and small handwritten-style labels, without tiny tracked gold microtext. Use no remote fonts or assets.
+
+Creation retains the same editable data and validation but is presented as **The Whisper → The Name Tag → Choose a Vessel**, with paper writing surfaces, a live title tag and an object tray. Placement is a separate visual ceremony after one guarded successful save. Failed persistence skips the success ceremony and clearly labels the exhibit temporary. Details open as an illustrated cream keepsake card/box with the same independent light/replay controls and exact visitor words. All saved IDs, ordering, forms, drafts, and recovery semantics remain unchanged. Pip is a quiet original SVG character with welcome, idle, writing, placing and light-acknowledgment poses, no chat/AI, and reduced-motion equivalents.
+
 Source: `scope.md > Inspiration & Identity`; expanded by the learner during the PRD interview.
 
 - A small museum coming alive after closing hours: storybook illustration, hand-painted and watercolor character, deep twilight blues, warm amber illumination, wooden floors, tall arches, elegant pedestals, and delicate golden details.

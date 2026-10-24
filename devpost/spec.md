@@ -60,6 +60,8 @@ Implements `scope.md > The POC Boundary` and `prd.md > Non-Goals`.
 
 ## Look and Feel
 
+**Authorized implementation revision:** see `redesign.md` and `prd.md > Look and Feel`. Replace formal architecture with a responsive asymmetric diorama, an original local SVG MuseumAtmosphere, irregular wooden shelf positions, paper notebook/label/tray ritual and keepsake-box detail card. Add `PipCurator.tsx` and `pip.css` for the original decorative mascot and contextual motion. Maintain component APIs and all model/storage contracts; no schema migration. CSS controls the visual ceremony; only explicit App event handlers save data. Failed saving bypasses the success ceremony. No new runtime dependencies or remote assets.
+
 Implements `prd.md > Look and Feel`, `Museum Room and Arrival`, and `Exhibit Plaque`.
 
 - CSS custom properties: deep twilight navy, amber highlights, warm wood, muted parchment text surfaces, and restrained gold. Candidate implementation tokens: twilight #142238, wood #644633, amber #E6B66F, parchment #F6E9CF, plaque ink #29251F. Verify actual text/control contrast rather than assuming these combinations pass.

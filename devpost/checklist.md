@@ -21,7 +21,7 @@ Authorization: the learner supplied the build order and explicitly requested imp
   Learner check: Open the running museum, create an exhibit, inspect its reveal and light interaction; report whether the atmosphere and ceremony reflect your vision.
   Commit: `Build the first complete museum experience`
 
-- [ ] **2. Preserve words through interruptions and grow the collection**
+- [x] **2. Preserve words through interruptions and grow the collection**
   Becomes usable: Session drafts, editable failed creations, safe retry and blocked corrupt-storage mode, plus desktop/mobile browsing beyond six exhibits.
   Why now: Builds fault verification on the proven normal journey before spending the remaining effort on presentation.
   PRD ref: `prd.md > Session Draft and Cancellation`, `Save Failure and Retry`, `Return and Browse the Collection`
@@ -43,9 +43,9 @@ Authorization: the learner supplied the build order and explicitly requested imp
 
 ## Hands-on Checkpoints
 
-Slice 1 mechanical evidence: TypeScript, lint, 22 pure tests, production build, and 24 desktop/mobile browser scenario executions passed. Desktop empty-room and mobile creation/plaque screenshots inspected. Early creative feedback has been requested and remains pending; further presentation refinement waits for that feedback.
+Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production build, and 24 desktop/mobile browser scenario executions passed. Desktop empty-room and mobile creation/plaque screenshots inspected. Early feedback received as the learner's Midnight Keepsake Museum brief: replace the formal gallery with a miniature storybook world and Pip. This authorizes the redesign recorded in `redesign.md`; final review remains pending.
 
-- [ ] Early usable behavior explored — after slice 1, creative review of museum/reveal before further polish.
+- [x] Early usable behavior explored — learner supplied detailed creative feedback and authorized the Midnight Keepsake Museum revision.
 - [ ] Final kick-the-tires exploration and feedback completed
 
 ## Final Review
@@ -65,6 +65,8 @@ Reflection: Not yet offered.
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- Learner authorized a complete visual/interaction reinvention after the first playable checkpoint. Pip, asymmetric shelves, paper ritual and keepsake card replace the formal gallery. Storage schemas and semantics remain unchanged; see `redesign.md`.
 
 - Grouped the learner-authorized implementation order into three end-to-end slices and used fast pacing as requested, avoiding a repeat plan-approval question. Early creative and final hands-on reviews remain required.
 - App coordinates built-in React state and synchronous refs with pure upsert helpers rather than one large reducer. This preserves the specified model and prevents stale event handlers from dropping newer input.
