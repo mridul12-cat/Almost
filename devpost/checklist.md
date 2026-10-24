@@ -58,12 +58,12 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 - [ ] Learning activity complete — focused evidence-based connection between safe retries and observable acceptance criteria
 - [ ] Optional edit and transfer reflection addressed
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] `devpost/app-map.html` generated from current code, checked offline with JavaScript disabled, and opened/shown as a reference snapshot; final learner review remains pending
 
-Activity and evidence: Pending actual build verification and learner review.
-Route and stops: Pending finished implementation.
-Edit outcome: Pending; no extra exercise required if declined.
-Reflection: Not yet offered.
+Activity and evidence: Reference recap prepared from actual passing tests: reveal/light independence, failed-save ceremony suppression and exact-byte preservation of twelve records. This is an agent explanation, not completed learner practice; final review is pending.
+Route and stops: Reference-only route: CreationPanel / field → App / place, persist, light, replay → museumStorage / save, load, readDraft. Not toured interactively.
+Edit outcome: Not offered during pending final review; no extra exercise required.
+Reflection: Not asked; optional transfer reflection remains available after final review.
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
@@ -71,6 +71,7 @@ Activity mode: Fast execution with creative feedback and final focused wrap-up.
 - Implemented the authorized redesign with local SVG room scenery, Pip, notebook/name-tag/object-tray creation, keepsake-box details and independent shelf lanterns. Failed persistence bypasses the success ceremony. Added five browser scenarios for Pip, failure ceremony, 12-record preservation, network independence and narrow layouts.
 - Tablet visual QA found the speech note colliding with the desk action; suppress that optional note at intermediate widths and give shelf rows more space. Measured paper-text and primary-control contrast; darkened essential text/control colors to at least 4.5:1 for the checked pairs.
 - Added static Vercel settings and retained Render Free Static Site as backup. Removed one unused development lint plugin; no runtime dependency or storage schema change. Nothing pushed, published or deployed.
+- Saved redesign source as `03c2132`. Added the offline app map as a clearly labeled reference snapshot; validated native details and essential content with scripts disabled and zero external requests. No interactive learner activity or final sign-off is claimed.
 
 - Learner authorized a complete visual/interaction reinvention after the first playable checkpoint. Pip, asymmetric shelves, paper ritual and keepsake card replace the formal gallery. Storage schemas and semantics remain unchanged; see `redesign.md`.
 
