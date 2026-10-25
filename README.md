@@ -25,6 +25,16 @@ Use the wooden signposts to explore two more rooms, each with an original illust
 
 Pip visits both. Room discoveries reset when you leave; they never alter exhibits or drafts. Your collection stays in the Main Hall, retaining its browsing position. “Keep a beginning” returns to the existing creation desk; “Continue your beginning” resumes the same draft. Reload starts in the Main Hall. Keyboard navigation, modal focus restoration and reduced motion apply throughout.
 
+## The Conservatory memory journal
+
+Open **Memory journal** beside the Conservatory’s story invitation. The botanical notebook lets you write, name (optionally), read and edit personal memories. Each page records its original date, time (including seconds) and time zone; editing adds a separate Updated timestamp. Original recording metadata is retained.
+
+Pages save explicitly in this browser under `almost:journal:entry:<id>`. One open page uses the separate session key `almost:journal:draft`, so closing the journal or changing rooms preserves unfinished words. This journal is the exception to the room discoveries’ temporary-state behavior. It does not alter exhibits or their creation draft.
+
+Names allow 100 Unicode characters and memory text 5,000, with visible limits and no silent truncation. Failed saves retain an editable page for same-ID retry. Corrupted/unsupported journal records remain untouched and block journal writes until a readable-storage recheck. Newest recorded pages appear first, five at a time; mobile has a collapsible index.
+
+Saved memories belong to this browser/site address; clearing browser data can remove them. If browser storage fails, the journal explains that in-memory words may not survive reload. No account, backend, cross-device or encrypted-storage promise is introduced.
+
 ## Run locally
 
 Use a supported Node.js release compatible with Vite and Vitest (Node 22.12+ or a newer supported release) and npm.

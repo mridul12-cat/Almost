@@ -50,6 +50,8 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 ## Final Review
 
+- [x] Conservatory memory journal implemented and verified — themed notebook, dated entries/editing, safe independent persistence, recovery and responsive/keyboard checks.
+
 - [x] Two story rooms implemented and mechanically verified — navigation, distinct stories/interactions, preserved core journey and exact storage bytes.
 
 - [x] Expanded hall revision implemented and mechanically verified — architectural depth, optional room discoveries, preserved creation and storage flows.
@@ -72,6 +74,10 @@ Reflection: Not asked; optional transfer reflection remains available after fina
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- Journal extension verified: typecheck, lint, 57 unit tests and 82 browser executions passed with a production build. Corrected duplicate field/dialog IDs and phone-size heading/discovery spacing. Original/updated timestamps, raw content, same-ID retry, corruption/conflict safeguards, cleanup reconciliation and existing exhibit bytes are covered. Final creative acceptance remains open.
+
+- Learner authorizes a Conservatory memory journal. `journal.md` extends the side rooms’ prior no-persistence rule only for explicitly saved journal pages and session drafts; exhibit storage is unchanged.
 
 - Two-room extension verified after learner confirmation of themes: 22 unit tests and 62 browser executions passed, plus typecheck, lint and production build. Both rooms inspected at five viewports; paper-label contrast and tablet feedback collision corrected. Collection page/mobile position, exact storage bytes and same-ID creation handoff retained. No new services, dependencies or storage schema changes; final creative acceptance remains open.
 

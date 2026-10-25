@@ -5,6 +5,8 @@ status: approved
 
 # ALMOST — Technical Spec
 
+**Authorized extension — Conservatory journal:** The learner requests personal memory recording with dated/timed entries. `journal.md` defines an independent browser journal with explicit saves, original recording metadata, edit timestamps and safe draft/retry recovery. This adds journal-only persistence; exhibit records, creation drafts and other room discoveries retain their existing behavior.
+
 **Authorized extension — two story rooms:** The learner explicitly requests two differently themed rooms with their own stories and features. `story-rooms.md` supersedes the prior single-room limit for this extension. The Main Hall keeps the unchanged personal collection; the new rooms are optional, lightweight, deterministic experiences with no new persistence or services.
 
 ## How This Works, In Plain Language

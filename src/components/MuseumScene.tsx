@@ -2,12 +2,14 @@ import { useState, type ReactNode } from 'react';
 import type { MuseumRoom } from '../model/rooms';
 import { RoomNavigation } from './RoomNavigation';
 import { StoryRoom } from './StoryRoom';
+import { MemoryJournal } from './MemoryJournal';
 import { MuseumAtmosphere } from './MuseumAtmosphere';
 import type { PipMood } from './PipCurator';
 import { MuseumEnvironment } from './MuseumEnvironment';
 
 export function MuseumScene({ children, count, hasDraft, onCreate, placing = false, pipMood = 'sleepy', pipSpeaking = false, lightCount = 0, onSkipReveal }: { children: ReactNode; count: number; hasDraft: boolean; onCreate: () => void; placing?: boolean; pipMood?: PipMood; pipSpeaking?: boolean; lightCount?: number; onSkipReveal?: () => void }) {
   const [room, setRoom] = useState<MuseumRoom>('hall');
+  const [journalOpen, setJournalOpen] = useState(false);
   const visit = (next: MuseumRoom) => {
     if (placing || next === room) return;
     setRoom(next);
@@ -31,6 +33,7 @@ export function MuseumScene({ children, count, hasDraft, onCreate, placing = fal
       <div className="foreground-balustrade" aria-hidden="true"><i/><i/></div>
       <p className="hall-invitation">Take a look around. A few things here remember how to glow.</p>
     </div>
-    {room !== 'hall' && <StoryRoom key={room} room={room} onCreate={createFromRoom} hasDraft={hasDraft}/>}
+    {room !== 'hall' && <StoryRoom key={room} room={room} onCreate={createFromRoom} hasDraft={hasDraft} onOpenJournal={() => setJournalOpen(true)}/>}
+    <MemoryJournal open={journalOpen} onClose={() => setJournalOpen(false)}/>
   </main>;
 }

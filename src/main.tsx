@@ -6,4 +6,5 @@ import './styles/museum.css';
 import './styles/artifacts.css';
 import './styles/hall.css';
 import './styles/rooms.css';
+import './styles/journal.css';
 createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);
