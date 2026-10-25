@@ -50,6 +50,9 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 ## Final Review
 
+- [x] Expanded hall revision implemented and mechanically verified — architectural depth, optional room discoveries, preserved creation and storage flows.
+
+- [x] Creative pass 2 implemented and verified — composed room, event-driven Pip, explicit unsaved preview stage, larger/readable exhibits and five-viewport QA.
 - [x] Implement authorized Midnight Keepsake Museum reinvention and mechanically verify it — 22 unit tests, 34 browser tests, typecheck, lint and production build passed; desktop/mobile/tablet screenshots inspected.
 - [ ] Learner explores the redesigned room, ritual, reveal and details; any further feedback is clarified and resolved.
 - [ ] Final review complete — feedback resolved and learner confirms ready to ship
@@ -67,6 +70,12 @@ Reflection: Not asked; optional transfer reflection remains available after fina
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- Hall revision verified: typecheck, lint, 22 unit tests, production build and 50 desktop/mobile browser tests passed. Inspected five viewport pairs (empty/ten exhibits), guestbook and plaque. Window crop, desk target interception and narrow-label spacing corrected. No model/storage/dependency changes. Final learner acceptance remains open.
+
+- Learner’s hands-on feedback explicitly authorizes the environment redesign in `hall-redesign.md`; creation is working and should remain mostly intact. One continuous hall gains layered architecture and optional ephemeral discoveries. Final creative acceptance remains open.
+
+- Learner's second creative review authorizes refinement of the existing world, including an explicit fourth unsaved preview stage. No persisted schema or storage semantics change; see `creative-pass-2.md`. Final hands-on review is reopened for the refined implementation.
 
 - Implemented the authorized redesign with local SVG room scenery, Pip, notebook/name-tag/object-tray creation, keepsake-box details and independent shelf lanterns. Failed persistence bypasses the success ceremony. Added five browser scenarios for Pip, failure ceremony, 12-record preservation, network independence and narrow layouts.
 - Tablet visual QA found the speech note colliding with the desk action; suppress that optional note at intermediate widths and give shelf rows more space. Measured paper-text and primary-control contrast; darkened essential text/control colors to at least 4.5:1 for the checked pairs.

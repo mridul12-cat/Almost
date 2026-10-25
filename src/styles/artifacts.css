@@ -27,11 +27,11 @@
   .artifact.is-playing .artifact-moment-halo, .artifact.is-playing .artifact-sparks { opacity: 0; }
 }
 /* Slow, sparse toy-like motion; explicit reliving always takes precedence. */
-.artifact:not(.is-playing):not(.is-revealing) .book-pages { transform-origin: 110px 162px; animation: book-idle 14s ease-in-out infinite; }
-.artifact:not(.is-playing):not(.is-revealing) .spaceship-body { transform-origin: 110px 156px; animation: rocket-idle 11s ease-in-out infinite; }
-.artifact:not(.is-playing):not(.is-revealing) .plant-leaf { transform-origin: 110px 100px; animation: leaf-idle 9s ease-in-out infinite; }
-.artifact:not(.is-playing):not(.is-revealing) .music-turn { transform-origin: 115px 119px; animation: music-idle 16s ease-in-out infinite; }
-.artifact:not(.is-playing):not(.is-revealing) .canvas-paint { animation: paint-idle 18s ease-in-out infinite; }
+.artifact-choice:hover .artifact:not(.is-playing):not(.is-revealing) .book-pages { transform-origin: 110px 162px; animation: book-idle 14s ease-in-out infinite; }
+.artifact-choice:hover .artifact:not(.is-playing):not(.is-revealing) .spaceship-body { transform-origin: 110px 156px; animation: rocket-idle 11s ease-in-out infinite; }
+.artifact-choice:hover .artifact:not(.is-playing):not(.is-revealing) .plant-leaf { transform-origin: 110px 100px; animation: leaf-idle 9s ease-in-out infinite; }
+.artifact-choice:hover .artifact:not(.is-playing):not(.is-revealing) .music-turn { transform-origin: 115px 119px; animation: music-idle 16s ease-in-out infinite; }
+.artifact-choice:hover .artifact:not(.is-playing):not(.is-revealing) .canvas-paint { animation: paint-idle 18s ease-in-out infinite; }
 @keyframes book-idle { 0%,85%,100% { transform: skewY(0); } 91% { transform: skewY(-1.5deg) scaleY(1.02); } 95% { transform: skewY(.5deg); } }
 @keyframes rocket-idle { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-1.5px) rotate(-.4deg); } }
 @keyframes leaf-idle { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-2deg); } }

@@ -13,7 +13,7 @@ export function ExhibitGallery({ records, selectedId, revealId, playbackId, save
     if (selectionIndex < 0) return;
     setPage(Math.floor(selectionIndex / 6));
     setMobileIndex(selectionIndex);
-    if (window.matchMedia('(max-width: 767px)').matches) track.current?.querySelector<HTMLElement>(`[data-id="${selectedId}"]`)?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'instant' });
+    if (window.matchMedia('(max-width: 959px)').matches) track.current?.querySelector<HTMLElement>(`[data-id="${selectedId}"]`)?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'instant' });
   }, [selectedId, selectionIndex]);
   const browseMobile = (direction: number) => {
     const next = Math.max(0, Math.min(records.length - 1, mobileIndex + direction));
@@ -23,7 +23,7 @@ export function ExhibitGallery({ records, selectedId, revealId, playbackId, save
   const placeholders = Math.max(0, 6 - (records.length ? Math.min(6, records.length - effectivePage * 6) : 0));
   return <section className={`collection-stage ${records.length ? '' : 'awaiting-beginnings'}`} aria-label="Your museum collection">
     <div className="shelf-caption"><span>Your little collection</span><span aria-hidden="true">↘</span></div>
-    <div className="exhibit-track" ref={track} onScroll={e => { if (window.innerWidth < 768) { const el = e.currentTarget; const first = el.firstElementChild as HTMLElement | null; if (first) setMobileIndex(Math.min(records.length - 1, Math.max(0, Math.round(el.scrollLeft / (first.offsetWidth + 20))))); } }}>
+    <div className="exhibit-track" ref={track} onScroll={e => { if (window.innerWidth < 960) { const el = e.currentTarget; const first = el.firstElementChild as HTMLElement | null; if (first) setMobileIndex(Math.min(records.length - 1, Math.max(0, Math.round(el.scrollLeft / (first.offsetWidth + 20))))); } }}>
       {records.map((exhibit, index) => <div key={exhibit.id} data-id={exhibit.id} className={`exhibit-position position-${index % 6} ${Math.floor(index / 6) === effectivePage ? 'on-page' : 'off-page'} ${revealId === exhibit.id ? 'being-revealed' : ''} ${exhibit.lightOn ? 'shelf-lit' : ''}`}>
         <button id={`artifact-${exhibit.id}`} className={`exhibit-button ${selectedId === exhibit.id ? 'selected' : ''}`} aria-label={`View exhibit: ${exhibit.title}`} aria-pressed={selectedId === exhibit.id} onClick={() => onSelect(exhibit.id)}>
           <div className="artifact-display"><div className="reveal-spotlight"/><Artifact type={exhibit.artifactType} lightOn={exhibit.lightOn} playing={playbackId === exhibit.id} revealing={revealId === exhibit.id}/></div>

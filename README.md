@@ -1,14 +1,18 @@
 # ALMOST — Every Unfinished Thing Has a Story
 
-A small, browser-only museum for unfinished creative ideas. The Midnight Keepsake Museum is an original storybook diorama of crooked shelves, a moon window, paper tags, little lanterns, and Pip, the sleepy curator cat. Describe something you began, choose its symbolic form, and give it a place in the room. Leaving a little light on acknowledges a possibility without asking you to finish it.
+A small, browser-only museum for unfinished creative ideas. The Midnight Keepsake Museum is an original storybook hall with tall twilight windows, a distant archway, perspective wooden floors, curated shelves and plinths, and Pip’s keepsake desk. Describe something you began, choose its symbolic form, and give it a place in the room. Leaving a little light on acknowledges a possibility without asking you to finish it.
 
 ## Make a little place for it
 
-The Whisper opens Pip's paper notebook. The Name Tag offers an editable deterministic title and live label preview. Choose a Vessel presents five original SVG keepsakes on a wooden tray. One successful save starts the placement ceremony: the object arrives, its tag settles, and Pip notices a sparkle. A failed save skips that celebration and opens an honestly labeled temporary exhibit with retry/edit controls.
+The Whisper opens Pip's paper notebook. The Name Tag offers an editable deterministic title and live label preview. Choose a Vessel presents five original SVG keepsakes on a wooden tray. An unsaved fourth stage previews the chosen keepsake and name before the final Place action. Back or Escape retains the same draft; preview never creates an exhibit. One successful save starts the placement ceremony: the object arrives, its tag settles, and Pip notices a sparkle. A failed save skips that celebration and opens an honestly labeled temporary exhibit with retry/edit controls.
 
-Click a shelf object to open its keepsake box and read your exact words. Selection and replay never change its lasting light. Desktop displays six irregular shelf positions per collection page; mobile uses a pocket-museum gallery with visible previous/next controls. More exhibits stay in the same room, in stable creation order.
+Click a shelf object to open its keepsake box and read your exact words. Selection and replay never change its lasting light. Desktop displays six shelf/plinth positions per collection page; mobile unfolds the hall vertically around a swipeable gallery with visible previous/next controls. More exhibits stay in the same room, in stable creation order.
 
-Pip has welcome, idle, writing/notebook, placing/sparkle, and light/lantern poses. All character, room, and artifact animation is decorative and disabled under reduced motion. No font, artwork, or runtime service is fetched externally.
+Pip has event-driven welcome, sleepy, listening, anticipation, happy, looking and settling poses; short speech bubbles settle away. All character, room, and artifact animation is decorative and disabled under reduced motion. No font, artwork, or runtime service is fetched externally.
+
+## Discover the hall
+
+Look through the twilight window, switch the desk lamp, ring the silent visual bell, open the curator-written guestbook, read a note or empty-pedestal inscription, or ask Pip for a thought. Every object has a visible label, keyboard access and reduced-motion feedback. These optional discoveries use ephemeral React state only: they never change exhibits, drafts or saved lights. The room lamp resets on reload; the guestbook is a readable welcome, not a new visitor-writing feature.
 
 ## Run locally
 

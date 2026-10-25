@@ -4,7 +4,7 @@ import { test, expect, type Page, type Locator } from '@playwright/test';
 const PREFIX = 'almost:exhibit:';
 const FIRST_ID = '00000000-0000-4000-8000-000000000001';
 const existing = { schemaVersion: 1, id: FIRST_ID, title: 'An earlier beginning', description: 'Words that must remain untouched.', artifactType: 'book', lightOn: false, createdAt: '2026-10-24T00:00:00.000Z' };
-declare global { interface Window { almostFaults: { localWrite: boolean; sessionWrite: boolean; cleanup: boolean; localRead: boolean } } }
+declare global { interface Window { almostExhibitWrites: string[]; almostFaults: { localWrite: boolean; sessionWrite: boolean; cleanup: boolean; localRead: boolean } } }
 async function installFaults(page: Page, faults: Partial<Window['almostFaults']>) {
   await page.addInitScript(flags => {
     window.almostFaults = { localWrite: false, sessionWrite: false, cleanup: false, localRead: false, ...flags };
@@ -37,6 +37,8 @@ async function create(page: Page, title = 'The paper moon', description = 'A pap
   await page.getByLabel('Exhibit title', { exact: true }).fill(title);
   await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
   await page.getByRole('radio', { name: form, exact: true }).check();
+  await page.getByRole('button', { name: 'Preview its place', exact: true }).click();
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'A little place for it.', exact: true })).toBeVisible();
   // Two synchronous events model repeated activation before React can disable/unmount it.
   await page.getByRole('button', { name: 'Place in Museum' }).evaluate(button => { (button as HTMLButtonElement).click(); (button as HTMLButtonElement).click(); });
   await expect(page.getByRole('dialog').getByRole('heading', { name: title.trim(), exact: true })).toBeVisible();
@@ -221,6 +223,8 @@ test('keyboard-only creation, validation, focus return and reduced-motion intera
   await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.type('A summer song');
   await tabTo(page, page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true })); await page.keyboard.press('Enter');
   await tabTo(page, page.getByRole('radio', { name: 'Book', exact: true })); await page.keyboard.press('Space');
+  await tabTo(page, page.getByRole('button', { name: 'Preview its place', exact: true })); await page.keyboard.press('Enter');
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'A little place for it.' })).toBeFocused();
   await tabTo(page, page.getByRole('button', { name: 'Place in Museum' })); await page.keyboard.press('Enter');
   await expect(page.getByRole('dialog').getByRole('heading', { name: 'A summer song' })).toBeFocused();
   await tabTo(page, page.getByRole('button', { name: 'Leave a little light on' })); await page.keyboard.press('Enter');
@@ -308,6 +312,7 @@ test('a failed save skips the placement ceremony and never celebrates durable su
   await page.getByLabel('Exhibit title', { exact: true }).fill('A temporary observatory');
   await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
   await page.getByRole('radio', { name: 'Spaceship', exact: true }).check();
+  await page.getByRole('button', { name: 'Preview its place', exact: true }).click();
   await page.getByRole('button', { name: 'Place in Museum' }).evaluate(button => { (button as HTMLButtonElement).click(); (button as HTMLButtonElement).click(); });
   // Assertions run immediately, before a normal ceremony could have finished.
   await expect(page.locator('.being-revealed, .artifact.is-revealing, .placement-ceremony')).toHaveCount(0);
@@ -378,6 +383,7 @@ test('320px short viewports keep creation and long plaque bottom actions reachab
   await expect(next).toBeInViewport();
   await next.click();
   await page.getByRole('radio', { name: 'Canvas', exact: true }).check();
+  await page.getByRole('button', { name: 'Preview its place', exact: true }).click();
   const place = page.getByRole('button', { name: 'Place in Museum' });
   await place.scrollIntoViewIfNeeded();
   await expect(place).toBeInViewport();
@@ -390,4 +396,251 @@ test('320px short viewports keep creation and long plaque bottom actions reachab
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.keyboard.press('Escape');
   await expect(page.getByRole('button', { name: 'View exhibit: A very small room for a long story' })).toBeFocused();
+});
+
+async function preparePreview(page: Page, title = 'A previewed beginning', form = 'Book') {
+  await page.getByRole('button', { name: /^(Create your first exhibit|\+ Add an Exhibit|Continue where you left off)/ }).click();
+  await page.getByLabel('Something you never quite finished').fill('An idea that is still mine to place.');
+  await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByLabel('Exhibit title', { exact: true }).fill(title);
+  await page.getByRole('dialog').getByRole('button', { name: 'Continue', exact: true }).click();
+  await page.getByRole('radio', { name: form, exact: true }).check();
+  await page.getByRole('button', { name: 'Preview its place', exact: true }).click();
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'A little place for it.', exact: true })).toBeVisible();
+}
+
+test('placement preview remains reversible and never writes or creates a phantom exhibit', async ({ page, isMobile }) => {
+  if (isMobile) await page.setViewportSize({ width: 320, height: 700 });
+  const longTitle = 'A softly remembered beginning with a place among the stars. '.repeat(2).slice(0, 100);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.addInitScript(() => {
+    const original = Storage.prototype.setItem;
+    const local = window.localStorage;
+    window.almostExhibitWrites = [];
+    Storage.prototype.setItem = function(key, value) {
+      if (this === local && key.startsWith('almost:exhibit:')) window.almostExhibitWrites.push(key);
+      return original.call(this, key, value);
+    };
+  });
+  await page.goto('/');
+  await preparePreview(page, longTitle, 'Music box');
+  const previewScene = await page.locator('.placement-preview-scene').boundingBox();
+  const previewArtifact = await page.locator('.preview-keepsake .artifact').boundingBox();
+  const previewTag = await page.locator('.preview-tag').boundingBox();
+  expect(previewScene).not.toBeNull(); expect(previewArtifact).not.toBeNull(); expect(previewTag).not.toBeNull();
+  for (const part of [previewArtifact!, previewTag!]) {
+    expect(part.x).toBeGreaterThanOrEqual(previewScene!.x - 1);
+    expect(part.y).toBeGreaterThanOrEqual(previewScene!.y - 1);
+    expect(part.x + part.width).toBeLessThanOrEqual(previewScene!.x + previewScene!.width + 1);
+    expect(part.y + part.height).toBeLessThanOrEqual(previewScene!.y + previewScene!.height + 1);
+  }
+  await expect(page.getByText('Preview only · not placed yet', { exact: true })).toBeVisible();
+  expect(await savedRecords(page)).toEqual([]);
+  expect(await page.evaluate(() => window.almostExhibitWrites)).toEqual([]);
+  await expect(page.getByRole('button', { name: /View exhibit:/ })).toHaveCount(0);
+  await expect(page.getByRole('dialog').locator('.artifact.is-lit')).toHaveCount(0);
+  const draftId = await page.evaluate(() => JSON.parse(sessionStorage.getItem('almost:draft')!).id);
+  await page.getByRole('button', { name: /Back to vessel$/ }).click();
+  await expect(page.getByRole('radio', { name: 'Music box', exact: true })).toBeChecked();
+  await page.getByRole('button', { name: 'Preview its place', exact: true }).click();
+  await page.keyboard.press('Escape');
+  expect(await savedRecords(page)).toEqual([]);
+  await page.getByRole('button', { name: 'Continue where you left off' }).click();
+  await expect(page.getByRole('radio', { name: 'Music box', exact: true })).toBeChecked();
+  expect(await page.evaluate(() => JSON.parse(sessionStorage.getItem('almost:draft')!).id)).toBe(draftId);
+  await page.getByRole('button', { name: 'Preview its place', exact: true }).click();
+  await page.getByRole('button', { name: 'Place in Museum', exact: true }).evaluate(button => { (button as HTMLButtonElement).click(); (button as HTMLButtonElement).click(); });
+  await expect(page.getByRole('dialog').getByRole('heading', { name: longTitle.trim(), exact: true })).toBeVisible();
+  expect(await savedRecords(page)).toMatchObject([{ id: draftId, lightOn: false, artifactType: 'music-box' }]);
+  expect(await page.evaluate(() => window.almostExhibitWrites)).toEqual([PREFIX + draftId]);
+});
+
+test('the placement ceremony can be skipped by keyboard without a second write or light change', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  await preparePreview(page, 'A moment I can skip', 'Spaceship');
+  await tabTo(page, page.getByRole('button', { name: 'Place in Museum', exact: true }));
+  await page.keyboard.press('Enter');
+  const skip = page.getByRole('button', { name: 'Open its keepsake card', exact: true });
+  await expect(skip).toBeVisible();
+  await tabTo(page, skip);
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'A moment I can skip' })).toBeFocused();
+  await expect(page.locator('.placement-ceremony')).toHaveCount(0);
+  const records = await savedRecords(page);
+  expect(records).toHaveLength(1);
+  expect(records).toMatchObject([{ title: 'A moment I can skip', lightOn: false }]);
+});
+
+test('twenty-four keepsakes retain predictable pagination and remain selectable', async ({ page, isMobile }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const fixture = Array.from({ length: 24 }, (_, index) => ({ ...existing, id: `00000000-0000-4000-8000-${String(index + 1).padStart(12, '0')}`, title: `Little beginning ${String(index + 1).padStart(2, '0')}`, lightOn: index % 3 === 0, createdAt: new Date(Date.parse(existing.createdAt) + index * 1000).toISOString() }));
+  await page.evaluate(({ prefix, records }) => { for (const record of records) localStorage.setItem(prefix + record.id, JSON.stringify(record)); }, { prefix: PREFIX, records: fixture });
+  await page.reload();
+  if (isMobile) {
+    for (let step = 1; step < 24; step++) {
+      await page.getByRole('button', { name: 'Next exhibit', exact: true }).click();
+      await expect(page.getByRole('navigation', { name: 'Mobile collection browsing' })).toContainText(`${step + 1} of 24`);
+    }
+    await expect(page.getByRole('button', { name: 'Next exhibit', exact: true })).toBeDisabled();
+  } else {
+    for (let step = 1; step < 4; step++) {
+      await page.getByRole('button', { name: 'Next exhibits', exact: true }).click();
+      await expect(page.getByRole('navigation', { name: 'Collection browsing', exact: true })).toContainText(`${step * 6 + 1}–${(step + 1) * 6}`);
+    }
+    await expect(page.getByRole('button', { name: 'Next exhibits', exact: true })).toBeDisabled();
+  }
+  await page.getByRole('button', { name: 'View exhibit: Little beginning 24', exact: true }).click();
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'Little beginning 24' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  expect((await savedRecords(page)).sort((a, b) => a.id.localeCompare(b.id))).toEqual(fixture);
+});
+
+test('five responsive layouts keep primary actions discoverable and clear of exhibit labels', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const viewports = [{ width: 1440, height: 900 }, { width: 1920, height: 1080 }, { width: 768, height: 1024 }, { width: 390, height: 844 }, { width: 320, height: 700 }];
+  for (const viewport of viewports) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    // Isolate the first-use composition from the prior viewport's seeded collection.
+    await page.evaluate(prefix => { for (const key of Object.keys(localStorage)) if (key.startsWith(prefix)) localStorage.removeItem(key); }, PREFIX);
+    await page.reload();
+    const createButton = page.getByRole('button', { name: 'Create your first exhibit', exact: true });
+    await expect(createButton).toBeVisible();
+    if (viewport.width >= 960) await expect(createButton).toBeInViewport({ ratio: 1 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `empty-room overflow at ${viewport.width}`).toBe(true);
+    const fixture = Array.from({ length: 6 }, (_, index) => ({ ...existing, id: `00000000-0000-4000-8000-${String(index + 1).padStart(12, '0')}`, title: `A kept beginning ${index + 1} with a longer label`, createdAt: new Date(Date.parse(existing.createdAt) + index * 1000).toISOString() }));
+    await page.evaluate(({ prefix, records }) => { for (const record of records) localStorage.setItem(prefix + record.id, JSON.stringify(record)); }, { prefix: PREFIX, records: fixture });
+    await page.reload();
+    const add = page.getByRole('button', { name: '+ Add an Exhibit', exact: true });
+    await expect(add).toBeVisible();
+    if (viewport.width >= 960) await expect(add).toBeInViewport({ ratio: 1 });
+    const geometry = await page.evaluate(() => {
+      const primary = document.querySelector('.museum-create')!.getBoundingClientRect();
+      const overlap = (a: DOMRect, b: DOMRect) => Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 && Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1;
+      const labels = [...document.querySelectorAll('.keepsake-tag')].filter(element => element.getClientRects().length).map(element => element.getBoundingClientRect());
+      const nav = [...document.querySelectorAll('.desktop-browse, .mobile-browse')].filter(element => element.getClientRects().length).map(element => element.getBoundingClientRect());
+      return { overflow: document.documentElement.scrollWidth > innerWidth, labelCollisions: labels.filter(label => overlap(label, primary) || nav.some(controls => overlap(label, controls))).length, labelsOverlap: labels.some((label, index) => labels.slice(index + 1).some(other => overlap(label, other))) };
+    });
+    expect(geometry, `collection geometry at ${viewport.width}x${viewport.height}`).toEqual({ overflow: false, labelCollisions: 0, labelsOverlap: false });
+  }
+});
+
+test('Pip acknowledges a light briefly then returns to a quiet pose without writing again', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  await create(page, 'A little light for Pip', 'A beginning with room to stay.', 'Plant');
+  await page.getByRole('button', { name: 'Leave a little light on' }).click();
+  await expect(page.locator('.keeper-corner .pip-note')).toContainText('A little light? Good idea.');
+  const [record] = await savedRecords(page);
+  expect(record.lightOn).toBe(true);
+  await expect(page.locator('.keeper-corner .pip-note')).toHaveCount(0, { timeout: 8000 });
+  expect(await savedRecords(page)).toEqual([record]);
+});
+
+async function storageBytes(page: Page) {
+  return page.evaluate(() => ({
+    local: Object.keys(localStorage).sort().map(key => [key, localStorage.getItem(key)]),
+    session: Object.keys(sessionStorage).sort().map(key => [key, sessionStorage.getItem(key)]),
+  }));
+}
+
+async function seedEnvironmentVisit(page: Page) {
+  await page.goto('/');
+  const draft = { schemaVersion: 1, id: '00000000-0000-4000-8000-000000000002', step: 'name', title: '  My own words ✨  ', description: 'A beginning\nWith room to change.', titleInitialized: true, artifactType: 'canvas', phase: 'creating', placedAt: null };
+  await page.evaluate(({ record, unfinished }) => {
+    localStorage.setItem('almost:exhibit:' + record.id, JSON.stringify(record, null, 2));
+    sessionStorage.setItem('almost:draft', JSON.stringify(unfinished, null, 3));
+  }, { record: existing, unfinished: draft });
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Continue where you left off', exact: true })).toBeVisible();
+  return storageBytes(page);
+}
+
+test('room discoveries offer visible feedback and preserve exact saved and unfinished words', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.addInitScript(() => {
+    let calls = 0;
+    for (const key of ['Audio', 'AudioContext', 'webkitAudioContext']) {
+      const constructor = Reflect.get(window, key);
+      if (typeof constructor === 'function') Reflect.set(window, key, new Proxy(constructor, { construct(target, argumentsList) { calls++; return Reflect.construct(target, argumentsList); } }));
+    }
+    Reflect.defineProperty(window, 'almostSoundCalls', { get: () => calls });
+  });
+  const before = await seedEnvironmentVisit(page);
+  await page.getByRole('button', { name: 'Look through the twilight window', exact: true }).click();
+  await expect(page.locator('.window-discovery')).toHaveClass(/is-twinkling/);
+  await expect(page.getByRole('status').filter({ hasText: 'Somewhere, the night is still full of possibilities.' })).toBeVisible();
+  expect(await storageBytes(page)).toEqual(before);
+  const lamp = page.getByRole('button', { name: 'Desk lamp', exact: true });
+  await expect(lamp).toHaveAttribute('aria-pressed', 'true');
+  await lamp.click();
+  await expect(lamp).toHaveAttribute('aria-pressed', 'false');
+  await expect(lamp).toContainText('Lamp off');
+  await lamp.click();
+  await expect(lamp).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'Ring the museum bell', exact: true }).click();
+  await expect(page.locator('.bell-touch')).toHaveClass(/is-ringing/);
+  await expect(page.getByRole('status').filter({ hasText: 'A little ring, seen rather than heard. Nothing here is late.' })).toBeVisible();
+  await expect(page.locator('audio,video')).toHaveCount(0);
+  expect(await page.evaluate(() => Reflect.get(window, 'almostSoundCalls'))).toBe(0);
+  expect(await storageBytes(page)).toEqual(before);
+  await expect(page.locator('.bell-touch')).not.toHaveClass(/is-ringing/, { timeout: 5000 });
+  await expect(page.locator('.environment-whisper')).toBeEmpty();
+  expect(await storageBytes(page)).toEqual(before);
+});
+
+test('every room story is keyboard accessible and Escape restores its own trigger without changing storage', async ({ page }) => {
+  const before = await seedEnvironmentVisit(page);
+  const stories = [
+    { trigger: 'Open the guestbook', title: 'The guestbook, left open.', text: 'You do not need a finished thing to belong here.' },
+    { trigger: 'Read the curator’s note', title: 'A note from the curator.', text: 'We keep beginnings here.' },
+    { trigger: 'Read the empty pedestal inscription', title: 'A place for what might have been.', text: 'An empty pedestal is not a missing story.' },
+    { trigger: 'Ask Pip for a little thought', title: 'A word from Pip.', text: 'I keep the lamps company.' },
+  ];
+  // Move to each real tab stop; do not invoke the onClick handler directly.
+  for (const [index, story] of stories.entries()) {
+    const trigger = page.getByRole('button', { name: story.trigger, exact: true });
+    await tabTo(page, trigger);
+    await page.keyboard.press(index % 2 ? 'Space' : 'Enter');
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toHaveAccessibleName(story.title);
+    await expect(dialog.getByRole('heading', { name: story.title, exact: true })).toBeFocused();
+    await expect(dialog).toContainText(story.text);
+    if (index === 0) await expect(dialog.locator('.open-guestbook')).toBeVisible();
+    expect(await storageBytes(page)).toEqual(before);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+  }
+  expect(await storageBytes(page)).toEqual(before);
+  await page.reload();
+  expect(await storageBytes(page)).toEqual(before);
+  await expect(page.getByRole('button', { name: `View exhibit: ${existing.title}`, exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Continue where you left off', exact: true })).toBeVisible();
+});
+
+test('reduced motion keeps room discoveries immediate and keyboard usable without animating or persisting them', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const before = await seedEnvironmentVisit(page);
+  const windowButton = page.getByRole('button', { name: 'Look through the twilight window', exact: true });
+  await tabTo(page, windowButton);
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.environment-whisper')).toContainText('Somewhere, the night is still full of possibilities.');
+  const lamp = page.getByRole('button', { name: 'Desk lamp', exact: true });
+  await tabTo(page, lamp);
+  await page.keyboard.press('Space');
+  await expect(lamp).toHaveAttribute('aria-pressed', 'false');
+  const bell = page.getByRole('button', { name: 'Ring the museum bell', exact: true });
+  await tabTo(page, bell);
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.environment-whisper')).toContainText('A little ring, seen rather than heard.');
+  const animations = await page.locator('.window-stars, .window-stars i, .bell-touch, .bell-touch svg').evaluateAll(elements => elements.flatMap(element => element.getAnimations()).filter(animation => animation.playState === 'running').length);
+  expect(animations).toBe(0);
+  expect(await storageBytes(page)).toEqual(before);
+  // Transient lamp state resets on return, while authored content remains byte-for-byte unchanged.
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Desk lamp', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  expect(await storageBytes(page)).toEqual(before);
 });

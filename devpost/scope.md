@@ -23,6 +23,8 @@ Returning is an invitation to remember, never an obligation or engagement goal.
 
 ## Inspiration & Identity
 
+The learner’s later hands-on review authorizes a larger architectural presentation of this same hall: window alcove, collection wall and foreground curator desk, with optional ephemeral environmental discoveries. See `hall-redesign.md`. Distant arches are scenery; no additional navigable rooms or services.
+
 An intimate place between a dream and a memory. Updated by the learner's authorized Midnight Keepsake Museum revision: a single asymmetric storybook diorama, midnight blue and soft forest green, butter-yellow lanterns, dusty peach/lavender, tactile cream labels and wooden shelves. Pip, an original sleepy curator cat, quietly accompanies creation and remembering. No direct imitation of an existing artist or work. See `redesign.md` for the revision boundary.
 
 “The museum preserves beginnings, not endings.” Aim for quiet wonder and recognition, leaving visitors free to decide how they feel. Avoid a memorial atmosphere, forced positivity, therapeutic language, or invented emotional interpretations.

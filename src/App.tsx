@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createDraft, type Draft, type Exhibit } from './model/types';
 import { reconcileDraft, upsertExhibit } from './model/museumReducer';
 import { suggestTitle } from './model/naming';
@@ -10,6 +10,8 @@ import { ExhibitGallery } from './components/ExhibitGallery';
 import { CreationPanel } from './components/CreationPanel';
 import { ExhibitPlaque } from './components/ExhibitPlaque';
 import { StatusNotice } from './components/StatusNotice';
+import { PlacementPreview } from './components/PlacementPreview';
+import { usePipBehavior } from './hooks/usePipBehavior';
 
 const storage = createMuseumStorage(() => window.localStorage, () => window.sessionStorage);
 function initialize() {
@@ -37,7 +39,7 @@ export default function App() {
   const [loadWarning, setLoadWarning] = useState(initial.load.error || '');
   const [draftWarning, setDraftWarning] = useState(initial.draftError);
   const [message, setMessage] = useState('');
-  const [panel, setPanel] = useState<'creation' | 'plaque' | null>(null);
+  const [panel, setPanel] = useState<'creation' | 'preview' | 'plaque' | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [revealId, setRevealId] = useState<string | null>(null);
   const [playbackId, setPlaybackId] = useState<string | null>(null);
@@ -46,6 +48,7 @@ export default function App() {
   const revealTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const playbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reduced = useReducedMotion();
+  const { mood: pipMood, speaking: pipSpeaking, react: pipReact } = usePipBehavior();
   const selected = records.find(e => e.id === selectedId);
 
   function updateRecords(next: Exhibit[]) { recordsRef.current = next; setRecords(next); }
@@ -60,6 +63,7 @@ export default function App() {
     const current = draftRef.current;
     if (!current) return;
     writeDraft({ ...current, ...changes });
+    if (changes.step) pipReact(changes.step === 'form' ? 'anticipation' : 'listening');
   }
   function persist(exhibit: Exhibit): boolean {
     if (blocked) {
@@ -86,9 +90,17 @@ export default function App() {
     return false;
   }
   function beginCreation() {
+    if (submissionGuard.current) return;
     if (!draftRef.current) writeDraft(createDraft(crypto.randomUUID()));
     setMessage('');
     setPanel('creation');
+    pipReact('listening');
+  }
+  function preview() {
+    const current = draftRef.current;
+    if (!current || Object.keys(validateDraft(current)).length) return;
+    setPanel('preview');
+    pipReact('anticipation');
   }
   function nextStep() {
     const current = draftRef.current;
@@ -97,13 +109,14 @@ export default function App() {
     if (current.step === 'remember' && !errors.description) writeDraft({ ...current, step: 'name', title: current.titleInitialized ? current.title : suggestTitle(current.description), titleInitialized: true });
     else if (current.step === 'name' && !errors.title && !errors.description) updateDraft({ step: 'form' });
   }
-  function finishReveal(id: string) {
+  const finishReveal = useCallback((id: string) => {
     setRevealId(null);
     setBusy(false);
     submissionGuard.current = false;
     setSelectedId(id);
     setPanel('plaque');
-  }
+    pipReact('settling');
+  }, [pipReact]);
   function place() {
     const current = draftRef.current;
     if (!current || submissionGuard.current || Object.keys(validateDraft(current)).length) return;
@@ -118,6 +131,7 @@ export default function App() {
     writeDraft({ ...current, phase: 'pending-save', placedAt: record.createdAt });
     updateRecords(upsertExhibit(recordsRef.current, record));
     const didSave = persist(record);
+    pipReact(didSave ? 'happy' : 'settling', didSave);
     setMessage(didSave ? 'Your exhibit has found its place.' : SAVE_WARNING);
     setPanel(null);
     setSelectedId(record.id);
@@ -125,13 +139,18 @@ export default function App() {
     else {
       setRevealId(record.id);
       revealTimer.current = setTimeout(() => finishReveal(record.id), 1900);
+      requestAnimationFrame(() => document.querySelector<HTMLButtonElement>('.placement-ceremony button')?.focus());
     }
   }
   function closePanel() {
     setPanel(null);
     setPlaybackId(null);
     if (playbackTimer.current) clearTimeout(playbackTimer.current);
-    if (selectedId) requestAnimationFrame(() => document.getElementById(`artifact-${selectedId}`)?.focus());
+    pipReact('settling');
+    requestAnimationFrame(() => {
+      if (panel === 'plaque' && selectedId) document.getElementById(`artifact-${selectedId}`)?.focus();
+      else document.querySelector<HTMLButtonElement>('.museum-create')?.focus();
+    });
   }
   function select(id: string) {
     if (revealTimer.current) clearTimeout(revealTimer.current);
@@ -143,6 +162,7 @@ export default function App() {
     if (playbackTimer.current) clearTimeout(playbackTimer.current);
     setMessage('');
     setPanel('plaque');
+    pipReact('welcome');
   }
   function replay(id: string) {
     if (playbackId) return;
@@ -161,6 +181,7 @@ export default function App() {
       : { ...record, lightOn };
     updateRecords(upsertExhibit(recordsRef.current, changed));
     const didSave = persist(changed);
+    pipReact(lightOn ? 'looking' : 'settling', lightOn);
     setMessage(didSave ? (lightOn ? 'A little light, left on.' : 'The light is off. Your beginning is still here.') : 'Your light has changed here, but could not be saved for your next visit.');
     if (animate) replay(id);
   }
@@ -205,15 +226,16 @@ export default function App() {
     if (playbackTimer.current) clearTimeout(playbackTimer.current);
     setPlaybackId(null);
     if (revealId) finishReveal(revealId);
-  }, [reduced, revealId]);
+  }, [reduced, revealId, finishReveal]);
 
   return <div className="museum-app">
     <a className="skip-link" href="#museum">Skip to museum</a>
     <header className="site-header"><a className="wordmark" href="#museum" aria-label="Almost museum"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M25 5A13 13 0 1 0 29 25 14 14 0 0 1 25 5Z"/><path d="m22 13 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg><span>almost<span className="wordmark-subtitle">The museum of unfinished things</span></span></a><span className="header-note"><span aria-hidden="true">✦</span> No endings required.</span></header>
-    <MuseumScene count={records.length} hasDraft={!!draft} onCreate={beginCreation} placing={!!revealId} remembering={!!playbackId} lightCount={records.filter(e => e.lightOn).length} onSkipReveal={() => {if (revealId) {if (revealTimer.current) clearTimeout(revealTimer.current); finishReveal(revealId);}}}><ExhibitGallery records={records} selectedId={selectedId} revealId={revealId} playbackId={playbackId} saved={saved} onSelect={select}/></MuseumScene>
+    <MuseumScene count={records.length} hasDraft={!!draft} onCreate={beginCreation} placing={!!revealId} pipMood={pipMood} pipSpeaking={pipSpeaking} lightCount={records.filter(e => e.lightOn).length} onSkipReveal={() => {if (revealId) {if (revealTimer.current) clearTimeout(revealTimer.current); finishReveal(revealId);}}}><ExhibitGallery records={records} selectedId={selectedId} revealId={revealId} playbackId={playbackId} saved={saved} onSelect={select}/></MuseumScene>
     <StatusNotice blocked={blocked} warning={loadWarning} draftWarning={draftWarning || (initial.reconciliation === 'conflict' ? 'An earlier draft differs from its saved exhibit. Both have been retained; the saved version will not be overwritten.' : '')} message={message} onRecheck={recheck}/>
     <footer className="site-footer"><span>Kept with care. By you, and a very small cat.</span><span className="footer-storage">Saved in this browser when available.<br/>Clearing browser data may remove your collection.</span><span className="footer-star" aria-hidden="true">☾</span></footer>
-    {panel === 'creation' && draft && <CreationPanel draft={draft} busy={busy} onChange={updateDraft} onNext={nextStep} onPlace={place} onClose={closePanel} notice={blocked ? 'This collection cannot currently be saved. Your words will remain here for now, and may disappear after a reload.' : draftWarning}/>}
-    {panel === 'plaque' && selected && <ExhibitPlaque exhibit={selected} playing={playbackId === selected.id} saved={!!saved[selected.id]} error={errors[selected.id] || (!saved[selected.id] ? SAVE_WARNING : '')} blocked={blocked} canEdit={draft?.id === selected.id} onClose={closePanel} onLight={(on, animate) => light(selected.id, on, animate)} onReplay={() => replay(selected.id)} onRetry={() => retry(selected)} onEdit={() => setPanel('creation')}/>}
+    {panel === 'creation' && draft && <CreationPanel draft={draft} busy={busy} onChange={updateDraft} onNext={nextStep} onPlace={place} onPreview={preview} onClose={closePanel} notice={blocked ? 'This collection cannot currently be saved. Your words will remain here for now, and may disappear after a reload.' : draftWarning}/>}
+    {panel === 'preview' && draft && draft.artifactType && <PlacementPreview draft={draft} busy={busy} onConfirm={place} onBack={() => {setPanel('creation');pipReact('anticipation');}} onClose={closePanel} warning={blocked ? 'This browser cannot currently save the collection. If placed, this exhibit will be temporary and may disappear after a reload.' : draftWarning}/>}
+    {panel === 'plaque' && selected && <ExhibitPlaque exhibit={selected} playing={playbackId === selected.id} saved={!!saved[selected.id]} error={errors[selected.id] || (!saved[selected.id] ? SAVE_WARNING : '')} blocked={blocked} canEdit={draft?.id === selected.id} onClose={closePanel} onLight={(on, animate) => light(selected.id, on, animate)} onReplay={() => replay(selected.id)} onRetry={() => retry(selected)} onEdit={() => {setPanel('creation');pipReact('listening');}}/>}
   </div>;
 }

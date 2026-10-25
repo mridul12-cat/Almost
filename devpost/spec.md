@@ -60,6 +60,10 @@ Implements `scope.md > The POC Boundary` and `prd.md > Non-Goals`.
 
 ## Look and Feel
 
+**Hall redesign:** The learner’s subsequent review authorizes `hall-redesign.md`: one full-width architectural hall with window alcove, curated collection wall and foreground keepsake desk; optional, accessible room discoveries have ephemeral UI state only. This supersedes the boxed miniature presentation. Creation/preview, authorship, storage/recovery, lasting lights, cost and service boundaries remain intact. The distant arch is scenery, not another navigable room.
+
+**Creative pass 2:** see `creative-pass-2.md`. Add a memory-only `preview` panel and `PlacementPreview` component without changing Draft.step or record schemas. Keep placement in the existing guarded App.place handler; no effect/animation writes. `usePipBehavior` owns cancellable decorative reaction timers independently from persistence. Dialogs use a stable titlebar and one scroll body, with in-body sticky actions. Shelf layout reserves separate space for two-line tags and ticket navigation. Recheck the five explicitly requested viewports.
+
 **Authorized implementation revision:** see `redesign.md` and `prd.md > Look and Feel`. Replace formal architecture with a responsive asymmetric diorama, an original local SVG MuseumAtmosphere, irregular wooden shelf positions, paper notebook/label/tray ritual and keepsake-box detail card. Add `PipCurator.tsx` and `pip.css` for the original decorative mascot and contextual motion. Maintain component APIs and all model/storage contracts; no schema migration. CSS controls the visual ceremony; only explicit App event handlers save data. Failed saving bypasses the success ceremony. No new runtime dependencies or remote assets.
 
 Implements `prd.md > Look and Feel`, `Museum Room and Arrival`, and `Exhibit Plaque`.
