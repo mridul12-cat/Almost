@@ -5,9 +5,11 @@ status: approved
 
 # ALMOST — Technical Spec
 
+**Authorized extension — two story rooms:** The learner explicitly requests two differently themed rooms with their own stories and features. `story-rooms.md` supersedes the prior single-room limit for this extension. The Main Hall keeps the unchanged personal collection; the new rooms are optional, lightweight, deterministic experiences with no new persistence or services.
+
 ## How This Works, In Plain Language
 
-ALMOST is one React page: a museum room, a creation panel, and an exhibit plaque. The visitor writes the words and chooses the object; the app supplies the presentation. Five local SVG illustrations and CSS create the museum and its small magical moments without external image or AI services.
+ALMOST is one React page: three lightweight room destinations, the existing creation/preview flow, and exhibit plaques. The Main Hall holds the personal collection; the two side rooms contain curator stories and ephemeral discoveries. The visitor writes the words and chooses the object; the app supplies the presentation. Five local SVG illustrations and CSS create the museum and its small magical moments without external image or AI services.
 
 Each exhibit receives an ID when its creation begins. That ID stays with its draft, temporary exhibit, saved record, and every retry. Saving replaces only the record with that ID, never appends a duplicate or replaces the entire collection. React keeps the current collection and unsaved words in memory. localStorage remembers successfully saved exhibits; sessionStorage remembers the unfinished creation in that tab. Both can fail, so the app reports what is actually saved.
 
@@ -78,6 +80,14 @@ Implements `prd.md > Look and Feel`, `Museum Room and Arrival`, and `Exhibit Pla
 
 ## Components
 
+### RoomNavigation, StoryRoom, and StoryRoomAtmosphere
+
+`src/model/rooms.ts` defines the three typed destinations, independently of exhibit/draft schemas. `MuseumScene` owns the transient current room. `RoomNavigation` uses native buttons in a named navigation landmark, `aria-current`, sticky signposts, and explicit heading focus/scroll on room changes. During a placement ceremony, navigation is disabled until the ceremony ends or is skipped.
+
+The Hall stays mounted with `hidden` while visiting a side room, preserving collection pagination and mobile scroll state. A keyed `StoryRoom` unmounts on departure, resetting optional rain, petals, drawer, constellation and comet state. Its timer is cleared on unmount; repeated comet activation replaces the previous timer. Story/telescope panels reuse `PanelDialog` naming, native modality, Escape and focus restoration. Returning to creation switches to the Hall and invokes the existing creation callback without reallocating a recovered draft ID.
+
+`StoryRoomAtmosphere` draws two original, distinct SVG architectures. `rooms.css` adds responsive discovery compositions and reduced-motion equivalents; no additional runtime dependency, route library, data schema, storage key, migration or backend is introduced. Reload starts in the Main Hall; ephemeral room settings are not promised to survive.
+
 ### App
 
 Owns top-level built-in React state and synchronous refs for the initialized collection, draft, selection, active panel, and save/load statuses; ExhibitGallery owns browsing position. Pure helpers upsert records by ID. Calls a single storage module from explicit event handlers, not from render or pure model functions. A pure initial read may run twice under React development checks; it must not write or allocate exhibit IDs. Passes small callbacks and data to children.
@@ -94,7 +104,7 @@ Implements `prd.md > Museum Room and Arrival` and `Look and Feel`.
 
 Desktop: groups of at most six visible exhibits on composed pedestals/shelves, using Previous/Next controls for additional groups. Mobile below an initial 768px breakpoint: all exhibit positions in a horizontal scroll-snap gallery, with Previous/Next controls scrolling to the adjacent item. Use native scroll/touch behavior rather than custom gesture recognition. At intermediate widths use fewer positions per row within the same room.
 
-Artifacts are labeled native buttons; show a short title and a small labeled light/status marker. Selection and browsing never write. Creating an exhibit switches to the relevant desktop group or mobile item. Stable creation order is retained; selecting never reorders items. No fixed total of six and no additional room.
+Artifacts are labeled native buttons; show a short title and a small labeled light/status marker. Selection and browsing never write. Creating an exhibit switches to the relevant desktop group or mobile item. Stable creation order is retained; selecting never reorders items. No fixed total of six. Gallery pagination stays in the Main Hall; independent signposts visit the two approved story rooms.
 
 Implements `prd.md > Return and Browse the Collection` and `Screens and Layout`.
 

@@ -5,6 +5,8 @@ status: approved
 
 # ALMOST — Every Unfinished Thing Has a Story
 
+**Authorized extension — two story rooms:** The learner explicitly requests two differently themed rooms with their own stories and features. `story-rooms.md` supersedes the prior single-room limit for this extension. The Main Hall keeps the unchanged personal collection; the new rooms are optional, lightweight, deterministic experiences with no new persistence or services.
+
 A small, atmospheric virtual museum where an unfinished creative idea becomes a personal exhibit worth remembering.
 
 ## The Unique Kernel
@@ -23,7 +25,7 @@ Returning is an invitation to remember, never an obligation or engagement goal.
 
 ## Inspiration & Identity
 
-The learner’s later hands-on review authorizes a larger architectural presentation of this same hall: window alcove, collection wall and foreground curator desk, with optional ephemeral environmental discoveries. See `hall-redesign.md`. Distant arches are scenery; no additional navigable rooms or services.
+The learner’s later hands-on review authorizes a larger architectural presentation of this same hall: window alcove, collection wall and foreground curator desk, with optional ephemeral environmental discoveries. See `hall-redesign.md`. The hall’s distant arch remains scenery; the two destinations in `story-rooms.md` are reached through named signposts. No new services.
 
 An intimate place between a dream and a memory. Updated by the learner's authorized Midnight Keepsake Museum revision: a single asymmetric storybook diorama, midnight blue and soft forest green, butter-yellow lanterns, dusty peach/lavender, tactile cream labels and wooden shelves. Pip, an original sleepy curator cat, quietly accompanies creation and remembering. No direct imitation of an existing artist or work. See `redesign.md` for the revision boundary.
 
@@ -41,7 +43,7 @@ The memorable beat is an ordinary unfinished idea receiving a beautiful place in
 
 ## The POC Boundary
 
-- One intimate museum setting, with a small collection of handcrafted artifact types rather than unique generated artwork or a large explorable world.
+- Three lightweight museum settings: the Hall of Beginnings holds the personal collection; Moonseed Conservatory and Pocket-Sky Observatory offer distinct curator stories and optional deterministic discoveries. Keep the small handcrafted artifact set.
 - One complete creation-and-revisit loop. The visitor supplies a short description; simple, transparent templates suggest a title. Both title and description remain editable. No rewriting that invents feelings or meaning.
 - Personalization through the visitor's words and a restrained set of artifact details such as color, lighting, or motion. Exact artifact selection and adaptation rules belong in the PRD.
 - One polished “leave a little light on” interaction, expressed through brief artifact animation and light. Specific animations and any optional sound remain for the PRD.
@@ -53,7 +55,7 @@ The memorable beat is an ordinary unfinished idea receiving a beautiful place in
 
 ## Later
 
-- More artifact types, richer variations, and additional museum spaces after the small collection proves the experience.
+- More artifact types, richer variations, and museum spaces beyond the approved three after the core experience proves itself.
 - A dedicated peaceful-retirement experience from the initial concept; it is not necessary to demonstrate creation, remembering, and the light interaction.
 - Further personalization beyond the small handcrafted system, only if it preserves visitor authorship and the project's cost constraints.
 

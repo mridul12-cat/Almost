@@ -1,12 +1,26 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
+import type { MuseumRoom } from '../model/rooms';
+import { RoomNavigation } from './RoomNavigation';
+import { StoryRoom } from './StoryRoom';
 import { MuseumAtmosphere } from './MuseumAtmosphere';
 import type { PipMood } from './PipCurator';
 import { MuseumEnvironment } from './MuseumEnvironment';
 
 export function MuseumScene({ children, count, hasDraft, onCreate, placing = false, pipMood = 'sleepy', pipSpeaking = false, lightCount = 0, onSkipReveal }: { children: ReactNode; count: number; hasDraft: boolean; onCreate: () => void; placing?: boolean; pipMood?: PipMood; pipSpeaking?: boolean; lightCount?: number; onSkipReveal?: () => void }) {
-  return <main className={`museum ${count ? 'inhabited' : 'empty'} ${placing ? 'is-placing' : ''} ${lightCount ? 'has-lights' : ''}`} id="museum" tabIndex={-1}>
-    <div className="museum-intro"><div><span className="little-caption">The Midnight Keepsake Museum · Main Hall</span><h1>A whole world of <span>almost.</span></h1></div><p>Every unfinished thing began somewhere. <br/>Give something you once started a place to exist.</p></div>
-    <div className="diorama museum-hall">
+  const [room, setRoom] = useState<MuseumRoom>('hall');
+  const visit = (next: MuseumRoom) => {
+    if (placing || next === room) return;
+    setRoom(next);
+    requestAnimationFrame(() => {
+      document.getElementById('museum-room-title')?.focus({ preventScroll: true });
+      document.querySelector('.museum-intro')?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    });
+  };
+  const createFromRoom = () => { setRoom('hall'); onCreate(); };
+  return <main className={`museum ${count ? 'inhabited' : 'empty'} ${placing ? 'is-placing' : ''} ${lightCount ? 'has-lights' : ''}`} id="museum" tabIndex={-1} data-room={room}>
+    <div className="museum-intro"><div><span className="little-caption">The Midnight Keepsake Museum · {room === 'hall' ? 'Main Hall' : room === 'conservatory' ? 'The Glasshouse Wing' : 'The Upstairs Dome'}</span><h1 id="museum-room-title" tabIndex={-1}>{room === 'hall' ? <>A whole world of <span>almost.</span></> : room === 'conservatory' ? <>A quiet place to <span>just be.</span></> : <>For all the places <span>imagined.</span></>}</h1></div><p>{room === 'hall' ? <>Every unfinished thing began somewhere. <br/>Give something you once started a place to exist.</> : room === 'conservatory' ? <>Not every seed needs a season. <br/>Some beginnings are beautiful company.</> : <>A journey can matter before its first step. <br/>There is a little sky for that here.</>}</p></div>
+    <RoomNavigation current={room} onChange={visit} disabled={placing}/>
+    <div className="diorama museum-hall" hidden={room !== 'hall'}>
       <MuseumAtmosphere/>
       <div className="hall-heading" aria-hidden="true"><span>I</span> The Hall of Beginnings <span>✧</span></div>
       <div className="moonlight-layer" aria-hidden="true"/>
@@ -17,5 +31,6 @@ export function MuseumScene({ children, count, hasDraft, onCreate, placing = fal
       <div className="foreground-balustrade" aria-hidden="true"><i/><i/></div>
       <p className="hall-invitation">Take a look around. A few things here remember how to glow.</p>
     </div>
+    {room !== 'hall' && <StoryRoom key={room} room={room} onCreate={createFromRoom} hasDraft={hasDraft}/>}
   </main>;
 }

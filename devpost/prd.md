@@ -5,6 +5,8 @@ status: approved
 
 # ALMOST — Product Requirements
 
+**Authorized extension — two story rooms:** The learner explicitly requests two differently themed rooms with their own stories and features. `story-rooms.md` supersedes the prior single-room limit for this extension. The Main Hall keeps the unchanged personal collection; the new rooms are optional, lightweight, deterministic experiences with no new persistence or services.
+
 A small magical museum for visitors who want to give an unfinished creative idea a place to exist, without being asked to complete it.
 
 Source: `scope.md > The Unique Kernel`, `Who It's For`, and `The POC Boundary`. This document defines the experience, not its technical implementation.
@@ -31,7 +33,17 @@ The museum is the visual centerpiece, rather than a dashboard or large form. The
 
 Above the pedestal: **“Every unfinished thing began somewhere.”** Beneath it: **“Create your first exhibit”**, with supporting copy **“Give something you once started a place to exist.”** The invitation is clearly visible without overpowering the artwork. The empty room suggests possibility, not loneliness.
 
-Once exhibits exist, pedestals and shelves gradually fill. A subtle, persistent **“+ Add an Exhibit”** action sits near the room's lower edge. Approximately six exhibit positions are visible on desktop; additional exhibits use simple browsing within the same room. No additional rooms or database-style record grid.
+Once exhibits exist, pedestals and shelves gradually fill. A subtle, persistent **“+ Add an Exhibit”** action sits near the room's lower edge. Approximately six exhibit positions are visible on desktop; additional exhibits use simple browsing within the same room. Exhibit pagination stays within the Main Hall. Separate signposts visit the two approved story rooms; the collection does not become a database-style record grid.
+
+### The Two Story Rooms
+
+Named, keyboard-accessible signposts connect the Hall of Beginnings, Moonseed Conservatory, and Pocket-Sky Observatory. Each destination has a clear heading, distinct architecture, a curator-authored fictional story, and Pip’s quiet company. Navigation indicates the current room, remains reachable while scrolling, and focuses the new heading. The existing gallery stays mounted so its browsing position survives a visit elsewhere.
+
+The Conservatory has a reversible little rain cloud, foldable paper flower, and opening seed drawer. Its story allows a beginning to rest without needing to grow. The Observatory offers a telescope view, a wheel cycling through three constellations, and a brief clockwork-comet orbit. Its story preserves imagined journeys without requiring departure.
+
+Interactions have visible/text state, keyboard operation, and reduced-motion equivalents. Local room state resets when leaving; it never changes exhibit/draft storage. A creation invitation in either room returns to the Main Hall and starts or resumes the same existing draft. Curator stories are clearly fictional, never an interpretation of visitor input. No new audio, persistence, account, service or runtime AI.
+
+Acceptance criteria: navigate all three rooms by keyboard; open/dismiss stories with focus return; use all six discoveries; preserve exact saved/draft bytes across exploration; resume and save one existing draft from either room without duplicates; preserve Main Hall paging; verify narrow/mobile layouts and reduced motion.
 
 ### Creation Panel
 
@@ -199,13 +211,13 @@ Acceptance criteria: complete the core journey by keyboard; repeat on a narrow m
 
 ## What We're Building
 
-One atmospheric room; empty and returning states; the three-step creation panel; editable template title and description; a small handcrafted artifact set; placement/reveal; readable plaques; separate light/replay/toggle actions; collection browsing; same-browser persistence; session draft recovery; accessible, responsive, reduced-motion behavior; validation and honest save/retry feedback.
+Three atmospheric rooms, including the unchanged Main Hall collection and two optional story environments; empty and returning states; the three-step creation panel; editable template title and description; a small handcrafted artifact set; placement/reveal; readable plaques; separate light/replay/toggle actions; collection browsing; same-browser persistence; session draft recovery; accessible, responsive, reduced-motion behavior; validation and honest save/retry feedback.
 
 ## Deferred From the POC
 
 Source: `scope.md > Later` and `Explicitly Cut`.
 
-- More forms, richer customization, additional spaces, and a dedicated retirement experience: protect time for the central interaction.
+- More forms, richer customization, spaces beyond the approved three, and a dedicated retirement experience: protect time for the central interaction.
 - General post-placement editing, deletion, search, sorting, export/import, and draft libraries: not part of the approved core loop. Editing retained words during creation or save recovery remains included.
 - Sound: visual and textual feedback fully demonstrates the kernel without extra assets or controls.
 

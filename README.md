@@ -14,6 +14,17 @@ Pip has event-driven welcome, sleepy, listening, anticipation, happy, looking an
 
 Look through the twilight window, switch the desk lamp, ring the silent visual bell, open the curator-written guestbook, read a note or empty-pedestal inscription, or ask Pip for a thought. Every object has a visible label, keyboard access and reduced-motion feedback. These optional discoveries use ephemeral React state only: they never change exhibits, drafts or saved lights. The room lamp resets on reload; the guestbook is a readable welcome, not a new visitor-writing feature.
 
+## Two rooms further inside
+
+Use the wooden signposts to explore two more rooms, each with an original illustrated environment and a short fictional curator story:
+
+| Room | Story | Discoveries |
+| --- | --- | --- |
+| Moonseed Conservatory | A seed can rest without needing to grow. | Toggle a tiny rain cloud, unfold paper petals, open a seed drawer. |
+| Pocket-Sky Observatory | An imagined journey can keep its place in the sky. | Look through a telescope, turn three constellations, wake a clockwork comet. |
+
+Pip visits both. Room discoveries reset when you leave; they never alter exhibits or drafts. Your collection stays in the Main Hall, retaining its browsing position. “Keep a beginning” returns to the existing creation desk; “Continue your beginning” resumes the same draft. Reload starts in the Main Hall. Keyboard navigation, modal focus restoration and reduced motion apply throughout.
+
 ## Run locally
 
 Use a supported Node.js release compatible with Vite and Vitest (Node 22.12+ or a newer supported release) and npm.

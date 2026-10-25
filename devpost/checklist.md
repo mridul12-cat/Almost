@@ -50,6 +50,8 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 ## Final Review
 
+- [x] Two story rooms implemented and mechanically verified — navigation, distinct stories/interactions, preserved core journey and exact storage bytes.
+
 - [x] Expanded hall revision implemented and mechanically verified — architectural depth, optional room discoveries, preserved creation and storage flows.
 
 - [x] Creative pass 2 implemented and verified — composed room, event-driven Pip, explicit unsaved preview stage, larger/readable exhibits and five-viewport QA.
@@ -70,6 +72,10 @@ Reflection: Not asked; optional transfer reflection remains available after fina
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- Two-room extension verified after learner confirmation of themes: 22 unit tests and 62 browser executions passed, plus typecheck, lint and production build. Both rooms inspected at five viewports; paper-label contrast and tablet feedback collision corrected. Collection page/mobile position, exact storage bytes and same-ID creation handoff retained. No new services, dependencies or storage schema changes; final creative acceptance remains open.
+
+- Learner explicitly expands the museum to two additional themed story rooms. See `story-rooms.md`; existing creation and storage architecture remain intact. Themes offered for learner steering; final creative acceptance remains open.
 
 - Hall revision verified: typecheck, lint, 22 unit tests, production build and 50 desktop/mobile browser tests passed. Inspected five viewport pairs (empty/ten exhibits), guestbook and plaque. Window crop, desk target interception and narrow-label spacing corrected. No model/storage/dependency changes. Final learner acceptance remains open.
 

@@ -1,0 +1,80 @@
+/* A small wooden wayfinding rail connects three real, lightweight destinations. */
+.room-navigation { padding:9px 24px 13px; background:#243e3d; border-bottom:1px solid #8b98705c; position:relative; z-index:6; }
+.signpost-caption { display:none; }
+.room-signposts { display:flex; justify-content:center; gap:12px; max-width:940px; margin:auto; }
+.room-signposts button { display:flex; align-items:center; justify-content:center; gap:12px; min-height:46px; min-width:190px; padding:10px 20px; border:1px solid #9d8e6e; border-radius:5px 8px 7px 4px; background:linear-gradient(#a5845e,#8a6c4e); box-shadow:0 3px #504c39; color:#fff0ce; font-family:var(--hand); font-size:14px; }
+.room-signposts button[aria-current] { color:#334f47; background:linear-gradient(#ebd5a8,#d5bb8c); border-color:#dfc593; box-shadow:0 3px #8c7958; }
+.room-signposts button:hover:not(:disabled) { filter:brightness(1.1); }.signpost-arrow { opacity:.8; font-family:var(--serif); }
+#museum-room-title:focus { outline:none; }
+.museum-hall[hidden] { display:none; }
+/* Counter the new wayfinding rail while retaining a spacious architectural scene. */
+.museum-hall { height:clamp(700px,calc(100svh - 244px),1000px); }
+.story-room { position:relative; min-height:720px; height:clamp(720px,calc(100svh - 244px),1000px); overflow:hidden; isolation:isolate; background:#476558; }
+.story-room-architecture { position:absolute; inset:0; width:100%; height:100%; z-index:-3; pointer-events:none; }
+.story-room::after { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; background:linear-gradient(0deg,#173a3133,transparent 25%,transparent 70%,#193b3a26); }
+.room-observatory { background:#383f58; }.room-observatory::after { background:linear-gradient(0deg,#1c223c3b,transparent 60%); }
+.story-room-heading { position:absolute; top:4%; left:20%; width:60%; text-align:center; color:#f2e5c6; }
+.room-number { display:block; font-family:var(--hand); font-size:12px; margin-bottom:9px; color:#ddd6b5; }
+.story-room-heading h2 { font-family:var(--serif); font-size:clamp(29px,2.9vw,43px); font-weight:500; margin:0 0 9px; line-height:1.1; text-shadow:0 2px #1b3b3544; }.story-room-heading p { font-family:var(--hand); font-size:15px; margin:0; line-height:1.6; color:#e1dfc5; }.story-room-heading .text-button { font-size:13px; color:#f8e2b4; padding-top:7px; }
+.story-features { position:absolute; top:30%; left:10%; width:80%; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6%; }
+.room-feature { position:relative; min-width:0; }.room-feature:nth-child(2) { transform:translateY(28px); }
+.story-object { display:flex; flex-direction:column; align-items:center; width:100%; position:relative; background:none; border:0; color:#f6e9ca; padding:0 6px 14px; border-radius:90px 90px 12px 12px; min-height:44px; }
+.story-object::before { content:''; position:absolute; z-index:-1; left:3%; right:3%; top:5%; height:75%; background:radial-gradient(ellipse at 50% 65%,#d6e6bc1f,transparent 70%); pointer-events:none; }
+.story-object > svg { display:block; width:clamp(190px,17vw,280px); max-width:100%; aspect-ratio:1; overflow:visible; transition:filter .3s; pointer-events:none; }
+.story-object:hover > svg,.story-object:focus-visible > svg { filter:brightness(1.12) drop-shadow(0 3px 5px #112f2a22); }
+.story-object strong { font-family:var(--serif); font-size:19px; font-weight:500; line-height:1.4; margin-top:4px; text-shadow:0 1px 3px #183b35; }
+.story-object > span { font-family:var(--hand); font-size:13px; line-height:1.6; margin-top:5px; color:#f0ddb3; }
+.story-room-feedback { position:absolute; top:76%; left:27%; width:46%; text-align:center; font-family:var(--hand); font-size:15px; line-height:1.6; color:#ffedc3; text-shadow:0 2px 3px #15332e; pointer-events:none; }
+.story-pip { position:absolute; bottom:4%; left:9%; width:170px; text-align:center; }.story-pip .pip-curator { width:100%; margin:0; }.story-pip > span { display:block; font-family:var(--hand); font-size:12px; color:#f1e1b8; margin-top:-7px; }
+.story-room-invitation { position:absolute; right:8%; bottom:6%; text-align:center; width:270px; }.story-room-invitation > span { display:block; font-family:var(--hand); font-size:14px; margin-bottom:10px; color:#f2e5c6; }.story-room-invitation small { display:block; font-size:11px; line-height:1.6; margin-top:10px; color:#dddac1; }.story-room-invitation .primary-button { min-height:48px; width:100%; }
+.cloud-raindrops { opacity:0; }.is-raining .cloud-raindrops { opacity:1; }.is-raining .cloud-raindrops path { animation:pocket-rain 1.6s ease-in infinite; }.is-raining .cloud-raindrops path:nth-child(2) { animation-delay:.4s; }.is-raining .cloud-raindrops path:nth-child(3) { animation-delay:.8s; }
+.paper-petals { transform:scale(.5,.78); transform-origin:111px 88px; transition:transform .8s ease; }.petals-open .paper-petals { transform:scale(1); }
+.seed-drawer { transform:translateY(-7px); transition:transform .5s ease; }.drawer-open .seed-drawer { transform:translateY(7px); }
+.seed-drawer-caption { position:absolute; width:100%; text-align:center; font-family:var(--hand); font-size:13px; line-height:1.6; color:#f5dfb5; background:#345548e8; border:1px solid #9aab8166; border-radius:5px; padding:8px; margin-top:5px; }.seed-drawer-caption[hidden] { display:none; }
+.comet-awake .clockwork-comet { animation:clockwork-journey 2.8s ease-in-out both; transform-origin:110px 110px; }
+.telescope-view { text-align:center; }.telescope-view svg { display:block; width:100%; margin-bottom:20px; }.telescope-view p { font-family:var(--serif); font-size:20px; line-height:1.8; }
+@keyframes pocket-rain { 0% { opacity:0; transform:translateY(-9px); } 30% { opacity:.9; } 100% { opacity:0; transform:translateY(14px); } }
+@keyframes clockwork-journey { 0% { transform:rotate(0); } 50% { filter:drop-shadow(0 0 6px #f1d59c); } 100% { transform:rotate(360deg); } }
+@media(min-width:1600px) { .story-room-heading { top:7%; }.story-features { top:33%; }.story-pip { width:220px; }.story-room-feedback { top:77%; } }
+@media(max-width:959px) {
+  .room-navigation { padding-inline:20px; }.room-signposts { gap:9px; }.room-signposts button { min-width:0; flex:1; max-width:220px; gap:9px; padding:10px 13px; font-size:13px; }
+  .story-room { height:1200px; min-height:1200px; }.story-room-architecture { width:190%; left:-40%; max-width:none; }
+  .story-room-heading { top:4%; left:10%; width:80%; }.story-room-heading h2 { font-size:36px; }.story-room-heading p { max-width:380px; margin:auto; font-size:15px; }
+  .story-features { top:24%; left:10%; width:80%; gap:7% 5%; grid-template-columns:repeat(2,minmax(0,1fr)); }.room-feature:nth-child(2) { transform:none; }.room-feature:nth-child(3) { grid-column:1 / -1; width:47.5%; margin:18px auto 0; }
+  .story-object > svg { width:215px; }.story-object strong { font-size:19px; }.story-object > span { font-size:13px; }
+  .story-room-feedback { top:auto; bottom:22%; left:12%; width:76%; font-size:15px; }.story-pip { bottom:5%; width:170px; left:8%; }.story-room-invitation { right:8%; bottom:7%; width:250px; }.seed-drawer-caption { font-size:12px; }
+}
+@media(max-width:599px) {
+  .room-navigation { padding:7px 12px 12px; }.room-signposts { gap:6px; }.room-signposts button { gap:5px; min-height:49px; padding:8px 7px; font-size:12px; }.room-signposts .signpost-arrow { display:none; }.room-signposts button > span:first-child { font-size:16px; }
+  .story-room { min-height:1570px; height:1570px; }.story-room-architecture { width:260%; left:-60%; }
+  .story-room-heading { top:3%; left:7%; width:86%; }.story-room-heading h2 { font-size:31px; }.room-number { font-size:11px; }.story-room-heading p { font-size:14px; max-width:290px; }.story-room-heading .text-button { font-size:13px; }
+  .story-features { top:16%; left:12%; width:76%; display:flex; flex-direction:column; gap:54px; }.room-feature:nth-child(3) { width:100%; margin:0; }.story-object > svg { width:200px; }.story-object strong { font-size:19px; }.story-object > span { font-size:13px; }.seed-drawer-caption { margin-top:0; padding:5px; font-size:12px; }
+  .story-room-feedback { bottom:23%; left:10%; width:80%; font-size:14px; }.story-pip { width:140px; left:calc(50% - 70px); bottom:12%; }.story-pip > span { font-size:11px; }.story-room-invitation { width:80%; right:10%; bottom:3%; }.story-room-invitation > span { font-size:14px; }.story-room-invitation small { font-size:11px; }.telescope-view p { font-size:18px; }
+}
+@media(prefers-reduced-motion:reduce) { .is-raining .cloud-raindrops path { animation:none; opacity:1; }.paper-petals,.seed-drawer,.story-object > svg { transition:none; }.comet-awake .clockwork-comet { animation:none; filter:drop-shadow(0 0 5px #f1d59c); } }
+/* Readable paper labels belong to each physical discovery, even against pale glass. */
+.room-navigation { position:sticky; top:0; }
+.story-object strong { width:100%; max-width:280px; padding:10px 10px 0; background:#eedcba; border:1px solid #b49e78; border-bottom:0; border-radius:5px 7px 0 0; color:#354f46; text-shadow:none; font-size:18px; margin-top:0; }
+.story-object > span { width:100%; max-width:280px; padding:7px 10px 11px; background:#eedcba; border:1px solid #b49e78; border-top:0; border-radius:0 0 5px 7px; color:#4c614c; text-shadow:none; margin:0; font-size:13px; box-shadow:0 4px #27473a33; }
+.story-room-feedback { background:#294c42ec; padding:8px 14px; border:1px solid #9b9f7477; border-radius:8px; text-shadow:none; }
+.room-observatory .story-room-feedback { background:#35354fe8; }
+.seed-packets { opacity:0; transform:translateY(20px); transition:opacity .4s,transform .5s; }.drawer-open .seed-packets { opacity:1; transform:none; }
+@media(prefers-reduced-motion:reduce) { .seed-packets { transition:none; } }
+/* Give the paper labels, discovery feedback, and invitation their own physical space. */
+.story-features { top:27%; }
+.story-room-feedback { top:78%; }
+@media(min-width:1600px) { .story-features { top:28%; }.story-room-feedback { top:77%; } }
+@media(max-width:959px) { .story-features { top:21%; }.story-room-feedback { top:auto; bottom:22%; } }
+@media(max-width:599px) {
+  .story-features { top:15%; gap:40px; }.story-object > svg { width:190px; }
+  .story-room-feedback { top:auto; bottom:20%; }.story-pip { bottom:10.5%; }
+}
+.room-signposts button:not([aria-current]) { background:linear-gradient(#806248,#6d533f); }
+.seed-packet-ink { opacity:0; transition:opacity .4s; }.drawer-open .seed-packet-ink { opacity:1; }
+@media(prefers-reduced-motion:reduce) { .seed-packet-ink { transition:none; } }
+@media(min-width:600px) and (max-width:959px) { .story-room-feedback { bottom:18%; } }
+/* The opened drawer reveals a little paper note on the cabinet, not another row. */
+.seed-drawer-caption { top:10%; right:-2%; width:155px; max-width:65%; margin:0; padding:8px; border-color:#ac9974; background:#edddbd; color:#3d5849; transform:rotate(4deg); box-shadow:1px 3px #23443933; pointer-events:none; }
+/* A hanging cloth sign keeps the glasshouse inscription clear of its bright roof ribs. */
+.room-conservatory .story-room-heading { isolation:isolate; }
+.room-conservatory .story-room-heading::before { content:''; position:absolute; inset:-12px -16px; z-index:-1; background:#284e48f2; border:1px solid #b9b28b88; border-radius:8px 5px 10px 6px; box-shadow:0 4px #274b3d33; }
