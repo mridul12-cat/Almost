@@ -50,6 +50,8 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 ## Final Review
 
+- [x] Cohesion refinement implemented and mechanically verified — clearer exhibit hierarchy, consistent discovery feedback, subtle accessible room arrivals, optional journal purpose and responsive collision coverage.
+
 - [x] Conservatory memory journal implemented and verified — themed notebook, dated entries/editing, safe independent persistence, recovery and responsive/keyboard checks.
 
 - [x] Two story rooms implemented and mechanically verified — navigation, distinct stories/interactions, preserved core journey and exact storage bytes.
@@ -74,6 +76,8 @@ Reflection: Not asked; optional transfer reflection remains available after fina
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- Learner authorizes a presentation-only cohesion pass across the three rooms. Rebalanced Hall spacing and mobile reading/tab order, retained all room discoveries, added CSS arrivals/short described introductions and clarified the optional journal. Storage/model/core-event code and dependencies are unchanged. `refinement-report.md` records executed checks and screenshot review; final learner acceptance remains open.
 
 - Journal extension verified: typecheck, lint, 57 unit tests and 82 browser executions passed with a production build. Corrected duplicate field/dialog IDs and phone-size heading/discovery spacing. Original/updated timestamps, raw content, same-ID retry, corruption/conflict safeguards, cleanup reconciliation and existing exhibit bytes are covered. Final creative acceptance remains open.
 

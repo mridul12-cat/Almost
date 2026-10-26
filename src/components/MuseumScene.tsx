@@ -20,18 +20,18 @@ export function MuseumScene({ children, count, hasDraft, onCreate, placing = fal
   };
   const createFromRoom = () => { setRoom('hall'); onCreate(); };
   return <main className={`museum ${count ? 'inhabited' : 'empty'} ${placing ? 'is-placing' : ''} ${lightCount ? 'has-lights' : ''}`} id="museum" tabIndex={-1} data-room={room}>
-    <div className="museum-intro"><div><span className="little-caption">The Midnight Keepsake Museum · {room === 'hall' ? 'Main Hall' : room === 'conservatory' ? 'The Glasshouse Wing' : 'The Upstairs Dome'}</span><h1 id="museum-room-title" tabIndex={-1}>{room === 'hall' ? <>A whole world of <span>almost.</span></> : room === 'conservatory' ? <>A quiet place to <span>just be.</span></> : <>For all the places <span>imagined.</span></>}</h1></div><p>{room === 'hall' ? <>Every unfinished thing began somewhere. <br/>Give something you once started a place to exist.</> : room === 'conservatory' ? <>Not every seed needs a season. <br/>Some beginnings are beautiful company.</> : <>A journey can matter before its first step. <br/>There is a little sky for that here.</>}</p></div>
+    <div className="museum-intro"><div><span className="little-caption">The Midnight Keepsake Museum · {room === 'hall' ? 'Main Hall' : room === 'conservatory' ? 'The Glasshouse Wing' : 'The Upstairs Dome'}</span><h1 id="museum-room-title" tabIndex={-1} aria-describedby="museum-room-introduction">{room === 'hall' ? <>A whole world of <span>almost.</span></> : room === 'conservatory' ? <>A quiet place to <span>just be.</span></> : <>For all the places <span>imagined.</span></>}</h1></div><p id="museum-room-introduction" key={room} className="room-introduction">{room === 'hall' ? <>A museum for your unfinished ideas. <br/>Give something you once started a place to exist.</> : room === 'conservatory' ? <>Not every seed needs a season. <br/>Some beginnings are beautiful company.</> : <>A journey can matter before its first step. <br/>There is a little sky for that here.</>}</p></div>
     <RoomNavigation current={room} onChange={visit} disabled={placing}/>
     <div className="diorama museum-hall" hidden={room !== 'hall'}>
       <MuseumAtmosphere/>
       <div className="hall-heading" aria-hidden="true"><span>I</span> The Hall of Beginnings <span>✧</span></div>
       <div className="moonlight-layer" aria-hidden="true"/>
       <div className="room-motes" aria-hidden="true"><i/><i/><i/></div>
-      <MuseumEnvironment pipMood={pipMood} pipSpeaking={pipSpeaking}/>
       <div className={`writing-desk ${placing ? 'placement-ceremony' : ''}`} role={placing ? 'status' : undefined}><span className="desk-note">{placing ? 'A little place, just for this.' : hasDraft ? 'Your notebook is still open.' : count ? 'There’s room for one more.' : 'A little place, waiting for you.'}</span>{placing ? <button className="primary-button" onClick={onSkipReveal}>Open its keepsake card <span aria-hidden="true">✧</span></button> : <button className="primary-button museum-create" onClick={onCreate}><span>{hasDraft ? 'Continue where you left off' : count ? '+ Add an Exhibit' : 'Create your first exhibit'}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 17 1-5L17 1l5 5-11 11-6 1Zm1-5 5 5M3 21h17"/></svg></button>}</div>
       {children}
+      <MuseumEnvironment pipMood={pipMood} pipSpeaking={pipSpeaking}/>
       <div className="foreground-balustrade" aria-hidden="true"><i/><i/></div>
-      <p className="hall-invitation">Take a look around. A few things here remember how to glow.</p>
+      <p className="hall-invitation">Look for the little brass marks. There’s more to discover.</p>
     </div>
     {room !== 'hall' && <StoryRoom key={room} room={room} onCreate={createFromRoom} hasDraft={hasDraft} onOpenJournal={() => setJournalOpen(true)}/>}
     <MemoryJournal open={journalOpen} onClose={() => setJournalOpen(false)}/>

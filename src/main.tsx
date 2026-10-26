@@ -7,4 +7,5 @@ import './styles/artifacts.css';
 import './styles/hall.css';
 import './styles/rooms.css';
 import './styles/journal.css';
+import './styles/refinements.css';
 createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);

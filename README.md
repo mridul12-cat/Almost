@@ -12,7 +12,7 @@ Pip has event-driven welcome, sleepy, listening, anticipation, happy, looking an
 
 ## Discover the hall
 
-Look through the twilight window, switch the desk lamp, ring the silent visual bell, open the curator-written guestbook, read a note or empty-pedestal inscription, or ask Pip for a thought. Every object has a visible label, keyboard access and reduced-motion feedback. These optional discoveries use ephemeral React state only: they never change exhibits, drafts or saved lights. The room lamp resets on reload; the guestbook is a readable welcome, not a new visitor-writing feature.
+Look through the twilight window, switch the desk lamp, ring the silent visual bell, open the curator-written guestbook, read a note or empty-pedestal inscription, or ask Pip for a thought. A small brass diamond marks objects you can touch. Every object has a visible label, consistent hover/focus/press feedback, keyboard access and reduced-motion feedback. On phones, creation and exhibits appear before the quieter discovery corner. These optional discoveries use ephemeral React state only: they never change exhibits, drafts or saved lights. The room lamp resets on reload; the guestbook is a readable welcome, not a new visitor-writing feature.
 
 ## Two rooms further inside
 
@@ -23,11 +23,11 @@ Use the wooden signposts to explore two more rooms, each with an original illust
 | Moonseed Conservatory | A seed can rest without needing to grow. | Toggle a tiny rain cloud, unfold paper petals, open a seed drawer. |
 | Pocket-Sky Observatory | An imagined journey can keep its place in the sky. | Look through a telescope, turn three constellations, wake a clockwork comet. |
 
-Pip visits both. Room discoveries reset when you leave; they never alter exhibits or drafts. Your collection stays in the Main Hall, retaining its browsing position. “Keep a beginning” returns to the existing creation desk; “Continue your beginning” resumes the same draft. Reload starts in the Main Hall. Keyboard navigation, modal focus restoration and reduced motion apply throughout.
+A brief, motion-sensitive arrival transition and a short atmospheric introduction connect each room; reduced motion removes the transition immediately. Pip visits both. Room discoveries reset when you leave; they never alter exhibits or drafts. Your collection stays in the Main Hall, retaining its browsing position. “Keep a beginning” returns to the existing creation desk; “Continue your beginning” resumes the same draft. Reload starts in the Main Hall. Keyboard navigation, modal focus restoration and reduced motion apply throughout.
 
 ## The Conservatory memory journal
 
-Open **Memory journal** beside the Conservatory’s story invitation. The botanical notebook lets you write, name (optionally), read and edit personal memories. Each page records its original date, time (including seconds) and time zone; editing adds a separate Updated timestamp. Original recording metadata is retained.
+“A place for memories that don’t need a pedestal.” Open the optional **Memory journal** beside the Conservatory’s story invitation. The botanical notebook lets you write, name (optionally), read and edit personal memories. Each page records its original date, time (including seconds) and time zone; editing adds a separate Updated timestamp. Original recording metadata is retained.
 
 Pages save explicitly in this browser under `almost:journal:entry:<id>`. One open page uses the separate session key `almost:journal:draft`, so closing the journal or changing rooms preserves unfinished words. This journal is the exception to the room discoveries’ temporary-state behavior. It does not alter exhibits or their creation draft.
 

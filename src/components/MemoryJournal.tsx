@@ -121,6 +121,7 @@ export function MemoryJournal({ open, onClose }: { open: boolean; onClose: () =>
   },[initial]);
   if (!open) return null;
   return <PanelDialog title="The Memory Journal" kind="journal" onClose={onClose}>
+    <p className="journal-purpose">A place for memories that don’t need a pedestal.</p>
     <div className="journal-toolbar"><span><span aria-hidden="true">❀</span> Moonseed Conservatory</span><button className="text-button" onClick={startPage} disabled={view === 'write' && !!draft}>{draft ? 'Continue open page' : 'New memory'} <span aria-hidden="true">＋</span></button></div>
     <p className="journal-storage-note">Saved in this browser. Clearing its data removes saved pages.</p>
     {warning && <div className="journal-warning" role="status"><p>{warning}</p><button className="text-button" onClick={recheck}>Check saved pages</button></div>}
@@ -148,7 +149,7 @@ export function MemoryJournal({ open, onClose }: { open: boolean; onClose: () =>
           <div className="journal-read-actions"><span className={`journal-save-label ${saved[selected.id] ? '' : 'journal-temporary'}`}>{saved[selected.id] ? 'Saved in this browser' : 'This version is not saved yet'}</span><button className="text-button" disabled={!!draft && draft.id !== selected.id} onClick={() => editPage(selected)}>{draft?.id === selected.id ? 'Continue editing & retry' : 'Edit this memory'}</button></div>
           {draft && draft.id !== selected.id && <p className="journal-draft-note">An open page is waiting. Continue it before editing another memory.</p>}
           <p className="journal-entry-body">{selected.body}</p><span className="journal-page-flourish" aria-hidden="true">— ❧ —</span>
-        </article> : <div className="journal-welcome"><span className="journal-kicker">The glasshouse keeps a little book</span><h3 id="journal-page-heading" tabIndex={-1}>A few words,<br/>kept gently.</h3><p>A place for a moment you would like to remember. No perfect words needed.</p><span className="journal-welcome-leaf" aria-hidden="true">❧</span><button className="primary-button" onClick={startPage}>Write a memory <span aria-hidden="true">✎</span></button></div>}
+        </article> : <div className="journal-welcome"><span className="journal-kicker">The glasshouse keeps a little book</span><h3 id="journal-page-heading" tabIndex={-1}>A few words,<br/>kept gently.</h3><p>A passing moment, a familiar place, a few words. Keep a page if you like.</p><span className="journal-welcome-leaf" aria-hidden="true">❧</span><button className="primary-button" onClick={startPage}>Write a memory <span aria-hidden="true">✎</span></button></div>}
       </div>
     </div>
     <div className="journal-message" role="status" aria-live="polite">{message}</div>

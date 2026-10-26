@@ -25,7 +25,7 @@ export function MuseumEnvironment({ pipMood, pipSpeaking }: { pipMood: PipMood; 
   return <>
     <div className={`window-discovery ${moment === 'window' ? 'is-twinkling' : ''}`}>
       <span className="window-stars" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>·</i></span>
-      <button className="room-object window-touch" onClick={() => discover('window')} aria-label="Look through the twilight window"><span className="object-label">The window alcove <span aria-hidden="true">✧</span></span></button>
+      <button className="room-object window-touch" onClick={() => discover('window')} aria-label="Look through the twilight window"><span className="object-label">The window alcove</span></button>
     </div>
     <div className="keeper-corner"><button className="pip-greeting" aria-label="Ask Pip for a little thought" onClick={() => setStory('pip')}><PipCurator mood={pipMood} showNote={pipSpeaking}/><span className="object-label">Pip, your curator</span></button></div>
     <div className={`desk-lamp ${lampOn ? 'lamp-on' : ''}`}>

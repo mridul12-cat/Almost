@@ -154,10 +154,10 @@ test('creation from either story room resumes one stable draft in the hall and s
   }
 });
 
-test('both story rooms stay readable without page overflow or feature/control collisions in five layouts', async ({ page }) => {
+test('both story rooms stay readable without page overflow or feature/control collisions in seven layouts', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  for (const viewport of [{width:320,height:700},{width:390,height:844},{width:768,height:1024},{width:1440,height:900},{width:1920,height:1080}]) {
+  for (const viewport of [{width:320,height:700},{width:390,height:844},{width:600,height:900},{width:768,height:1024},{width:1440,height:900},{width:1920,height:900},{width:1920,height:1080}]) {
     await page.setViewportSize(viewport);
     for (const destination of destinations) {
       await visit(page, destination.name);
@@ -168,9 +168,9 @@ test('both story rooms stay readable without page overflow or feature/control co
         const feedback = room.querySelector('.story-room-feedback')!.getBoundingClientRect();
         const invitation = room.querySelector('.story-room-invitation')!.getBoundingClientRect();
         const overlap = (a: DOMRect, b: DOMRect) => Math.min(a.right,b.right) - Math.max(a.left,b.left) > 1 && Math.min(a.bottom,b.bottom) - Math.max(a.top,b.top) > 1;
-        return { overflow: document.documentElement.scrollWidth > innerWidth, buttonsOutsidePage: buttons.some(button => button.left < -1 || button.right > innerWidth + 1), buttonsOverlap: buttons.some((button,index) => buttons.slice(index+1).some(other => overlap(button,other))), controlCollisions: buttons.filter(button => overlap(button,feedback) || overlap(button,invitation)).length };
+        return { overflow: document.documentElement.scrollWidth > innerWidth, buttonsOutsidePage: buttons.some(button => button.left < -1 || button.right > innerWidth + 1), buttonsOverlap: buttons.some((button,index) => buttons.slice(index+1).some(other => overlap(button,other))), feedbackCollision: overlap(feedback,invitation), controlCollisions: buttons.filter(button => overlap(button,feedback) || overlap(button,invitation)).length };
       });
-      expect(geometry, `${destination.name} at ${viewport.width}×${viewport.height}`).toEqual({ overflow:false,buttonsOutsidePage:false,buttonsOverlap:false,controlCollisions:0 });
+      expect(geometry, `${destination.name} at ${viewport.width}×${viewport.height}`).toEqual({ overflow:false,buttonsOutsidePage:false,buttonsOverlap:false,feedbackCollision:false,controlCollisions:0 });
     }
   }
 });
