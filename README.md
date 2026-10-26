@@ -8,11 +8,11 @@ The Whisper opens Pip's paper notebook. The Name Tag offers an editable determin
 
 Click a shelf object to open its keepsake box and read your exact words. Selection and replay never change its lasting light. Desktop displays six shelf/plinth positions per collection page; mobile unfolds the hall vertically around a swipeable gallery with visible previous/next controls. More exhibits stay in the same room, in stable creation order.
 
-Pip has event-driven welcome, sleepy, listening, anticipation, happy, looking and settling poses; short speech bubbles settle away. All character, room, and artifact animation is decorative and disabled under reduced motion. No font, artwork, or runtime service is fetched externally.
+Pip has event-driven welcome, sleepy, listening, anticipation, happy, looking and settling poses; short speech bubbles settle away. All character, room, and artifact animation is decorative and disabled under reduced motion. No font, artwork, or runtime service is fetched externally. The exhibit display section and its contents are scaled to 80% of their earlier size; browsing targets remain 44px.
 
 ## Discover the hall
 
-Look through the twilight window, switch the desk lamp, ring the silent visual bell, open the curator-written guestbook, read a note or empty-pedestal inscription, or ask Pip for a thought. A small brass diamond marks objects you can touch. Every object has a visible label, consistent hover/focus/press feedback, keyboard access and reduced-motion feedback. On phones, creation and exhibits appear before the quieter discovery corner. These optional discoveries use ephemeral React state only: they never change exhibits, drafts or saved lights. The room lamp resets on reload; the guestbook is a readable welcome, not a new visitor-writing feature.
+Look through the twilight window, switch the desk lamp, ring the silent visual bell, open the curator-written guestbook, read a note or empty-pedestal inscription, or ask Pip for a thought. A small brass diamond marks objects you can touch. Every object has a visible label, consistent hover/focus/press feedback, keyboard access and reduced-motion feedback. On phones, the curator table and creation invitation sit above the swipeable collection. These optional discoveries use ephemeral React state only: they never change exhibits, drafts or saved lights. The room lamp resets on reload; the guestbook is a readable welcome, not a new visitor-writing feature.
 
 ## Two rooms further inside
 
@@ -111,3 +111,13 @@ Localhost, preview deployments, Vercel, and Render each have separate browser co
 Approved planning lives in `devpost/scope.md`, `devpost/prd.md`, and `devpost/spec.md`. Build progress, hands-on reviews, and remaining verification are recorded in `devpost/checklist.md`. Personal learner context and local credentials are excluded from commits by `.gitignore`.
 
 No runtime AI, authentication, backend, analytics, remote artwork, or remote fonts.
+
+## License and asset rights
+
+ALMOST’s application source code and original SVG artwork are licensed under the [MIT License](LICENSE), copyright © 2026 Mridul Dabral. Third-party packages retain their own licenses; see [runtime notices](THIRD_PARTY_NOTICES.md). The deployed static files include `third-party-notices.txt`.
+
+**The MP3 files in `music/` and `public/music/` are expressly excluded from the MIT license.** They were generated with Google Gemini/Lyria from project-specific prompts supplied by the creator. Their origin and unresolved redistribution rights are recorded in [MUSIC_RIGHTS.md](MUSIC_RIGHTS.md). No blanket redistribution permission or exclusive ownership is claimed. The creator explicitly authorizes including these tracks in this GitHub publication; their applicable redistribution rights have not been independently confirmed.
+
+## Submission preparation
+
+Executed checks and publication/deployment blockers are recorded in [shipping readiness](devpost/shipping-readiness.md). The [demo recording checklist](devpost/demo-checklist.md) describes actions to demonstrate, not narration. The [submission checklist](devpost/submission-checklist.md) distinguishes confirmed public rules from authenticated form questions still to be reviewed. No repository publication, deployment, video upload or Devpost submission has been performed by this workflow.

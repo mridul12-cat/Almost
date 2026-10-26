@@ -1,0 +1,6 @@
+/* Shrink the collection and its contents together, around their existing centre. */
+.museum-hall .collection-stage { scale:.8; transform-origin:50% 0; }
+/* Browsing remains comfortably readable and at least 44px to tap after scaling. */
+.museum-hall .collection-stage .desktop-browse,
+.museum-hall .collection-stage .mobile-browse { font-size:17.5px; gap:16.25px; }
+.museum-hall .collection-stage .icon-button { scale:1.25; }

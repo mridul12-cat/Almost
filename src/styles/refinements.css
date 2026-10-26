@@ -25,18 +25,17 @@
 .museum-hall .awaiting-beginnings .exhibit-track { grid-template-columns:repeat(2,minmax(0,1fr)); width:80%; margin:auto; gap:40px; }
 .museum-hall .awaiting-beginnings .waiting-nook:nth-child(n+3) { display:none; }
 .museum-hall .awaiting-beginnings .waiting-sketch { height:150px; }
-.museum-hall .keeper-corner { top:34%; left:13%; width:14%; }
+.museum-hall .keeper-corner { top:42%; left:13%; width:14%; }
 .museum-hall .keeper-corner .pip-curator { width:180px; }
 .museum-hall .keeper-corner .pip-note { width:190px; font-size:13px; bottom:calc(100% - 12px); }
 .pip-greeting > .object-label { top:auto; right:auto; bottom:-10px; left:50%; transform:translateX(-50%); max-width:none; background:none; border:0; padding:0; }
-.museum-hall .desk-discoveries { top:62%; left:8%; width:24%; gap:24px; }
+.museum-hall .desk-discoveries { top:65%; left:8%; width:24%; gap:24px; }
 .museum-hall .desk-discoveries svg { max-height:54px; }
-.museum-hall .desk-lamp { top:43%; left:29%; width:5%; }
+.museum-hall .desk-lamp { top:51%; left:29%; width:5%; }
 .museum-hall .writing-desk,.museum-hall .writing-desk.placement-ceremony { left:7%; width:27%; bottom:9%; }
-.window-discovery { top:13%; height:18%; }
-.window-touch .object-label { top:0; bottom:auto; }
+.window-discovery { top:13%; height:24%; }
 .empty-pedestal-touch { opacity:.85; }
-.hall-invitation { left:75%; width:20%; bottom:3%; font-size:11px; line-height:1.6; color:#e0d9bf; z-index:5; }
+.hall-invitation { font-size:12px; color:#e0d9bf; }
 
 /* A small brass mark means "you can touch this"; painted scenery has no mark. */
 :is(.room-object,.pip-greeting,.story-object,.journal-entrypoint,.exhibit-button) { --discovery-ink:#f4d8a1; }
@@ -62,19 +61,11 @@
 .journal-entrypoint small { font-weight:400; }
 
 @media(min-width:1600px) {
-  .museum-hall { height:clamp(780px,calc(100svh - 244px),1000px); min-height:780px; }
   .museum-hall .collection-stage { height:550px; top:17%; }
   .museum-hall .artifact-display { height:165px; }
   .museum-hall .artifact-display > .artifact { width:230px; }
-  .museum-hall .keeper-corner { top:34%; }
+  .museum-hall .keeper-corner { top:44%; }
   .museum-hall .keeper-corner .pip-curator { width:215px; }
-  .story-room { height:clamp(800px,calc(100svh - 244px),1000px); min-height:800px; }
-  .story-features { top:31%; }
-  .story-room-feedback { top:83%; }
-}
-@media(min-width:600px) and (max-width:959px) {
-  .story-room { height:1300px; min-height:1300px; }
-  .story-room-feedback { bottom:20%; }
 }
 @media(max-width:1199px) and (min-width:960px) {
   .museum-hall .collection-stage { left:40%; width:48%; }
@@ -103,7 +94,7 @@
   .museum-hall .desk-lamp { top:65%; left:77%; width:10%; }
   .window-discovery { left:6%; top:13%; width:17%; height:12%; }
   .window-touch .object-label { white-space:normal; font-size:11px; max-width:110px; }
-  .empty-pedestal-touch { top:84%; right:12%; width:9%; }
+  .empty-pedestal-touch { top:87%; right:12%; width:12%; }
   .environment-whisper { bottom:9%; left:8%; width:58%; }
   .hall-invitation { bottom:3%; left:8%; width:84%; }
   .museum-hall .moonlight-layer { opacity:.5; }
@@ -123,7 +114,7 @@
   .museum-hall .collection-stage,.museum-hall .awaiting-beginnings { top:28%; }
   .museum-hall .shelf-caption { padding-inline:25px; font-size:13px; }
   .museum-hall .awaiting-beginnings .exhibit-track { padding-inline:32px; gap:26px; }
-  .museum-hall .keeper-corner { top:71%; left:8%; width:35%; }
+  .museum-hall .keeper-corner { top:68%; left:8%; width:35%; }
   .museum-hall .keeper-corner .pip-curator { width:150px; }
   .museum-hall .keeper-corner .pip-note { width:155px; font-size:12px; left:0; }
   .pip-greeting > .object-label { bottom:-10px; font-size:11px; }
@@ -134,19 +125,12 @@
   .museum-hall .desk-discoveries svg { max-height:48px; }
   .museum-hall .desk-discoveries .object-label { font-size:10px; max-width:78px; white-space:normal; }
   .museum-hall .desk-lamp { top:62%; left:72%; width:17%; }
-  .window-discovery { top:61%; left:8%; width:44%; height:4%; }
-  .window-touch .object-label { top:auto; bottom:0; max-width:none; font-size:11px; }
+  .window-discovery { top:58%; left:8%; width:44%; height:5%; }
+  .window-touch .object-label { max-width:none; font-size:11px; }
   .empty-pedestal-touch { top:84%; left:14%; right:auto; width:16%; }
-  .environment-whisper { bottom:6%; left:8%; width:84%; font-size:12px; }
-  .hall-invitation { bottom:1%; font-size:12px; }
+  .environment-whisper { bottom:9%; left:39%; width:53%; font-size:12px; }
+  .hall-invitation { font-size:12px; }
   .journal-purpose { font-size:17px; margin-top:12px; }
-  /* Let labels wrap naturally, including at text zoom, without colliding with the next discovery. */
-  .story-room { height:auto; min-height:1570px; padding-top:50px; }
-  .story-room-heading { position:relative; top:auto; left:auto; margin:0 auto; }
-  .story-room .story-features { position:relative; top:auto; left:auto; margin:70px auto 0; }
-  .story-room-feedback { position:relative; top:auto; bottom:auto; left:auto; margin:28px auto 0; }
-  .story-pip { position:relative; bottom:auto; left:auto; margin:24px auto 0; }
-  .story-room-invitation { position:relative; bottom:auto; right:auto; margin:26px auto 45px; }
 }
 @media(prefers-reduced-motion:reduce) {
   .museum-hall,.story-room,.room-introduction { animation:none; }

@@ -46,7 +46,7 @@ Authorization: the learner supplied the build order and explicitly requested imp
 Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production build, and 24 desktop/mobile browser scenario executions passed. Desktop empty-room and mobile creation/plaque screenshots inspected. Early feedback received as the learner's Midnight Keepsake Museum brief: replace the formal gallery with a miniature storybook world and Pip. This authorizes the redesign recorded in `redesign.md`; final review remains pending.
 
 - [x] Early usable behavior explored — learner supplied detailed creative feedback and authorized the Midnight Keepsake Museum revision.
-- [ ] Final kick-the-tires exploration and feedback completed
+- [x] Final kick-the-tires exploration and feedback completed — learner confirms the finished experience on October 26, 2026.
 
 ## Final Review
 
@@ -62,22 +62,26 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 - [x] Creative pass 2 implemented and verified — composed room, event-driven Pip, explicit unsaved preview stage, larger/readable exhibits and five-viewport QA.
 - [x] Implement authorized Midnight Keepsake Museum reinvention and mechanically verify it — 22 unit tests, 34 browser tests, typecheck, lint and production build passed; desktop/mobile/tablet screenshots inspected.
-- [ ] Learner explores the redesigned room, ritual, reveal and details; any further feedback is clarified and resolved.
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [x] Learner explores the redesigned room, ritual, reveal and details; feedback resolved, including the final 20% display-size reduction.
+- [x] Final review complete — learner explicitly confirms “yes, its finished”; typecheck, lint, 103 unit tests, 116 browser checks and production build pass on the current implementation.
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — focused evidence-based connection between safe retries and observable acceptance criteria
-- [ ] Optional edit and transfer reflection addressed
-- [x] `devpost/app-map.html` generated from current code, checked offline with JavaScript disabled, and opened/shown as a reference snapshot; final learner review remains pending
+- [x] Learning activity complete — focused evidence-based recap connecting the presentation/meaning principle to persistence-gated reveal and its executed failure test; no claim of an interactive code tour or demonstrated mastery.
+- [x] Optional edit and transfer reflection addressed — no extra code exercise for the focused alternative; optional transfer reflection answered and kept only in the private learner profile.
+- [x] `devpost/app-map.html` generated from current code, checked offline with JavaScript disabled, and linked as the take-home reference; final hands-on review and focused wrap-up complete. Panel-open request was queued; the direct file link remains available.
 
-Activity and evidence: Reference recap prepared from actual passing tests: reveal/light independence, failed-save ceremony suppression and exact-byte preservation of twelve records. This is an agent explanation, not completed learner practice; final review is pending.
+Activity and evidence: Completed the experienced-user focused alternative as an evidence-based recap after final review. Connected PRD presentation/meaning and honest-save criteria → App.place/persist → browser test “a failed save skips the placement ceremony and never celebrates durable success.” Full verification passes; the learner confirmed the finished app. This is a recap, not a hands-on code exercise or proof of mastery.
 Route and stops: Reference-only route: CreationPanel / field → App / place, persist, light, replay → museumStorage / save, load, readDraft. Not toured interactively.
-Edit outcome: Not offered during pending final review; no extra exercise required.
-Reflection: Not asked; optional transfer reflection remains available after final review.
+Edit outcome: Not applicable to the focused recap; the learner-approved gallery sizing is already implemented and verified.
+Reflection: Offered once and answered; personal response recorded only in the ignored learner profile.
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- `6-ship` preparation: approved MIT for source/original SVGs (2026 Mridul Dabral), excludes MP3s and retains third-party notices. Repository/security/history review and full technical verification complete. Creator supplied the existing empty public GitHub repository and explicitly authorizes pushing full history including audio after being informed of unconfirmed music rights. Deployment and submission remain separate, unapproved actions.
+
+- Final build review completed October 26, 2026: learner confirms finished. The requested display section/artifacts shrink to 80% about their existing centre; browsing targets remain 44px. Exact desktop/mobile dimensions checked, 16 focused regressions and the subsequent complete 116-browser suite pass with 103 unit tests, typecheck, lint and production build. Evidence-based wrap-up and private optional reflection completed; `5-build` prerequisites for `6-ship` are satisfied.
 
 - Learner authorizes three supplied local room tracks and an animated SVG play/pause control. `room-music.md` narrowly extends the silent POC boundary for opt-in room music. Added one shared looping audio element, page-only intent, reduced-motion visuals and safe playback retry/cancellation. Moved the desktop player alongside room signs after the first full run exposed a below-fold creation invitation; updated obsolete no-audio-element tests to assert silent default behavior. Final verification: 103 unit tests, 116 browser executions, lint and production build passed. See `room-music-report.md`; learner creative acceptance remains open.
 

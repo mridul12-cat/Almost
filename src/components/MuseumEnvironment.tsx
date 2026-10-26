@@ -25,7 +25,7 @@ export function MuseumEnvironment({ pipMood, pipSpeaking, desk }: { pipMood: Pip
   return <>
     <div className={`window-discovery ${moment === 'window' ? 'is-twinkling' : ''}`}>
       <span className="window-stars" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>·</i></span>
-      <button className="room-object window-touch" onClick={() => discover('window')} aria-label="Look through the twilight window"><span className="object-label">The window alcove</span></button>
+      <button className="room-object window-touch" onClick={() => discover('window')} aria-label="Look through the twilight window"><span className="object-label">The window alcove <span aria-hidden="true">✧</span></span></button>
     </div>
     <div className="curator-table">
     <div className="curator-arrangement">
