@@ -391,3 +391,11 @@ Within the learner's 6–10 total hours, protect early functional completion and
 **Approved implementation details:** per-ID keys with versioned records and baseline conflict checks; one editable recovery draft; the deterministic title rule and visible 100/1,000 code-point limits; desktop six-item grouping/mobile scroll-snap; system fonts; native dialogs; Vitest plus Playwright as development-only tooling. The learner approved the specification with a hosting change: GitHub-connected **Vercel Hobby preferred**, conditional on personal/non-commercial eligibility, and **Render Free Static Site backup**. Build output is `dist`; the Vercel build command is `npm run build`. Hosting and dependencies must remain within ₹0.
 
 **No additional product-defining question remains.** Exact installed versions, local runtime availability, hosting account access and Hobby eligibility, and browser-test binary availability are unverified implementation prerequisites to check at the first relevant milestone. Any dependency incompatibility must be resolved before relying on its tests/build; any consequential deviation from this blueprint returns to the learner. This specification is approved. The learner explicitly requested stopping before `5-build`; do not start implementation or create application code until separately authorized.
+
+
+## Sharing Record
+
+- Source: https://github.com/mridul12-cat/Almost — public `main`, anonymously verified against tested release `4ae45ee2264adc6503d9a5d186e81b501eb489a1` on October 26, 2026. Source, original SVGs and planning documents included; learner profile and credential/config paths excluded. Creator explicitly authorized publishing the MP3s, which remain outside MIT with unverified redistribution rights documented in `MUSIC_RIGHTS.md`.
+- Deployment: not performed; Vercel Hobby remains preferred, subject to separate approval/eligibility. Render Free Static Site remains the backup.
+- Demo: not yet recorded or uploaded. See `demo-checklist.md` for a 2:45 action sequence; narration and public descriptions are creator-written.
+- Devpost form/exit survey: not started; review deferred at the creator's request until the demo is ready. No submission performed.

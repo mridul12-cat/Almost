@@ -5,7 +5,7 @@ status: in-progress
 
 # ALMOST — shipping readiness
 
-Reviewed October 26, 2026. Technical preparation is complete. The creator explicitly authorizes pushing the full repository, including audio. GitHub publication is pending execution/verification. Deployment, video upload and Devpost submission remain unauthorized and unperformed. Music redistribution rights are not independently confirmed and no blanket license is claimed.
+Reviewed October 26, 2026. Technical preparation is complete. The creator explicitly authorizes pushing the full repository, including audio. GitHub publication is complete and anonymously verified at release commit `4ae45ee2264adc6503d9a5d186e81b501eb489a1`. Deployment, video upload and Devpost submission remain unauthorized and unperformed. Music redistribution rights are not independently confirmed and no blanket license is claimed.
 
 ## Build prerequisites
 
@@ -41,7 +41,7 @@ Production smoke checks at `http://127.0.0.1:4173/`:
 
 ## GitHub publication audit
 
-Existing repository supplied by the learner: https://github.com/mridul12-cat/Almost . Anonymous GitHub API and page requests return 200; API reports `private: false`, default branch `main`. The remote Git repository is empty (tree/commit endpoints report 409, “Git Repository is empty”). No app files are publicly present there. At audit time no Git remote was configured locally. Existing macOS Git credentials passed a dry-run push check without uploading files. The creator subsequently authorized pushing to this existing repository, including audio; no visibility change, account setup or repository creation is needed.
+Existing repository supplied by the learner: https://github.com/mridul12-cat/Almost . Anonymous GitHub API and page requests return 200; API reports `private: false`, default branch `main`. At the initial audit the remote Git repository was empty (tree/commit endpoints reported 409). After the authorized push, anonymous API checks confirm 212 tracked files, all required planning/source files, all three MP3s matching local blob hashes, MIT detection and no private/config paths. The remote `main` matched release commit `4ae45ee2264adc6503d9a5d186e81b501eb489a1`. At audit time no Git remote was configured locally. Existing macOS Git credentials passed a dry-run push check without uploading files. The creator subsequently authorized pushing to this existing repository, including audio. Added the token-free `origin` URL and pushed local `HEAD` to remote `main`; no force push, visibility change, account setup or repository creation was performed.
 
 Audit baseline: local commit `420a129`, 15 commits reachable from all local refs, 225 historical text blobs and 201 tracked files. Pattern scans found no high-confidence private keys, GitHub/OpenAI/AWS/Slack credentials or credential-bearing HTTP URLs. No learner-profile, credential file or `.env` path was found in reachable history. This is a bounded pattern/path review, not proof that every possible secret is absent.
 
@@ -49,11 +49,11 @@ Audit baseline: local commit `420a129`, 15 commits reachable from all local refs
 - `devpost/learner-profile.md` remains ignored, untracked and absent from history; local reflection is not copied into public artifacts.
 - `.env` and `.env.*` are ignored, allowing only a secret-free `.env.example`. No app environment variables are needed.
 - Git author metadata contains the author's name and machine-local email. That metadata becomes public if existing history is pushed; it has not been rewritten.
-- The two pre-existing presentation edits in `MuseumEnvironment.tsx` and `refinements.css` are part of the locally reviewed/tested experience. Preserve them when choosing the release snapshot; do not silently revert or publish a differing snapshot.
+- The two pre-existing presentation edits in `MuseumEnvironment.tsx` and `refinements.css` were preserved in the reviewed release checkpoint, so the published source matches the tested experience.
 - Untracked course/config directories (`.agents/`, `.claude/`, `agent/`), `skills-lock.json` and original `music/` sources are outside the publication whitelist. Never use a blanket `git add` or upload the whole workspace.
 - Audio is already in local commit `420a129`. After this was explained, the creator explicitly instructed “push the audio files too”, superseding the earlier hold for the GitHub push. Preserve the full history; no music-free history or history rewrite is authorized. Audio remains excluded from MIT and no verified redistribution license is claimed.
 
-The existing empty public repository is the authorized push destination. Anonymous access is verified; populated-source verification follows the push.
+The existing public repository is now populated and anonymously verified. Original local history is preserved. No credential or learner-profile paths were published.
 
 ## License and assets
 
@@ -77,11 +77,11 @@ After separate deployment approval and a decision about its soundtrack rights, p
 
 - [x] Record music provenance, MIT exclusion and explicit creator authorization to publish the supplied MP3s to GitHub despite unresolved redistribution rights.
 - [x] Creator authorizes the full existing source/history, including audio, to the supplied GitHub repository.
-- [ ] Verify the populated public repository without authentication.
+- [x] Verify the populated public repository without authentication — main/4ae45ee, required files and audio match; private paths absent.
 - [ ] Approve deployment and confirm Hobby eligibility; then verify the actual live URL.
 - [ ] Record and publicly upload the demo; verify its link without authentication.
-- [ ] Review authenticated form fields and exit-survey prompts with the learner; public pages do not expose them.
+- [ ] After the demo is ready, review authenticated form fields and exit-survey prompts with the learner. The learner has not started the form and explicitly defers this step; it does not block technical preparation.
 - [ ] Learner writes all submission descriptions and reflections and completes the exit survey.
 - [ ] Learner explicitly authorizes Devpost submission, or submits it personally.
 
-GitHub push is authorized and pending verification. No deployment, video upload or Devpost submission has been performed. See `demo-checklist.md` and `submission-checklist.md` for the remaining mechanics.
+The authorized GitHub push and anonymous verification are complete. No deployment, video upload or Devpost submission has been performed. See `demo-checklist.md` and `submission-checklist.md` for the remaining mechanics.

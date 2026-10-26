@@ -26,4 +26,4 @@ On October 26, 2026, after the publication-rights uncertainty and the audio-bear
 
 The MP3s remain excluded from MIT. No blanket downstream license or exclusive ownership is claimed. Anyone reusing the audio must independently establish applicable permissions and terms; the code license does not grant audio rights.
 
-The application copies entered local history in commit `420a129`. The complete existing history will be preserved rather than replaced by a music-free snapshot. No history rewrite is authorized or performed. Deployment, video upload and Devpost submission remain separate actions requiring approval.
+The application copies entered local history in commit `420a129`. The complete existing history was preserved in the authorized GitHub push rather than replaced by a music-free snapshot. No history rewrite is authorized or performed. Deployment, video upload and Devpost submission remain separate actions requiring approval.

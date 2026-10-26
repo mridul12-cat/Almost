@@ -79,6 +79,8 @@ Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
 
+- GitHub publication completed with explicit creator authorization, including the supplied MP3s after their rights uncertainty was documented. Anonymous verification of remote main/4ae45ee confirms required source/planning artifacts, MIT detection, matching audio blobs and no private/config paths. No deployment or Devpost submission performed. Demo/form work remains; form review is intentionally deferred until recording is ready.
+
 - `6-ship` preparation: approved MIT for source/original SVGs (2026 Mridul Dabral), excludes MP3s and retains third-party notices. Repository/security/history review and full technical verification complete. Creator supplied the existing empty public GitHub repository and explicitly authorizes pushing full history including audio after being informed of unconfirmed music rights. Deployment and submission remain separate, unapproved actions.
 
 - Final build review completed October 26, 2026: learner confirms finished. The requested display section/artifacts shrink to 80% about their existing centre; browsing targets remain 44px. Exact desktop/mobile dimensions checked, 16 focused regressions and the subsequent complete 116-browser suite pass with 103 unit tests, typecheck, lint and production build. Evidence-based wrap-up and private optional reflection completed; `5-build` prerequisites for `6-ship` are satisfied.

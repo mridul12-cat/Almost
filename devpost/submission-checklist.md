@@ -10,7 +10,7 @@ status: in-progress
 Checked October 26, 2026 against the [hackathon overview](https://learn-ai-basics.devpost.com/) and [detailed rules](https://learn-ai-basics.devpost.com/rules):
 
 - [ ] New project built during the submission period with the Devpost Learn Skill Pack; disclose incorporated pre-existing work where required.
-- [ ] Public repository containing functional source, assets, setup instructions and the generated `scope.md`, `prd.md`, `spec.md`. The rules recommend a detectable open-source license.
+- [x] Public repository containing functional source, assets, setup instructions and the generated `scope.md`, `prd.md`, `spec.md`; MIT is detected. Anonymous verification matches tested release `4ae45ee`.
 - [ ] Demo showing the app actually working; target 1–3 minutes per overview and strictly less than three per detailed rules. Upload publicly to YouTube or Vimeo and provide its link.
 - [ ] Creator-written project description explaining features/functionality, audience and learning, plus every required authenticated form field.
 - [ ] Submission materials in English, or with the required English translation.
@@ -23,7 +23,7 @@ Deadline: **October 27, 2026 at 2:30 AM IST** (October 26, 5:00 PM EDT). The ove
 - [x] Planning documents approved and all `5-build` prerequisites complete.
 - [ ] Project name, short description and other required answers written by the creator.
 - [ ] Exit survey completed by the creator, as required by `6-ship`; its exact prompts are not visible on the public pages.
-- [ ] Review the exact required fields, upload constraints and exit-survey prompts in the signed-in submission form. They have been requested from the learner; no standard Devpost field list is assumed.
+- [ ] Review the exact required fields, upload constraints and exit-survey prompts in the signed-in submission form. The learner has not started the form and requests this step after the demo is ready. It is deferred without blocking other preparation; no standard Devpost field list is assumed.
 
 The public [My projects page](https://devpost.com/submit-to/30447-build-with-ai-basics/manage/submissions) does not expose the authenticated submission form through this web session. If its requirements differ from the public pages or skill, resolve the difference explicitly before submitting.
 
@@ -33,10 +33,10 @@ The creator writes the project name, descriptions, answers, reflections, video n
 
 | Item | Current state |
 | --- | --- |
-| GitHub | https://github.com/mridul12-cat/Almost — anonymously accessible and public, currently empty; full source/audio push authorized and pending verification |
-| Demo video | Not supplied or uploaded; public playback remains to be verified |
+| GitHub | https://github.com/mridul12-cat/Almost — anonymously accessible and populated; full source/audio release `4ae45ee` verified; MIT detected, learner profile absent |
+| Demo video | Not yet recorded (learner confirmed); public playback remains to be verified |
 | Live app | Not supplied or deployed; optional for submission, preferred by the creator |
-| Submission | Not submitted or edited by this workflow |
+| Submission | Not started by the learner; not submitted or edited by this workflow |
 
 Repo and video are both needed; neither replaces the other. Deployment, peer feedback and a Discord post are optional. No peer-review count or comment links are required by this skill.
 
