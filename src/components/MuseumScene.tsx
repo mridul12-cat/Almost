@@ -1,4 +1,7 @@
 import { useState, type ReactNode } from 'react';
+import type { Exhibit } from '../model/types';
+import { useObservatorySky } from '../hooks/useObservatorySky';
+import { ObservatorySky } from './ObservatorySky';
 import type { MuseumRoom } from '../model/rooms';
 import { RoomNavigation } from './RoomNavigation';
 import { StoryRoom } from './StoryRoom';
@@ -7,7 +10,8 @@ import { MuseumAtmosphere } from './MuseumAtmosphere';
 import type { PipMood } from './PipCurator';
 import { MuseumEnvironment } from './MuseumEnvironment';
 
-export function MuseumScene({ children, count, hasDraft, onCreate, placing = false, pipMood = 'sleepy', pipSpeaking = false, lightCount = 0, onSkipReveal }: { children: ReactNode; count: number; hasDraft: boolean; onCreate: () => void; placing?: boolean; pipMood?: PipMood; pipSpeaking?: boolean; lightCount?: number; onSkipReveal?: () => void }) {
+export function MuseumScene({ children, records, saved, count, hasDraft, onCreate, placing = false, pipMood = 'sleepy', pipSpeaking = false, lightCount = 0, onSkipReveal }: { children: ReactNode; records: Exhibit[]; saved: Record<string, boolean>; count: number; hasDraft: boolean; onCreate: () => void; placing?: boolean; pipMood?: PipMood; pipSpeaking?: boolean; lightCount?: number; onSkipReveal?: () => void }) {
+  const sky = useObservatorySky(records, saved);
   const [room, setRoom] = useState<MuseumRoom>('hall');
   const [journalOpen, setJournalOpen] = useState(false);
   const visit = (next: MuseumRoom) => {
@@ -32,7 +36,7 @@ export function MuseumScene({ children, count, hasDraft, onCreate, placing = fal
       <div className="foreground-balustrade" aria-hidden="true"><i/><i/></div>
       <p className="hall-invitation">Look for the little brass marks. There’s more to discover.</p>
     </div>
-    {room !== 'hall' && <StoryRoom key={room} room={room} onCreate={createFromRoom} hasDraft={hasDraft} onOpenJournal={() => setJournalOpen(true)}/>}
+    {room !== 'hall' && <StoryRoom key={room} room={room} onCreate={createFromRoom} hasDraft={hasDraft} onOpenJournal={() => setJournalOpen(true)} universe={<ObservatorySky sky={sky} onCreate={createFromRoom}/>}/>}
     <MemoryJournal open={journalOpen} onClose={() => setJournalOpen(false)}/>
   </main>;
 }

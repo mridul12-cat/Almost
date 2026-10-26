@@ -5,6 +5,8 @@ status: approved
 
 # ALMOST — Product Requirements
 
+**Authorized extension — Observatory universe:** The learner requests one star per exhibit, visitor-chosen golden connections, and optional names for each connected group. `observatory-universe.md` defines this independent local star map. Connections and naming never alter exhibit words or lasting lights; no AI supplies relationships or meanings.
+
 **Authorized extension — Conservatory journal:** The learner requests personal memory recording with dated/timed entries. `journal.md` defines an independent browser journal with explicit saves, original recording metadata, edit timestamps and safe draft/retry recovery. This adds journal-only persistence; exhibit records, creation drafts and other room discoveries retain their existing behavior.
 
 **Authorized extension — two story rooms:** The learner explicitly requests two differently themed rooms with their own stories and features. `story-rooms.md` supersedes the prior single-room limit for this extension. The Main Hall keeps the unchanged personal collection; the new rooms are optional, lightweight, deterministic experiences with no new persistence or services.
@@ -46,6 +48,16 @@ The Conservatory has a reversible little rain cloud, foldable paper flower, and 
 Interactions have visible/text state, keyboard operation, and reduced-motion equivalents. Local room state resets when leaving; it never changes exhibit/draft storage. A creation invitation in either room returns to the Main Hall and starts or resumes the same existing draft. Curator stories are clearly fictional, never an interpretation of visitor input. No new audio, persistence, account, service or runtime AI.
 
 Acceptance criteria: navigate all three rooms by keyboard; open/dismiss stories with focus return; use all six discoveries; preserve exact saved/draft bytes across exploration; resume and save one existing draft from either room without duplicates; preserve Main Hall paging; verify narrow/mobile layouts and reduced motion.
+
+### The Personal Observatory Sky
+
+Every exhibit has a glowing star, even when it has no connections or its museum light is off. Selecting a star reveals its exact title. Begin a connection, choose another star, then explicitly confirm a golden thread; browsing alone cannot draw or save anything. Duplicate/reversed pairs and self-connections are prevented. Untying affects only the thread, retaining both stars.
+
+Each connected group can have a visitor-written name of up to 100 Unicode characters. No suggested interpretation is generated. Naming is optional; explicit blank saving leaves a group unnamed. Joining named groups preserves their existing words until the visitor explicitly chooses one name. After a split, a name follows the star selected when it was kept; dormant metadata stays preserved.
+
+Keep threads and names between visits when browser saving works. Failed saves remain visible and editable for this open visit with a retry and an honest reload warning. Room trips retain temporary map changes and open naming inputs. Corrupt/unsupported saved skies remain untouched; an explicit read-only check is required before resuming writes. A connection to a temporary exhibit remains temporary until its source can be saved and the sky retried.
+
+Acceptance: create an exhibit and find its star; select without writing; connect two deliberately; name two independent groups, join them without losing names, explicitly rename, and untie while retaining stars. Reload restores exact names/threads; all stars remain reachable on desktop/mobile and by keyboard, including 24-star collections. Reduced motion removes thread animation, with the same immediate controls. Telescope, wheel, comet and room story remain available.
 
 ### Creation Panel
 

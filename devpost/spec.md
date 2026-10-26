@@ -5,6 +5,8 @@ status: approved
 
 # ALMOST — Technical Spec
 
+**Authorized extension — Observatory universe:** The learner requests one star per exhibit, visitor-chosen golden connections, and optional names for each connected group. `observatory-universe.md` defines this independent local star map. Connections and naming never alter exhibit words or lasting lights; no AI supplies relationships or meanings.
+
 **Authorized extension — Conservatory journal:** The learner requests personal memory recording with dated/timed entries. `journal.md` defines an independent browser journal with explicit saves, original recording metadata, edit timestamps and safe draft/retry recovery. This adds journal-only persistence; exhibit records, creation drafts and other room discoveries retain their existing behavior.
 
 **Authorized extension — two story rooms:** The learner explicitly requests two differently themed rooms with their own stories and features. `story-rooms.md` supersedes the prior single-room limit for this extension. The Main Hall keeps the unchanged personal collection; the new rooms are optional, lightweight, deterministic experiences with no new persistence or services.
@@ -83,6 +85,14 @@ Implements `prd.md > Look and Feel`, `Museum Room and Arrival`, and `Exhibit Pla
 - UI copy uses the PRD's supplied wording. No psychological interpretation, productivity language, completion prompts, or engagement pressure.
 
 ## Components
+
+### ObservatorySky and useObservatorySky
+
+`App` passes current records/saved flags to `MuseumScene`; its always-mounted `useObservatorySky` owns map state, selection, pending connection, naming drafts and recovery. The Observatory-only `ObservatorySky` view receives that controller through `StoryRoom` and uses local SVG threads plus native star buttons. Stars retain exhibit IDs and exact titles; this code never writes exhibit/journal storage or persistent lights. `universe.css` gives the map room to breathe and retains all existing instruments below it.
+
+`src/model/universe.ts` validates `{schemaVersion:1, edges:[{id,a,b}], names:[{anchorId,text}]}`. Canonical unordered ID pairs prevent duplicates; graph traversal determines connected groups. Names remain literal anchored strings, preserving multiple names during a merge and dormant metadata after a split/missing source. A 100-code-point limit validates names without silent truncation.
+
+`src/storage/universeStorage.ts` owns only `almost:observatory:universe`. A small graph snapshot makes edge/name updates atomic at the record level. Raw-baseline conflict checks, valid previous-own-write acknowledgement, idempotence and matching read-back protect ordinary retry/stale-tab cases. There is no cross-tab compare-and-swap guarantee. Corrupt/future/read-denied data blocks writes until an explicit read-only load; no automatic repair, reset or migration. Failed writes remain in memory with retry/reload limitations. Connections using temporary source exhibits are not claimed durable. See `observatory-universe.md` and its verification report.
 
 ### RoomNavigation, StoryRoom, and StoryRoomAtmosphere
 

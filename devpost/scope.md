@@ -5,6 +5,8 @@ status: approved
 
 # ALMOST — Every Unfinished Thing Has a Story
 
+**Authorized extension — Observatory universe:** The learner requests one star per exhibit, visitor-chosen golden connections, and optional names for each connected group. `observatory-universe.md` defines this independent local star map. Connections and naming never alter exhibit words or lasting lights; no AI supplies relationships or meanings.
+
 **Authorized extension — Conservatory journal:** The learner requests personal memory recording with dated/timed entries. `journal.md` defines an independent browser journal with explicit saves, original recording metadata, edit timestamps and safe draft/retry recovery. This adds journal-only persistence; exhibit records, creation drafts and other room discoveries retain their existing behavior.
 
 **Authorized extension — two story rooms:** The learner explicitly requests two differently themed rooms with their own stories and features. `story-rooms.md` supersedes the prior single-room limit for this extension. The Main Hall keeps the unchanged personal collection; the new rooms are optional, lightweight, deterministic experiences with no new persistence or services.

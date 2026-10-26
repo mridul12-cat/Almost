@@ -50,6 +50,8 @@ Slices 1–2 mechanical evidence: TypeScript, lint, 22 pure tests, production bu
 
 ## Final Review
 
+- [x] Observatory universe implemented and mechanically verified — exhibit stars, explicit golden threads, optional per-group names, preserved merge/split metadata, safe local recovery, keyboard/reduced-motion and responsive browsing.
+
 - [x] Cohesion refinement implemented and mechanically verified — clearer exhibit hierarchy, consistent discovery feedback, subtle accessible room arrivals, optional journal purpose and responsive collision coverage.
 
 - [x] Conservatory memory journal implemented and verified — themed notebook, dated entries/editing, safe independent persistence, recovery and responsive/keyboard checks.
@@ -76,6 +78,8 @@ Reflection: Not asked; optional transfer reflection remains available after fina
 Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
+
+- Learner authorizes an Observatory star map and confirms a separate optional name for each connected group. `observatory-universe.md` extends the room-only ephemeral rule for independent sky persistence. 103 unit tests and 108 browser executions pass with typecheck, lint and production build. Corrected recheck/retry visibility, read-back acknowledgement followed by newer edits, and a Conservatory narrow-label collision exposed by the full suite. Exhibit/light/journal storage and the table’s current sizing remain intact. Final creative acceptance remains open.
 
 - Learner clarifies that Pip, the bell, note and lamp should stand on the table. Replaced the separate shelf rows with one tabletop containing all five discoveries, including the guestbook, and placed the existing creation invitation in its front panel. All handlers/storage behavior remain intact. The focused tabletop/core-flow regression set passes; see `alignment-report.md`.
 

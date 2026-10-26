@@ -25,6 +25,14 @@ Use the wooden signposts to explore two more rooms, each with an original illust
 
 A brief, motion-sensitive arrival transition and a short atmospheric introduction connect each room; reduced motion removes the transition immediately. Pip visits both. Room discoveries reset when you leave; they never alter exhibits or drafts. Your collection stays in the Main Hall, retaining its browsing position. “Keep a beginning” returns to the existing creation desk; “Continue your beginning” resumes the same draft. Reload starts in the Main Hall. Keyboard navigation, modal focus restoration and reduced motion apply throughout.
 
+## Your Observatory universe
+
+Every exhibit becomes a glowing star. Select one to read its title, choose **Connect to another star**, choose its companion, then **Tie a golden thread**. Stars shine even when unconnected; their museum lights are unchanged.
+
+Each connected group can have its own optional name, written entirely by you. Joining named groups keeps both names until you explicitly save one chosen name. **Threads in this constellation → Untie** removes a connection while leaving its stars. A name follows the star selected when it was kept if a group separates. The telescope, constellation wheel and comet remain below the map.
+
+Connections and names use the separate local key `almost:observatory:universe`. Safe retries, strict validation and stale-tab checks protect the saved sky. Failed changes and open names remain through room visits in the current page; unsaved data may disappear on reload. Corrupt/future data is left untouched. A thread involving a temporary exhibit is temporary until its source is saved and the sky retried. A scrollable map and **Find a beginning** index keep large collections accessible by touch and keyboard.
+
 ## The Conservatory memory journal
 
 “A place for memories that don’t need a pedestal.” Open the optional **Memory journal** beside the Conservatory’s story invitation. The botanical notebook lets you write, name (optionally), read and edit personal memories. Each page records its original date, time (including seconds) and time zone; editing adds a separate Updated timestamp. Original recording metadata is retained.

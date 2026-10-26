@@ -78,3 +78,21 @@
 /* A hanging cloth sign keeps the glasshouse inscription clear of its bright roof ribs. */
 .room-conservatory .story-room-heading { isolation:isolate; }
 .room-conservatory .story-room-heading::before { content:''; position:absolute; inset:-12px -16px; z-index:-1; background:#284e48f2; border:1px solid #b9b28b88; border-radius:8px 5px 10px 6px; box-shadow:0 4px #274b3d33; }
+/* Keep wrapped discovery labels clear of feedback in the neighbouring glasshouse. */
+@media(min-width:1600px) {
+  .room-conservatory { height:clamp(800px,calc(100svh - 244px),1000px); min-height:800px; }
+  .room-conservatory .story-features { top:31%; }
+  .room-conservatory .story-room-feedback { top:83%; }
+}
+@media(min-width:600px) and (max-width:959px) {
+  .room-conservatory { height:1300px; min-height:1300px; }
+  .room-conservatory .story-room-feedback { bottom:20%; }
+}
+@media(max-width:599px) {
+  .room-conservatory { height:auto; min-height:1570px; padding-top:50px; }
+  .room-conservatory .story-room-heading { position:relative; top:auto; left:auto; margin:0 auto; }
+  .room-conservatory .story-features { position:relative; top:auto; left:auto; margin:70px auto 0; }
+  .room-conservatory .story-room-feedback { position:relative; top:auto; bottom:auto; left:auto; margin:28px auto 0; }
+  .room-conservatory .story-pip { position:relative; bottom:auto; left:auto; margin:24px auto 0; }
+  .room-conservatory .story-room-invitation { position:relative; bottom:auto; right:auto; margin:26px auto 45px; }
+}
