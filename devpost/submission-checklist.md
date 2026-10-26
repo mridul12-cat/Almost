@@ -34,9 +34,9 @@ The creator writes the project name, descriptions, answers, reflections, video n
 | Item | Current state |
 | --- | --- |
 | GitHub | https://github.com/mridul12-cat/Almost — anonymously accessible and populated; full source/audio release `4ae45ee` verified; MIT detected, learner profile absent |
-| Demo video | Not yet recorded (learner confirmed); public playback remains to be verified |
-| Live app | Not supplied or deployed; optional for submission, preferred by the creator |
-| Submission | Not started by the learner; not submitted or edited by this workflow |
+| Demo video | https://youtu.be/lLiDguY4jsA |
+| Live app | https://almost-beige.vercel.app/ |
+| Submission |https://devpost.com/software/almost-cpbz9l |
 
 Repo and video are both needed; neither replaces the other. Deployment, peer feedback and a Discord post are optional. No peer-review count or comment links are required by this skill.
 
