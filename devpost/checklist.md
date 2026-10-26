@@ -77,6 +77,8 @@ Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
 
+- Learner clarifies that Pip, the bell, note and lamp should stand on the table. Replaced the separate shelf rows with one tabletop containing all five discoveries, including the guestbook, and placed the existing creation invitation in its front panel. All handlers/storage behavior remain intact. The focused tabletop/core-flow regression set passes; see `alignment-report.md`.
+
 - Learner supplies a screenshot of crowded curator labels and asks for proper alignment. Grouped Pip/lamp and desk discoveries into a shared responsive grid with labels inside each button, common illustration/label rows and a small shared ledge. `alignment-report.md` records focused checks and screenshots. Existing uncommitted room-style adjustments were preserved rather than replaced.
 
 - Learner authorizes a presentation-only cohesion pass across the three rooms. Rebalanced Hall spacing and mobile reading/tab order, retained all room discoveries, added CSS arrivals/short described introductions and clarified the optional journal. Storage/model/core-event code and dependencies are unchanged. `refinement-report.md` records executed checks and screenshot review; final learner acceptance remains open.

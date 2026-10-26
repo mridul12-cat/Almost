@@ -37,13 +37,13 @@ test('hall keeps creation and exhibits clear of discoveries and browsing control
       const discoveries=[...document.querySelectorAll('.museum-hall .room-object,.museum-hall .pip-greeting')].map(element=>element.getBoundingClientRect());
       const controls=[...document.querySelectorAll('.museum-hall .desktop-browse,.museum-hall .mobile-browse')].filter(visible).map(element=>element.getBoundingClientRect());
       const desk=rect('.writing-desk');
-      return {overflow:document.documentElement.scrollWidth>innerWidth,deskCollisions:discoveries.filter(item=>overlap(item,desk)).length,discoveryCollisions:discoveries.filter((item,index)=>discoveries.slice(index+1).some(other=>overlap(item,other))).length,discoveryControlCollisions:discoveries.filter(item=>controls.some(control=>overlap(item,control))).length,controlsClipped:controls.some(control=>control.bottom>rect('.museum-hall').bottom),tagControlCollisions:tags.filter(tag=>controls.some(control=>overlap(tag,control))).length,mobileCoreFirst:innerWidth>=600||discoveries.every(item=>item.top>rect('.collection-stage').top&&item.top>desk.bottom)};
+      return {overflow:document.documentElement.scrollWidth>innerWidth,deskCollisions:discoveries.filter(item=>overlap(item,desk)).length,discoveryCollisions:discoveries.filter((item,index)=>discoveries.slice(index+1).some(other=>overlap(item,other))).length,discoveryControlCollisions:discoveries.filter(item=>controls.some(control=>overlap(item,control))).length,controlsClipped:controls.some(control=>control.bottom>rect('.museum-hall').bottom),tagControlCollisions:tags.filter(tag=>controls.some(control=>overlap(tag,control))).length,mobileDeskFirst:innerWidth>=960||desk.bottom<rect('.collection-stage').top};
     });
-    expect(geometry,`Hall at ${viewport.width}×${viewport.height}`).toEqual({overflow:false,deskCollisions:0,discoveryCollisions:0,discoveryControlCollisions:0,controlsClipped:false,tagControlCollisions:0,mobileCoreFirst:true});
+    expect(geometry,`Hall at ${viewport.width}×${viewport.height}`).toEqual({overflow:false,deskCollisions:0,discoveryCollisions:0,discoveryControlCollisions:0,controlsClipped:false,tagControlCollisions:0,mobileDeskFirst:true});
   }
 });
 
-test('curator objects share aligned label rows without covering each other or the creation desk',async({page})=>{
+test('curator objects stand on one table with aligned labels and a clear creation panel',async({page})=>{
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');
   for(const viewport of [{width:320,height:700},{width:390,height:844},{width:600,height:900},{width:768,height:1024},{width:960,height:768},{width:1440,height:900},{width:1920,height:900},{width:1920,height:1080}]) {
@@ -59,10 +59,11 @@ test('curator objects share aligned label rows without covering each other or th
         contained:labels.every((label,index)=>{const button=buttons[index].getBoundingClientRect();return label.left>=button.left-1&&label.right<=button.right+1&&label.top>=button.top-1&&label.bottom<=button.bottom+1;}),
         collisions:labels.filter((label,index)=>labels.some((other,j)=>index!==j&&overlap(label,other))||drawings.some((drawing,j)=>index!==j&&overlap(label,drawing))||overlap(label,desk)).length,
         aligned:Math.max(...tools)-Math.min(...tools)<1,
-        deskGap:innerWidth<960||desk.top-group.getBoundingClientRect().bottom>=16,
+        tableJoined:document.querySelector('.writing-desk')!.closest('.curator-table')===group.closest('.curator-table')&&Math.abs(desk.top-group.getBoundingClientRect().bottom)<1,
+        onSurface:drawings.every(drawing=>Math.abs(drawing.bottom-(group.getBoundingClientRect().top+Number.parseFloat(getComputedStyle(group).getPropertyValue('--table-art-height'))))<=18),
       };
     });
-    expect(geometry,`Curator corner at ${viewport.width}×${viewport.height}`).toEqual({contained:true,collisions:0,aligned:true,deskGap:true});
+    expect(geometry,`Curator corner at ${viewport.width}×${viewport.height}`).toEqual({contained:true,collisions:0,aligned:true,tableJoined:true,onSurface:true});
   }
 });
 
