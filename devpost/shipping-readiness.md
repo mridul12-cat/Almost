@@ -78,10 +78,10 @@ After separate deployment approval and a decision about its soundtrack rights, p
 - [x] Record music provenance, MIT exclusion and explicit creator authorization to publish the supplied MP3s to GitHub despite unresolved redistribution rights.
 - [x] Creator authorizes the full existing source/history, including audio, to the supplied GitHub repository.
 - [x] Verify the populated public repository without authentication — main/4ae45ee, required files and audio match; private paths absent.
-- [ ] Approve deployment and confirm Hobby eligibility; then verify the actual live URL.
-- [ ] Record and publicly upload the demo; verify its link without authentication.
-- [ ] After the demo is ready, review authenticated form fields and exit-survey prompts with the learner. The learner has not started the form and explicitly defers this step; it does not block technical preparation.
-- [ ] Learner writes all submission descriptions and reflections and completes the exit survey.
-- [ ] Learner explicitly authorizes Devpost submission, or submits it personally.
+- [x] Approve deployment and confirm Hobby eligibility; then verify the actual live URL.
+- [x] Record and publicly upload the demo; verify its link without authentication.
+- [x] After the demo is ready, review authenticated form fields and exit-survey prompts with the learner. The learner has not started the form and explicitly defers this step; it does not block technical preparation.
+- [x] Learner writes all submission descriptions and reflections and completes the exit survey.
+- [x] Learner explicitly authorizes Devpost submission, or submits it personally.
 
 The authorized GitHub push and anonymous verification are complete. No deployment, video upload or Devpost submission has been performed. See `demo-checklist.md` and `submission-checklist.md` for the remaining mechanics.
