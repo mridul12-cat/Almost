@@ -43,6 +43,29 @@ test('hall keeps creation and exhibits clear of discoveries and browsing control
   }
 });
 
+test('curator objects share aligned label rows without covering each other or the creation desk',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');
+  for(const viewport of [{width:320,height:700},{width:390,height:844},{width:600,height:900},{width:768,height:1024},{width:960,height:768},{width:1440,height:900},{width:1920,height:900},{width:1920,height:1080}]) {
+    await page.setViewportSize(viewport);
+    const geometry=await page.locator('.curator-arrangement').evaluate(group=>{
+      const buttons=[...group.querySelectorAll('button')];
+      const labels=buttons.map(button=>button.querySelector('.object-label')!.getBoundingClientRect());
+      const drawings=buttons.map(button=>button.querySelector('svg')!.getBoundingClientRect());
+      const overlap=(a:DOMRect,b:DOMRect)=>Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1;
+      const tools=[...group.querySelectorAll('.desk-discoveries .object-label')].map(label=>label.getBoundingClientRect().top);
+      const desk=document.querySelector('.writing-desk')!.getBoundingClientRect();
+      return {
+        contained:labels.every((label,index)=>{const button=buttons[index].getBoundingClientRect();return label.left>=button.left-1&&label.right<=button.right+1&&label.top>=button.top-1&&label.bottom<=button.bottom+1;}),
+        collisions:labels.filter((label,index)=>labels.some((other,j)=>index!==j&&overlap(label,other))||drawings.some((drawing,j)=>index!==j&&overlap(label,drawing))||overlap(label,desk)).length,
+        aligned:Math.max(...tools)-Math.min(...tools)<1,
+        deskGap:innerWidth<960||desk.top-group.getBoundingClientRect().bottom>=16,
+      };
+    });
+    expect(geometry,`Curator corner at ${viewport.width}×${viewport.height}`).toEqual({contained:true,collisions:0,aligned:true,deskGap:true});
+  }
+});
+
 test('clickable room objects have visible keyboard focus, brass labels and hover feedback',async({page})=>{
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');

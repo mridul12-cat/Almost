@@ -77,6 +77,8 @@ Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
 
+- Learner supplies a screenshot of crowded curator labels and asks for proper alignment. Grouped Pip/lamp and desk discoveries into a shared responsive grid with labels inside each button, common illustration/label rows and a small shared ledge. `alignment-report.md` records focused checks and screenshots. Existing uncommitted room-style adjustments were preserved rather than replaced.
+
 - Learner authorizes a presentation-only cohesion pass across the three rooms. Rebalanced Hall spacing and mobile reading/tab order, retained all room discoveries, added CSS arrivals/short described introductions and clarified the optional journal. Storage/model/core-event code and dependencies are unchanged. `refinement-report.md` records executed checks and screenshot review; final learner acceptance remains open.
 
 - Journal extension verified: typecheck, lint, 57 unit tests and 82 browser executions passed with a production build. Corrected duplicate field/dialog IDs and phone-size heading/discovery spacing. Original/updated timestamps, raw content, same-ID retry, corruption/conflict safeguards, cleanup reconciliation and existing exhibit bytes are covered. Final creative acceptance remains open.

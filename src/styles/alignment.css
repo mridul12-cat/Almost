@@ -1,0 +1,122 @@
+/* A single arrangement keeps the curator, lamp and desk objects in real rows.
+   Labels participate in layout instead of hanging outside their hit targets. */
+.curator-arrangement {
+  --object-row:109px;
+  --curator-gap:24px;
+  position:absolute;
+  left:7%;
+  bottom:calc(9% + 145px);
+  width:27%;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:end;
+  gap:24px 16px;
+  z-index:3;
+}
+.curator-arrangement::before {
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:calc(var(--object-row) + var(--curator-gap) + 32px);
+  height:8px;
+  border-top:2px solid #d1b184;
+  background:#9e7956;
+  box-shadow:0 4px #65553d;
+  z-index:-1;
+  pointer-events:none;
+}
+@media(min-width:960px) {
+  .window-discovery { top:12%; height:10%; }
+  .window-touch .object-label { top:0; bottom:auto; }
+}
+.museum-hall .curator-arrangement .keeper-corner {
+  position:relative;
+  inset:auto;
+  width:100%;
+  grid-column:1 / 3;
+  padding:0;
+}
+.curator-arrangement .pip-greeting { border-radius:20px; }
+.museum-hall .curator-arrangement .pip-curator { width:min(180px,100%); margin:0 auto; }
+.curator-arrangement .pip-greeting > .object-label {
+  position:static;
+  transform:none;
+  width:100%;
+  max-width:none;
+  margin:2px 0 0;
+  padding:0;
+  min-height:24px;
+  text-align:center;
+  font-size:12px;
+}
+.museum-hall .curator-arrangement .desk-lamp {
+  position:relative;
+  inset:auto;
+  width:100%;
+  grid-column:3;
+}
+.curator-arrangement .lamp-touch { display:flex; flex-direction:column; align-items:center; }
+.curator-arrangement .lamp-touch svg { width:min(64px,85%); margin:0 auto; }
+.curator-arrangement .lamp-touch .object-label { margin:8px 0 0; min-height:24px; font-size:12px; }
+.museum-hall .curator-arrangement .desk-discoveries {
+  position:relative;
+  inset:auto;
+  width:100%;
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:start;
+  gap:16px;
+}
+.museum-hall .curator-arrangement .desk-discoveries > button {
+  width:100%;
+  margin:0;
+  display:grid;
+  grid-template-rows:60px auto;
+  align-items:end;
+  justify-items:center;
+  gap:9px;
+}
+.museum-hall .curator-arrangement .desk-discoveries svg { height:60px; max-height:none; width:100%; }
+.museum-hall .curator-arrangement .desk-discoveries .object-label {
+  width:100%;
+  max-width:none;
+  margin:0;
+  min-height:40px;
+  font-size:12px;
+  line-height:1.6;
+  white-space:normal;
+  text-align:center;
+}
+@media(min-width:1600px) {
+  .museum-hall { height:clamp(780px,calc(100svh - 244px),1000px); min-height:780px; }
+  .museum-hall .curator-arrangement .pip-curator { width:200px; }
+}
+@media(min-width:960px) and (max-width:1199px) {
+  .curator-arrangement { --curator-gap:20px; width:29%; left:6%; gap:20px 12px; }
+  .museum-hall .curator-arrangement .desk-discoveries { gap:12px; }
+  .museum-hall .curator-arrangement .desk-discoveries .object-label { font-size:11px; }
+}
+@media(min-width:600px) and (max-width:959px) {
+  .museum-hall { height:1240px; min-height:1240px; }
+  .curator-arrangement { left:14%; width:62%; bottom:150px; }
+  .museum-hall .curator-arrangement .pip-curator { width:165px; }
+  .empty-pedestal-touch { top:auto; bottom:55px; right:8%; width:9%; }
+}
+@media(max-width:599px) {
+  .museum-hall { height:1280px; min-height:1280px; }
+  .museum-hall .collection-stage,.museum-hall .awaiting-beginnings { top:25%; }
+  .curator-arrangement { --object-row:97px; --curator-gap:22px; left:8%; width:84%; bottom:195px; gap:22px 16px; }
+  .museum-hall .curator-arrangement .pip-curator { width:145px; }
+  .museum-hall .curator-arrangement .keeper-corner .pip-note { left:0; width:160px; }
+  .museum-hall .curator-arrangement .desk-discoveries { gap:12px; }
+  .museum-hall .curator-arrangement .desk-discoveries > button { grid-template-rows:52px auto; }
+  .museum-hall .curator-arrangement .desk-discoveries svg { height:52px; }
+  .museum-hall .curator-arrangement .desk-discoveries .object-label { font-size:11px; min-height:36px; }
+  .curator-arrangement .object-label::after { margin-left:4px; width:4px; height:4px; }
+  .window-discovery { top:56%; height:44px; }
+  .empty-pedestal-touch { top:auto; bottom:57px; left:10%; width:16%; }
+  .environment-whisper { bottom:65px; left:31%; width:61%; }
+  .hall-invitation { bottom:12px; }
+}
