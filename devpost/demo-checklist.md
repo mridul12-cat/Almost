@@ -8,12 +8,11 @@ This is an action sequence, not narration or submission copy. The creator explai
 
 ## Before recording
 
-- [ ] Use the production preview (`npm run preview -- --host 127.0.0.1 --port 4173 --strictPort`) or the approved live URL.
-- [ ] Use a separate demo browser profile/context. Keep personal exhibits, journal pages, account menus, notifications, credentials and unrelated windows off-screen; never clear a real collection to stage the demo.
-- [ ] Prepare one harmless demonstration exhibit in this context so the new exhibit produces at least two stars. Choose your own project text, title and optional constellation name.
-- [ ] Rehearse creation and journal entry once; keep typed content brief enough to read on screen.
-- [ ] Keep room music paused while demo-use rights remain unconfirmed. The creator authorized GitHub publication of the tracks; that does not establish permission for a public video. Do not add another soundtrack or publish unapproved audio.
-- [ ] Check capture resolution, readable browser zoom, microphone level and cursor visibility. Record actual interactions, not slides alone.
+- [x] Use the production preview (`npm run preview -- --host 127.0.0.1 --port 4173 --strictPort`) or the approved live URL.
+- [x] Use a separate demo browser profile/context. Keep personal exhibits, journal pages, account menus, notifications, credentials and unrelated windows off-screen; never clear a real collection to stage the demo.
+- [x] Prepare one harmless demonstration exhibit in this context so the new exhibit produces at least two stars. Choose your own project text, title and optional constellation name.
+- [x] Rehearse creation and journal entry once; keep typed content brief enough to read on screen.
+- [x] Check capture resolution, readable browser zoom, microphone level and cursor visibility. Record actual interactions, not slides alone.
 
 ## Suggested sequence
 
@@ -30,9 +29,9 @@ Skip minor environmental toys if time is tight. Keep the creation/light/remembra
 
 ## After recording
 
-- [ ] Watch the exported video fully: readable labels, working interactions, accurate persistence claims, no private material, no unapproved music, length below three minutes.
-- [ ] Upload to YouTube or Vimeo with the public visibility specified by the rules. Verify the shared link while signed out; confirm playback needs no account or permission request.
-- [ ] Record the final URL in the submission checklist and the project sharing record.
-- [ ] Write any platform description/narration yourself. Agent help is limited to factual gaps and spelling/grammar checks of your writing.
+- [x] Watch the exported video fully: readable labels, working interactions, accurate persistence claims, no private material, no unapproved music, length below three minutes.
+- [x] Upload to YouTube or Vimeo with the public visibility specified by the rules. Verify the shared link while signed out; confirm playback needs no account or permission request.
+- [x] Record the final URL in the submission checklist and the project sharing record.
+- [x] Write any platform description/narration yourself. Agent help is limited to factual gaps and spelling/grammar checks of your writing.
 
 No recording, upload, narration or public description has been created by this checklist.
