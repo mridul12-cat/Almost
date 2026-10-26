@@ -116,7 +116,7 @@ No runtime AI, authentication, backend, analytics, remote artwork, or remote fon
 
 ALMOST’s application source code and original SVG artwork are licensed under the [MIT License](LICENSE), copyright © 2026 Mridul Dabral. Third-party packages retain their own licenses; see [runtime notices](THIRD_PARTY_NOTICES.md). The deployed static files include `third-party-notices.txt`.
 
-**The MP3 files in `music/` and `public/music/` are expressly excluded from the MIT license.** They were generated with Google Gemini/Lyria from project-specific prompts supplied by the creator. Their origin and unresolved redistribution rights are recorded in [MUSIC_RIGHTS.md](MUSIC_RIGHTS.md). No blanket redistribution permission or exclusive ownership is claimed. The creator explicitly authorizes including these tracks in this GitHub publication; their applicable redistribution rights have not been independently confirmed.
+**The MP3 files in `music/` and `public/music/` are expressly excluded from the MIT license.** They were generated with Google Gemini/Lyria from project-specific prompts supplied by the creator. 
 
 ## Submission preparation
 
