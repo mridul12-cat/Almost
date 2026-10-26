@@ -72,6 +72,7 @@
 .museum-hall .curator-arrangement .pip-body { scale:1.508; transform-origin:130px 212px; }
 .museum-hall .curator-arrangement .pip-note { bottom:calc(100% + 12px); transform:translateY(-12px); width:165px; left:0; }
 .museum-hall .curator-arrangement .lamp-touch svg { width:58px; max-width:100%; height:auto; margin:0 0 -7px; }
+.museum-hall .curator-arrangement .lamp-touch svg > path { scale:1.3; transform-origin:50px 125px; }
 .museum-hall .curator-arrangement .desk-discoveries svg { width:100%; height:58px; max-height:none; margin-bottom:-3px; }
 .museum-hall .curator-arrangement .bell-touch svg { height:48px; margin-bottom:-6px; scale:1.14; transform-origin:50% 84%; }
 .museum-hall .curator-arrangement .curator-note svg { height:64px; }

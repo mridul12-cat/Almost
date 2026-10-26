@@ -18,3 +18,5 @@ No dependencies, services or storage changes. Final learner creative review rema
 Follow-up sizing polish: Pip’s tabletop drawing is 16% larger and the bell is 14% larger, anchored at their resting points. Desktop/phone crops were inspected; the production build and four focused layout checks passed. The linked screenshots above record the preceding tabletop arrangement.
 
 Pip sizing refinement: increased the current drawing by a further 30% (1.16 × 1.30 = 1.508 relative to the original). The tabletop anchor and bell size are retained. Production build and four responsive layout checks passed; desktop/320px crops were inspected.
+
+Lamp sizing refinement: enlarged its drawing by 30% around its base, retaining the tabletop position and control label. Desktop/320px crops were inspected; production build and four responsive layout checks passed.
