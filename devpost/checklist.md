@@ -79,6 +79,8 @@ Activity mode: Fast execution with creative feedback and final focused wrap-up.
 
 ## Revisions
 
+- Learner authorizes three supplied local room tracks and an animated SVG play/pause control. `room-music.md` narrowly extends the silent POC boundary for opt-in room music. Added one shared looping audio element, page-only intent, reduced-motion visuals and safe playback retry/cancellation. Moved the desktop player alongside room signs after the first full run exposed a below-fold creation invitation; updated obsolete no-audio-element tests to assert silent default behavior. Final verification: 103 unit tests, 116 browser executions, lint and production build passed. See `room-music-report.md`; learner creative acceptance remains open.
+
 - Learner authorizes an Observatory star map and confirms a separate optional name for each connected group. `observatory-universe.md` extends the room-only ephemeral rule for independent sky persistence. 103 unit tests and 108 browser executions pass with typecheck, lint and production build. Corrected recheck/retry visibility, read-back acknowledgement followed by newer edits, and a Conservatory narrow-label collision exposed by the full suite. Exhibit/light/journal storage and the table’s current sizing remain intact. Final creative acceptance remains open.
 
 - Learner clarifies that Pip, the bell, note and lamp should stand on the table. Replaced the separate shelf rows with one tabletop containing all five discoveries, including the guestbook, and placed the existing creation invitation in its front panel. All handlers/storage behavior remain intact. The focused tabletop/core-flow regression set passes; see `alignment-report.md`.

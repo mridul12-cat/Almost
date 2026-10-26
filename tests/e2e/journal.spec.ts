@@ -99,7 +99,9 @@ test('journal records exact words and original date/time, saves once and survive
   expect(await page.locator('.journal-entry-body').textContent()).toBe(body);
   expect(await unrelated(page)).toEqual(before);
   expect(external).toEqual([]);
-  await expect(page.locator('audio,video')).toHaveCount(0);
+  await expect(page.locator('video')).toHaveCount(0);
+  await expect(page.locator('.room-music audio')).toHaveCount(1);
+  expect(await page.locator('.room-music audio').evaluate((audio: HTMLAudioElement) => audio.paused && !audio.getAttribute('src'))).toBe(true);
 });
 
 test('editing keeps the stable ID, original recording time and zone with a separate updated timestamp',async({page})=>{

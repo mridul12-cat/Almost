@@ -10,4 +10,5 @@ import './styles/journal.css';
 import './styles/refinements.css';
 import './styles/alignment.css';
 import './styles/universe.css';
+import './styles/music.css';
 createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);

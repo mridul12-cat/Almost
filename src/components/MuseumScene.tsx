@@ -4,6 +4,7 @@ import { useObservatorySky } from '../hooks/useObservatorySky';
 import { ObservatorySky } from './ObservatorySky';
 import type { MuseumRoom } from '../model/rooms';
 import { RoomNavigation } from './RoomNavigation';
+import { RoomMusic } from './RoomMusic';
 import { StoryRoom } from './StoryRoom';
 import { MemoryJournal } from './MemoryJournal';
 import { MuseumAtmosphere } from './MuseumAtmosphere';
@@ -25,7 +26,10 @@ export function MuseumScene({ children, records, saved, count, hasDraft, onCreat
   const createFromRoom = () => { setRoom('hall'); onCreate(); };
   return <main className={`museum ${count ? 'inhabited' : 'empty'} ${placing ? 'is-placing' : ''} ${lightCount ? 'has-lights' : ''}`} id="museum" tabIndex={-1} data-room={room}>
     <div className="museum-intro"><div><span className="little-caption">The Midnight Keepsake Museum · {room === 'hall' ? 'Main Hall' : room === 'conservatory' ? 'The Glasshouse Wing' : 'The Upstairs Dome'}</span><h1 id="museum-room-title" tabIndex={-1} aria-describedby="museum-room-introduction">{room === 'hall' ? <>A whole world of <span>almost.</span></> : room === 'conservatory' ? <>A quiet place to <span>just be.</span></> : <>For all the places <span>imagined.</span></>}</h1></div><p id="museum-room-introduction" key={room} className="room-introduction">{room === 'hall' ? <>A museum for your unfinished ideas. <br/>Give something you once started a place to exist.</> : room === 'conservatory' ? <>Not every seed needs a season. <br/>Some beginnings are beautiful company.</> : <>A journey can matter before its first step. <br/>There is a little sky for that here.</>}</p></div>
-    <RoomNavigation current={room} onChange={visit} disabled={placing}/>
+    <div className="museum-wayfinding">
+      <RoomNavigation current={room} onChange={visit} disabled={placing}/>
+      <RoomMusic room={room}/>
+    </div>
     <div className="diorama museum-hall" hidden={room !== 'hall'}>
       <MuseumAtmosphere/>
       <div className="hall-heading" aria-hidden="true"><span>I</span> The Hall of Beginnings <span>✧</span></div>

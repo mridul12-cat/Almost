@@ -1,0 +1,47 @@
+/* A tiny smiling record player, outside the scene so it never covers an exhibit. */
+.museum-wayfinding { position:sticky; top:0; z-index:6; background:#243e3d; }
+.museum-wayfinding .room-navigation { position:static; }
+.room-music { --music-tint:#38574e; padding:8px 18px 10px; background:#243e3d; border-bottom:1px solid #8b98705c; }
+.room-music.music-conservatory { --music-tint:#47694e; }
+.room-music.music-observatory { --music-tint:#514d6b; }
+.music-box-control { display:flex; align-items:center; gap:13px; max-width:100%; width:max-content; min-height:74px; margin:auto; padding:0 17px 0 5px; color:#f5e5be; background:var(--music-tint); border:1px solid #b5a27799; border-radius:28px 11px 25px 12px; box-shadow:0 3px #132f2e55; text-align:left; transition:background .2s,box-shadow .2s; }
+.music-box-control:hover { background:color-mix(in srgb,var(--music-tint),#e7cd8e 12%); box-shadow:0 3px #132f2e55,0 0 16px #e7cd8e1f; }
+.music-box-control:focus-visible { outline:3px solid #efd293; outline-offset:4px; }
+.little-music-box { flex:none; width:88px; height:74px; overflow:visible; pointer-events:none; }
+.music-box-label { display:flex; flex-direction:column; gap:5px; min-width:0; }
+.music-box-label strong { font-family:var(--hand); font-size:15px; font-weight:500; }
+.music-box-label > span { font-size:11px; line-height:1.5; color:#f0dfbb; }
+.music-state-symbol { font-size:21px; width:22px; text-align:center; margin-left:8px; color:#f4d99d; }
+.music-note { opacity:0; }
+.is-playing .music-note { animation:little-music-note 2.6s ease-in-out infinite; }
+.is-playing .music-note-two { animation-delay:1.3s; }
+.is-playing .music-box-body { animation:music-box-sway 2s ease-in-out infinite; transform-origin:55px 79px; }
+.is-playing .music-record { animation:record-glimmer 2s ease-in-out infinite; }
+.music-feedback { color:#f3dfb4; font-size:12px; line-height:1.6; max-width:430px; margin:9px auto 0; text-align:center; }
+@keyframes little-music-note { 0%,100% { opacity:0; transform:translateY(4px) rotate(-6deg); } 35%,60% { opacity:1; } 85% { opacity:0; transform:translateY(-10px) rotate(8deg); } }
+@keyframes music-box-sway { 0%,100% { transform:rotate(-2deg); } 50% { transform:rotate(2deg); } }
+@keyframes record-glimmer { 0%,100% { opacity:1; } 50% { opacity:.7; } }
+@media(min-width:960px) {
+  .museum-wayfinding { display:flex; align-items:center; border-bottom:1px solid #8b98705c; }
+  .museum-wayfinding .room-navigation { flex:1; min-width:0; border-bottom:0; padding-inline:18px; }
+  .museum-wayfinding .room-signposts { gap:10px; }
+  .museum-wayfinding .room-signposts button { min-width:140px; padding-inline:14px; }
+  .room-music { flex:none; border-bottom:0; padding:5px 20px 8px 0; }
+  .music-box-control { min-height:62px; gap:8px; padding-right:12px; }
+  .little-music-box { width:73px; height:62px; }
+  .music-box-label strong { font-size:14px; }
+  .music-state-symbol { margin-left:2px; }
+}
+@media(max-width:599px) {
+  .room-music { padding:8px 12px 11px; }
+  .music-box-control { gap:8px; padding-right:12px; }
+  .little-music-box { width:73px; height:64px; }
+  .music-box-label strong { font-size:14px; }
+  .music-box-label > span { font-size:10px; }
+  .music-state-symbol { margin-left:2px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .is-playing .music-note { animation:none; opacity:1; }
+  .is-playing .music-box-body,.is-playing .music-record { animation:none; }
+  .music-box-control { transition:none; }
+}

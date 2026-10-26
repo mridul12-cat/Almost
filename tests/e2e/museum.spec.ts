@@ -583,7 +583,9 @@ test('room discoveries offer visible feedback and preserve exact saved and unfin
   await page.getByRole('button', { name: 'Ring the museum bell', exact: true }).click();
   await expect(page.locator('.bell-touch')).toHaveClass(/is-ringing/);
   await expect(page.getByRole('status').filter({ hasText: 'A little ring, seen rather than heard. Nothing here is late.' })).toBeVisible();
-  await expect(page.locator('audio,video')).toHaveCount(0);
+  await expect(page.locator('video')).toHaveCount(0);
+  await expect(page.locator('.room-music audio')).toHaveCount(1);
+  expect(await page.locator('.room-music audio').evaluate((audio: HTMLAudioElement) => audio.paused && !audio.getAttribute('src'))).toBe(true);
   expect(await page.evaluate(() => Reflect.get(window, 'almostSoundCalls'))).toBe(0);
   expect(await storageBytes(page)).toEqual(before);
   await expect(page.locator('.bell-touch')).not.toHaveClass(/is-ringing/, { timeout: 5000 });

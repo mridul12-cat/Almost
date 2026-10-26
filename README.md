@@ -43,6 +43,14 @@ Names allow 100 Unicode characters and memory text 5,000, with visible limits an
 
 Saved memories belong to this browser/site address; clearing browser data can remove them. If browser storage fails, the journal explains that in-memory words may not survive reload. No account, backend, cross-device or encrypted-storage promise is introduced.
 
+## Optional room music
+
+Click the little smiling SVG music box beside the room signposts (beneath them on mobile) to start or pause music. Main Hall, Conservatory, and Observatory each use their corresponding supplied MP3. Music starts off, loops quietly at 35% player volume, and switches to the new room’s track when already enabled. Pausing keeps it off across room changes; a reload starts quiet again. There is only one audio player, so tracks never overlap.
+
+The record player sways and floats notes only during playback; reduced-motion visitors get a static playing indicator. Keyboard Enter/Space work too. Playback/network failures show a retry invitation without affecting your museum. Browser autoplay restrictions may require another click after switching rooms. Music is separate from all exhibit and light interactions.
+
+Original supplied files remain in `music/`. Deployment copies live in `public/music/` and are bundled into `dist/music/`; no streaming provider or external requests. Tracks load only after a visitor chooses playback. No new dependencies or storage keys.
+
 ## Run locally
 
 Use a supported Node.js release compatible with Vite and Vitest (Node 22.12+ or a newer supported release) and npm.
